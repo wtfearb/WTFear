@@ -2,11 +2,27 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useAuditModal } from '../modals/AuditModalProvider';
 import { MobileNavDrawer } from './MobileNavDrawer';
 import { trackClientEvent } from '../TelemetryTracker';
 
+interface NavItem {
+  readonly label: string;
+  readonly href: string;
+}
+
+const NAV_ITEMS: readonly NavItem[] = [
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'Engineering Blueprints', href: '/blueprints' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+];
+
 export function Header(): React.ReactElement {
+  const pathname = usePathname();
   const { openModal } = useAuditModal();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
@@ -17,56 +33,70 @@ export function Header(): React.ReactElement {
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full border-b border-[var(--color-border-hairline)] bg-[var(--color-canvas)]/90 backdrop-blur-md">
-        <div className="mx-auto flex h-16 max-w-[var(--max-w-editorial)] items-center justify-between px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-8">
-            <Link
-              href="/"
-              className="flex items-center gap-2.5 font-mono text-base font-bold tracking-tight text-[var(--color-ink-primary)] hover:text-[var(--color-accent-signal)] transition-colors"
-            >
-              <span className="inline-block h-2.5 w-2.5 bg-[var(--color-accent-signal)]" aria-hidden="true" />
-              <span>WTFearB</span>
-              <span className="hidden sm:inline-block text-[var(--color-ink-muted)] font-normal text-xs pl-1 border-l border-[var(--color-border-hairline)]">
-                Make &ldquo;What If&rdquo; Work.
-              </span>
-            </Link>
+      <header className="sticky top-0 z-40 w-full bg-[#FFFFFF]/95 backdrop-blur-sm border-b border-[#E2E2E8]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+          {/* Left Brand Lockup */}
+          <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
+            <span
+              className="w-3.5 h-3.5 bg-[#C83E1B] inline-block shrink-0 transition-transform group-hover:scale-105"
+              aria-hidden="true"
+            />
+            <span className="font-sans font-extrabold text-[16px] tracking-[-0.02em] text-[#0A0A0C]">
+              WTFearB
+            </span>
+            <span className="hidden sm:inline-block h-4 w-px bg-[#E2E2E8] mx-1.5" aria-hidden="true" />
+            <span className="hidden sm:inline-block font-sans text-[12px] text-[#5A5D6A]">
+              Make &ldquo;What If&rdquo; Work.
+            </span>
+          </Link>
 
-            <nav className="hidden lg:flex items-center gap-6 font-mono text-xs text-[var(--color-ink-secondary)]" aria-label="Main Navigation">
-              <Link href="/" className="hover:text-[var(--color-ink-primary)] transition-colors">
-                Home
-              </Link>
-              <Link href="/services" className="hover:text-[var(--color-ink-primary)] transition-colors">
-                Services
-              </Link>
-              <Link href="/blueprints" className="hover:text-[var(--color-ink-primary)] transition-colors">
-                Engineering Blueprints
-              </Link>
-              <Link href="/projects" className="hover:text-[var(--color-ink-primary)] transition-colors">
-                Projects
-              </Link>
-              <Link href="/about" className="hover:text-[var(--color-ink-primary)] transition-colors">
-                About
-              </Link>
-              <Link href="/contact" className="hover:text-[var(--color-ink-primary)] transition-colors">
-                Contact
-              </Link>
-            </nav>
-          </div>
+          {/* Center Navigation with Active Orange Bottom Bar */}
+          <nav className="hidden lg:flex items-center gap-7" aria-label="Main Navigation">
+            {NAV_ITEMS.map((item) => {
+              const isActive =
+                item.href === '/'
+                  ? pathname === '/'
+                  : pathname === item.href || pathname.startsWith(`${item.href}/`);
 
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`font-sans text-[13px] transition-colors relative py-1.5 ${
+                    isActive
+                      ? 'font-semibold text-[#0A0A0C]'
+                      : 'font-medium text-[#3F414A] hover:text-[#0A0A0C]'
+                  }`}
+                >
+                  {item.label}
+                  {isActive && (
+                    <span
+                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C83E1B]"
+                      aria-hidden="true"
+                    />
+                  )}
+                </Link>
+              );
+            })}
+          </nav>
+
+          {/* Right Primary CTA & Mobile Menu Toggle */}
           <div className="flex items-center gap-3">
             <button
               type="button"
               onClick={handleAuditClick}
-              className="hidden sm:inline-flex items-center justify-center border border-[var(--color-ink-primary)] bg-[var(--color-ink-primary)] px-4 py-2 font-mono text-xs font-semibold text-white hover:bg-[var(--color-accent-signal)] hover:border-[var(--color-accent-signal)] transition-colors"
+              className="bg-[#0A0A0C] hover:bg-[#1E2028] text-white font-mono text-[12px] font-semibold px-4 py-2.5 inline-flex items-center gap-2 transition-colors cursor-pointer"
             >
-              Book an Architecture Audit &rarr;
+              <span>Book an Architecture Audit</span>
+              <span aria-hidden="true">&rarr;</span>
             </button>
 
             <button
               type="button"
               onClick={() => setMobileNavOpen(true)}
-              className="inline-flex lg:hidden p-2 text-[var(--color-ink-primary)] border border-[var(--color-border-hairline)]"
-              aria-label="Open mobile navigation"
+              className="inline-flex lg:hidden p-2 text-[#0A0A0C] border border-[#E2E2E8] hover:bg-[#F9F9FB] transition-colors"
+              aria-expanded={mobileNavOpen}
+              aria-label="Toggle navigation menu"
             >
               <span className="font-mono text-xs font-bold">[MENU]</span>
             </button>

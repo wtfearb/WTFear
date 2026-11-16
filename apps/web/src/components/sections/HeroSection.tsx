@@ -1,29 +1,45 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import { useAuditModal } from '../modals/AuditModalProvider';
 import { trackClientEvent } from '../TelemetryTracker';
 
+interface FeatureHighlight {
+  readonly number: string;
+  readonly title: string;
+  readonly description: string;
+}
+
+const FEATURE_HIGHLIGHTS: readonly FeatureHighlight[] = [
+  {
+    number: '01',
+    title: 'END-TO-END',
+    description: 'From discovery to deployment',
+  },
+  {
+    number: '02',
+    title: 'CLIENT-OWNED',
+    description: 'Clear ownership and handover',
+  },
+  {
+    number: '03',
+    title: 'HUMAN-LED',
+    description: 'Automation with appropriate oversight',
+  },
+  {
+    number: '04',
+    title: 'BUILT TO EVOLVE',
+    description: 'Designed for iteration and growth',
+  },
+];
+
 export function HeroSection(): React.ReactElement {
-  const { openModal } = useAuditModal();
-  const [activeNode, setActiveNode] = useState<string | null>('pgvector');
-
-  const handleAuditClick = () => {
-    trackClientEvent('cta_click', 'Hero: Book an Architecture Audit');
-    openModal();
-  };
-
-  const handleExploreClick = () => {
-    trackClientEvent('cta_click', 'Hero: Explore Our Engineering');
-  };
-
   return (
     <section
       aria-labelledby="hero-title"
-      className="relative border-b border-[var(--color-border-hairline)] bg-[var(--color-canvas)] pt-12 pb-16 md:pt-20 md:pb-24 overflow-hidden"
+      className="relative bg-[#F9F9FB] border-b border-[#E2E2E8] pt-12 pb-16 md:pt-16 md:pb-20 overflow-hidden"
     >
-      <div className="mx-auto max-w-[var(--max-w-editorial)] px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Definition Lead for AEO and technical indexing (Hidden visually, preserved in DOM for AI answer engines) */}
         <div className="sr-only">
           <dl className="font-mono text-xs text-[var(--color-ink-secondary)] leading-relaxed">
@@ -36,236 +52,309 @@ export function HeroSection(): React.ReactElement {
           </dl>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Column: Editorial Headline & Copy */}
-          <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 border border-[var(--color-border-hairline)] bg-[var(--color-surface-pure)] px-3 py-1 font-mono text-xs uppercase tracking-widest text-[var(--color-accent-signal)] font-semibold">
-              <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent-signal)] animate-pulse" />
-              <span>PRODUCT &amp; AI ENGINEERING STUDIO</span>
+        {/* Two-Column Hero Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          {/* Left Column: Headline, Copy & CTAs */}
+          <div className="lg:col-span-6 space-y-6">
+            {/* Eyebrow Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#FFFFFF] border border-[#E2E2E8]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C83E1B] shrink-0" aria-hidden="true" />
+              <span className="font-mono text-[11px] font-bold uppercase tracking-[0.08em] text-[#C83E1B]">
+                PRODUCT &amp; AI ENGINEERING STUDIO
+              </span>
             </div>
 
+            {/* Main Headline */}
             <h1
               id="hero-title"
-              className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[var(--color-ink-primary)] leading-[1.04]"
+              className="font-sans font-extrabold text-[#0A0A0C] text-[44px] sm:text-[56px] lg:text-[64px] leading-[1.05] tracking-[-0.035em]"
             >
-              Make &ldquo;What If&rdquo; Work.
+              Make &lsquo;What If&rsquo;
+              <br />
+              Work.
             </h1>
 
-            <p className="text-lg sm:text-xl text-[var(--color-ink-secondary)] max-w-2xl leading-relaxed">
-              We eliminate the gap between high-level ambition and production reality. No marketing fluff, no junior handoffs. Two embedded senior systems engineers delivering governed AI agents, Next.js 15 web platforms, and distributed event backends straight to your GitHub organization.
+            {/* Supporting Paragraph */}
+            <p className="font-sans text-[17px] sm:text-[18px] leading-[1.6] text-[#3F414A] max-w-[540px]">
+              We turn business problems and ambitious ideas into practical software — through thoughtful engineering, useful automation, and systems designed to grow.
             </p>
 
+            {/* CTA Button Group */}
             <div className="pt-2 flex flex-wrap items-center gap-4">
-              <button
-                type="button"
-                onClick={handleAuditClick}
-                className="inline-flex items-center justify-center bg-[var(--color-ink-primary)] text-white px-6 py-3.5 font-mono text-xs font-semibold hover:bg-[var(--color-accent-signal)] transition-colors shadow-sm"
+              <Link
+                href="/contact"
+                onClick={() =>
+                  trackClientEvent('cta_click', 'Hero Discuss a Project', { href: '/contact' })
+                }
+                className="bg-[#0A0A0C] hover:bg-[#1E2028] text-[#FFFFFF] font-mono text-[13px] font-semibold px-6 py-3.5 inline-flex items-center justify-center gap-2.5 transition-colors cursor-pointer"
               >
-                Book an Architecture Audit &rarr;
-              </button>
+                <span>Discuss a Project</span>
+                <span aria-hidden="true">&rarr;</span>
+              </Link>
 
               <Link
                 href="/blueprints"
-                onClick={handleExploreClick}
-                className="inline-flex items-center justify-center border border-[var(--color-border-hairline)] bg-[var(--color-surface-pure)] text-[var(--color-ink-primary)] px-6 py-3.5 font-mono text-xs font-semibold hover:border-[var(--color-ink-primary)] transition-colors"
+                onClick={() =>
+                  trackClientEvent('cta_click', 'Hero Explore Our Engineering', {
+                    href: '/blueprints',
+                  })
+                }
+                className="bg-[#FFFFFF] hover:bg-[#F3F4F7] text-[#0A0A0C] border border-[#D5D7E0] font-sans text-[13px] font-semibold px-6 py-3.5 inline-flex items-center justify-center transition-colors cursor-pointer"
               >
-                Explore Our Engineering [BLUEPRINTS]
+                Explore Our Engineering
               </Link>
             </div>
           </div>
 
-          {/* Right Column: Interactive Geometric Architectural System Composition */}
-          <div className="lg:col-span-5">
-            <div className="border border-[var(--color-border-hairline)] bg-[var(--color-surface-pure)] p-5 relative shadow-sm">
-              <div className="flex items-center justify-between border-b border-[var(--color-border-hairline)] pb-3 mb-4 font-mono text-[11px] text-[var(--color-ink-muted)]">
-                <span className="text-[var(--color-ink-primary)] font-bold">// ARCHITECTURAL TOPOLOGY</span>
-                <span className="text-[var(--color-accent-signal)] font-bold">STATE: DETERMINISTIC</span>
+          {/* Right Column: // DELIVERY WORKFLOW Diagram Card */}
+          <div className="lg:col-span-6">
+            <div className="bg-[#FFFFFF] border border-[#E2E2E8] p-5 sm:p-7 w-full shadow-xs">
+              {/* Top Header Row inside Card */}
+              <div className="flex items-center justify-between mb-4">
+                <span className="font-mono text-[12px] font-bold tracking-[0.05em] text-[#0A0A0C]">
+                  // DELIVERY WORKFLOW
+                </span>
+                <span className="font-mono text-[12px] font-bold tracking-[0.05em] text-[#C83E1B]">
+                  SYSTEM ENGINEERING
+                </span>
               </div>
 
-              {/* SVG Diagram with hoverable nodes */}
-              <svg
-                viewBox="0 0 460 280"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-full h-auto font-mono text-xs select-none"
-                aria-label="Interactive Architectural Topology Diagram"
-              >
-                {/* Precision Background Grid */}
-                <defs>
-                  <pattern id="heroGrid" width="20" height="20" patternUnits="userSpaceOnUse">
-                    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#E2E2E8" strokeWidth="0.5" />
-                  </pattern>
-                </defs>
-                <rect width="460" height="280" fill="url(#heroGrid)" />
-
-                {/* Connecting Data Busses */}
-                <path d="M 100 80 L 230 80 L 230 190 L 360 190" stroke="#C5C6D0" strokeWidth="1.5" strokeDasharray="4 4" />
-                <path d="M 100 190 L 230 190 L 360 80" stroke="#C5C6D0" strokeWidth="1.5" strokeDasharray="4 4" />
-
-                {/* Node 1: Ingress Edge */}
-                <g
-                  className="cursor-pointer transition-transform"
-                  onMouseEnter={() => setActiveNode('edge')}
-                  onClick={() => setActiveNode('edge')}
+              {/* Diagram Canvas with Technical Grid & 4 Connected Workflow Nodes */}
+              <div className="relative bg-[#FAFBFD] border border-[#ECEEF3] p-4 sm:p-6 overflow-hidden">
+                <svg
+                  viewBox="0 0 520 250"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-full h-auto block select-none"
+                  aria-label="Delivery Workflow: 01 Discover to 02 Architect, 03 Build, and 04 Deploy"
                 >
-                  <rect
-                    x="20"
-                    y="50"
-                    width="140"
-                    height="60"
-                    rx="2"
-                    fill={activeNode === 'edge' ? '#0A0A0C' : '#FFFFFF'}
-                    stroke={activeNode === 'edge' ? '#C83E1B' : '#E2E2E8'}
-                    strokeWidth="1.5"
-                  />
-                  <circle cx="36" cy="68" r="4" fill="#C83E1B" className="animate-svg-pulse" />
-                  <text x="48" y="72" fill={activeNode === 'edge' ? '#FFFFFF' : '#0A0A0C'} fontSize="10" fontWeight="bold">
-                    01 CLOUDFLARE EDGE
-                  </text>
-                  <text x="48" y="94" fill={activeNode === 'edge' ? '#9CA3AF' : '#5A5D6A'} fontSize="9">
-                    HMAC &bull; &lt; 15ms Ingress
-                  </text>
-                </g>
+                  {/* Background Grid Pattern */}
+                  <defs>
+                    <pattern id="workflowGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#ECEEF3" strokeWidth="1" />
+                    </pattern>
+                  </defs>
+                  <rect width="520" height="250" fill="url(#workflowGrid)" />
 
-                {/* Node 2: Next.js 15 App Router */}
-                <g
-                  className="cursor-pointer transition-transform"
-                  onMouseEnter={() => setActiveNode('rsc')}
-                  onClick={() => setActiveNode('rsc')}
-                >
-                  <rect
-                    x="20"
-                    y="160"
-                    width="140"
-                    height="60"
-                    rx="2"
-                    fill={activeNode === 'rsc' ? '#0A0A0C' : '#FFFFFF'}
-                    stroke={activeNode === 'rsc' ? '#C83E1B' : '#E2E2E8'}
+                  {/* Connectors */}
+                  {/* Arrow 01 -> 02 */}
+                  <path
+                    d="M 215 61 L 281 61"
+                    stroke="#3F414A"
                     strokeWidth="1.5"
+                    strokeDasharray="4 3"
                   />
-                  <rect x="32" y="174" width="8" height="8" fill="#10B981" />
-                  <text x="48" y="182" fill={activeNode === 'rsc' ? '#FFFFFF' : '#0A0A0C'} fontSize="10" fontWeight="bold">
-                    02 REACT 19 RSC
-                  </text>
-                  <text x="48" y="204" fill={activeNode === 'rsc' ? '#9CA3AF' : '#5A5D6A'} fontSize="9">
-                    Streaming &bull; LCP &lt; 1.2s
-                  </text>
-                </g>
-
-                {/* Node 3: Hybrid pgvector + BM25 */}
-                <g
-                  className="cursor-pointer transition-transform"
-                  onMouseEnter={() => setActiveNode('pgvector')}
-                  onClick={() => setActiveNode('pgvector')}
-                >
-                  <rect
-                    x="300"
-                    y="50"
-                    width="140"
-                    height="60"
-                    rx="2"
-                    fill={activeNode === 'pgvector' ? '#0A0A0C' : '#FFFFFF'}
-                    stroke={activeNode === 'pgvector' ? '#C83E1B' : '#E2E2E8'}
+                  <path
+                    d="M 275 56 L 282 61 L 275 66"
+                    fill="none"
+                    stroke="#3F414A"
                     strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
-                  <circle cx="316" cy="68" r="4" fill="#C83E1B" />
-                  <text x="328" y="72" fill={activeNode === 'pgvector' ? '#FFFFFF' : '#0A0A0C'} fontSize="10" fontWeight="bold">
-                    03 PGVECTOR + BM25
-                  </text>
-                  <text x="328" y="94" fill={activeNode === 'pgvector' ? '#9CA3AF' : '#5A5D6A'} fontSize="9">
-                    HNSW RRF &bull; PostgreSQL 16
-                  </text>
-                </g>
 
-                {/* Node 4: CI Golden Eval Gate */}
-                <g
-                  className="cursor-pointer transition-transform"
-                  onMouseEnter={() => setActiveNode('gate')}
-                  onClick={() => setActiveNode('gate')}
-                >
-                  <rect
-                    x="300"
-                    y="160"
-                    width="140"
-                    height="60"
-                    rx="2"
-                    fill={activeNode === 'gate' ? '#0A0A0C' : '#FFFFFF'}
-                    stroke={activeNode === 'gate' ? '#C83E1B' : '#E2E2E8'}
+                  {/* S-Curve Arrow 02 -> 03 (routed down and across into top center of 03 BUILD) */}
+                  <path
+                    d="M 480 61 L 496 61 Q 502 61 502 67 L 502 119 Q 502 125 496 125 L 124 125 Q 118 125 118 131 L 118 148"
+                    fill="none"
+                    stroke="#3F414A"
                     strokeWidth="1.5"
+                    strokeDasharray="4 3"
                   />
-                  <rect x="312" y="174" width="8" height="8" fill="#10B981" />
-                  <text x="328" y="182" fill={activeNode === 'gate' ? '#FFFFFF' : '#0A0A0C'} fontSize="10" fontWeight="bold">
-                    04 GOLDEN EVAL GATE
-                  </text>
-                  <text x="328" y="204" fill={activeNode === 'gate' ? '#9CA3AF' : '#5A5D6A'} fontSize="9">
-                    50-Case CI Test Harness
-                  </text>
-                </g>
-              </svg>
+                  <path
+                    d="M 113 142 L 118 149 L 123 142"
+                    fill="none"
+                    stroke="#3F414A"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
 
-              {/* Node Inspector Callout */}
-              <div className="mt-3 p-3 bg-[var(--color-surface-subtle)] border border-[var(--color-border-hairline)] font-mono text-xs">
-                {activeNode === 'edge' && (
-                  <p className="text-[var(--color-ink-primary)]">
-                    <strong className="text-[var(--color-accent-signal)]">Edge Ingress:</strong> Sub-15ms webhook capture, cryptographic HMAC verification, and distributed rate limiting.
-                  </p>
-                )}
-                {activeNode === 'rsc' && (
-                  <p className="text-[var(--color-ink-primary)]">
-                    <strong className="text-[var(--color-accent-signal)]">Frontend Pipeline:</strong> Next.js 15 App Router with streaming React Server Components, delivering zero-client-JS layouts.
-                  </p>
-                )}
-                {activeNode === 'pgvector' && (
-                  <p className="text-[var(--color-ink-primary)]">
-                    <strong className="text-[var(--color-accent-signal)]">Retrieval Engine:</strong> Single-round PostgreSQL 16 pgvector HNSW cosine similarity fused with BM25 lexical rank.
-                  </p>
-                )}
-                {activeNode === 'gate' && (
-                  <p className="text-[var(--color-ink-primary)]">
-                    <strong className="text-[var(--color-accent-signal)]">Governance Gate:</strong> 50-case automated CI evaluation harness blocking hallucinations before code merges.
-                  </p>
-                )}
+                  {/* Arrow 03 -> 04 */}
+                  <path
+                    d="M 215 189 L 281 189"
+                    stroke="#3F414A"
+                    strokeWidth="1.5"
+                    strokeDasharray="4 3"
+                  />
+                  <path
+                    d="M 275 184 L 282 189 L 275 194"
+                    fill="none"
+                    stroke="#3F414A"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+
+                  {/* Node 01: 01 DISCOVER (Top-Left) */}
+                  <g>
+                    <rect
+                      x="20"
+                      y="24"
+                      width="195"
+                      height="74"
+                      rx="2"
+                      fill="#FFFFFF"
+                      stroke="#D5D7E0"
+                      strokeWidth="1"
+                    />
+                    <rect x="36" y="43" width="8" height="8" fill="#9FA3B0" />
+                    <text
+                      x="54"
+                      y="51"
+                      fontFamily="var(--font-mono), monospace"
+                      fontSize="12"
+                      fontWeight="700"
+                      fill="#0A0A0C"
+                    >
+                      01 DISCOVER
+                    </text>
+                    <text
+                      x="54"
+                      y="73"
+                      fontFamily="var(--font-mono), monospace"
+                      fontSize="11"
+                      fill="#5A5D6A"
+                    >
+                      Problem &amp; workflow
+                    </text>
+                  </g>
+
+                  {/* Node 02: 02 ARCHITECT (Top-Right) */}
+                  <g>
+                    <rect
+                      x="285"
+                      y="24"
+                      width="195"
+                      height="74"
+                      rx="2"
+                      fill="#FFFFFF"
+                      stroke="#D5D7E0"
+                      strokeWidth="1"
+                    />
+                    <rect x="301" y="43" width="8" height="8" fill="#9FA3B0" />
+                    <text
+                      x="319"
+                      y="51"
+                      fontFamily="var(--font-mono), monospace"
+                      fontSize="12"
+                      fontWeight="700"
+                      fill="#0A0A0C"
+                    >
+                      02 ARCHITECT
+                    </text>
+                    <text
+                      x="319"
+                      y="73"
+                      fontFamily="var(--font-mono), monospace"
+                      fontSize="11"
+                      fill="#5A5D6A"
+                    >
+                      System design
+                    </text>
+                  </g>
+
+                  {/* Node 03: 03 BUILD (Bottom-Left — Signal Orange Highlighted) */}
+                  <g>
+                    <rect
+                      x="20"
+                      y="152"
+                      width="195"
+                      height="74"
+                      rx="2"
+                      fill="#C83E1B"
+                      stroke="#B03415"
+                      strokeWidth="1"
+                    />
+                    <rect x="36" y="171" width="8" height="8" fill="#FFFFFF" />
+                    <text
+                      x="54"
+                      y="179"
+                      fontFamily="var(--font-mono), monospace"
+                      fontSize="12"
+                      fontWeight="700"
+                      fill="#FFFFFF"
+                    >
+                      03 BUILD
+                    </text>
+                    <text
+                      x="54"
+                      y="201"
+                      fontFamily="var(--font-mono), monospace"
+                      fontSize="11"
+                      fill="#FFFFFF"
+                      fillOpacity="0.92"
+                    >
+                      Software + automation
+                    </text>
+                  </g>
+
+                  {/* Node 04: 04 DEPLOY (Bottom-Right) */}
+                  <g>
+                    <rect
+                      x="285"
+                      y="152"
+                      width="195"
+                      height="74"
+                      rx="2"
+                      fill="#FFFFFF"
+                      stroke="#D5D7E0"
+                      strokeWidth="1"
+                    />
+                    <rect x="301" y="171" width="8" height="8" fill="#9FA3B0" />
+                    <text
+                      x="319"
+                      y="179"
+                      fontFamily="var(--font-mono), monospace"
+                      fontSize="12"
+                      fontWeight="700"
+                      fill="#0A0A0C"
+                    >
+                      04 DEPLOY
+                    </text>
+                    <text
+                      x="319"
+                      y="201"
+                      fontFamily="var(--font-mono), monospace"
+                      fontSize="11"
+                      fill="#5A5D6A"
+                    >
+                      Launch &amp; improve
+                    </text>
+                  </g>
+                </svg>
+              </div>
+
+              {/* Bottom Caption Bar inside Right Card */}
+              <div className="mt-4 pt-3 flex items-center gap-2.5">
+                <span className="w-[3px] h-3.5 bg-[#C83E1B] shrink-0" aria-hidden="true" />
+                <span className="font-mono text-[11px] font-bold uppercase tracking-[0.06em] text-[#3F414A]">
+                  FROM POSSIBILITY TO WORKING SYSTEMS
+                </span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Quantitative Proof Strip */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 border-t border-[var(--color-border-hairline)] pt-8">
-          <div className="border border-[var(--color-border-hairline)] p-5 bg-[var(--color-surface-pure)]">
-            <div className="font-mono text-2xl sm:text-3xl font-bold text-[var(--color-ink-primary)]">
-              14 Days
-            </div>
-            <div className="font-mono text-xs uppercase tracking-wider text-[var(--color-ink-muted)] mt-1">
-              Rapid Sprint Cadence
-            </div>
-          </div>
-
-          <div className="border border-[var(--color-border-hairline)] p-5 bg-[var(--color-surface-pure)]">
-            <div className="font-mono text-2xl sm:text-3xl font-bold text-[var(--color-ink-primary)]">
-              100%
-            </div>
-            <div className="font-mono text-xs uppercase tracking-wider text-[var(--color-ink-muted)] mt-1">
-              Client GitHub IP Ownership
-            </div>
-          </div>
-
-          <div className="border border-[var(--color-border-hairline)] p-5 bg-[var(--color-surface-pure)]">
-            <div className="font-mono text-2xl sm:text-3xl font-bold text-[var(--color-accent-signal)]">
-              0.00%
-            </div>
-            <div className="font-mono text-xs uppercase tracking-wider text-[var(--color-ink-muted)] mt-1">
-              Uncited Autonomous Actions
-            </div>
-          </div>
-
-          <div className="border border-[var(--color-border-hairline)] p-5 bg-[var(--color-surface-pure)]">
-            <div className="font-mono text-2xl sm:text-3xl font-bold text-[var(--color-ink-primary)]">
-              &lt; 1.2s
-            </div>
-            <div className="font-mono text-xs uppercase tracking-wider text-[var(--color-ink-muted)] mt-1">
-              LCP Target SLA
-            </div>
+        {/* Four Feature Highlights Below Hero */}
+        <div className="border-t border-[#E2E2E8] mt-12 pt-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {FEATURE_HIGHLIGHTS.map((item) => (
+              <div
+                key={item.number}
+                className="bg-[#FFFFFF] border border-[#E2E2E8] p-6 flex flex-col justify-start"
+              >
+                <span className="font-mono text-[14px] font-bold text-[#C83E1B] mb-2">
+                  {item.number}
+                </span>
+                <h3 className="font-sans text-[17px] font-extrabold tracking-[-0.02em] text-[#0A0A0C] uppercase mb-1.5">
+                  {item.title}
+                </h3>
+                <p className="font-sans text-[13px] leading-[1.5] text-[#5A5D6A]">
+                  {item.description}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
