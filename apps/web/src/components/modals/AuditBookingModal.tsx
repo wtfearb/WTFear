@@ -116,9 +116,9 @@ export function AuditBookingModal({ isOpen, onClose }: AuditBookingModalProps): 
             type="button"
             onClick={onClose}
             aria-label="Close modal"
-            className="p-2 font-mono text-sm hover:text-[var(--color-accent-signal)] focus:outline-none focus:ring-2 focus:ring-[var(--color-border-focus)]"
+            className="p-1.5 font-mono text-xs border border-[var(--color-border-hairline)] hover:border-[var(--color-accent-signal)] hover:text-[var(--color-accent-signal)] transition-colors"
           >
-            [ESC / ✕]
+            [ESC / &times;]
           </button>
         </div>
 

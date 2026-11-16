@@ -5,6 +5,7 @@
 @theme {
   /* 1. Swiss-Editorial Surface & Ink Palette */
   --color-canvas: #F9F9FB;
+  --color-surface-pure: #FFFFFF;
   --color-surface-elevated: #FFFFFF;
   --color-surface-subtle: #F1F2F6;
   --color-terminal-bg: #0C0D10;
@@ -84,6 +85,7 @@
     background-color: var(--color-canvas);
     color: var(--color-ink-primary);
     font-family: var(--font-sans);
+    font-variant-numeric: tabular-nums;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     scroll-behavior: smooth;

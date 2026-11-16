@@ -38,8 +38,8 @@ export function EngagementSection(): React.ReactElement {
             <span className="font-mono text-xs uppercase tracking-widest text-[var(--color-accent-signal)] font-semibold">
               Deterministic Pricing &amp; Scope
             </span>
-            <h2 id="pricing-heading" className="text-3xl sm:text-4xl font-bold tracking-tight text-[var(--color-ink-primary)] mt-2">
-              Transparent Investment. Zero Retainer Trap.
+            <h2 id="pricing-heading" className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[var(--color-ink-primary)] mt-2">
+              Engineering That Moves With Your Ambition.
             </h2>
           </div>
           <p className="font-mono text-xs text-[var(--color-ink-muted)] max-w-md">
@@ -203,8 +203,8 @@ export function EngagementSection(): React.ReactElement {
                 </div>
                 <ul className="space-y-2 font-mono text-xs text-[var(--color-ink-secondary)]">
                   {scope.deliverables.map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-2">
-                      <span className="text-[var(--color-accent-signal)] font-bold">&check;</span>
+                    <li key={idx} className="flex items-start gap-2.5 font-mono text-xs text-[var(--color-ink-primary)]">
+                      <span className="text-[var(--color-accent-signal)] font-bold shrink-0">✓</span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -220,10 +220,17 @@ export function EngagementSection(): React.ReactElement {
               <div className="pt-2">
                 <button
                   type="button"
-                  onClick={openModal}
-                  className="w-full bg-[var(--color-accent-signal)] text-white py-3.5 px-4 font-mono text-xs font-semibold hover:bg-[var(--color-accent-signal-hover)] transition-colors text-center"
+                  onClick={() => {
+                    trackClientEvent('cta_click', 'Discuss Your Project', {
+                      model,
+                      complexity,
+                      estimatedCostRange: `$${scope.priceRangeUsd.min.toLocaleString()} - $${scope.priceRangeUsd.max.toLocaleString()}`,
+                    });
+                    openModal();
+                  }}
+                  className="w-full bg-[var(--color-ink-primary)] text-white py-3.5 px-4 font-mono text-xs font-semibold hover:bg-[var(--color-accent-signal)] transition-colors text-center shadow-sm"
                 >
-                  LOCK THIS SCOPE ON CAL.COM (15-MIN AUDIT) &rarr;
+                  Discuss Your Project (15-Min Architecture Audit) &rarr;
                 </button>
               </div>
             </div>

@@ -4,10 +4,16 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useAuditModal } from '../modals/AuditModalProvider';
 import { MobileNavDrawer } from './MobileNavDrawer';
+import { trackClientEvent } from '../TelemetryTracker';
 
 export function Header(): React.ReactElement {
   const { openModal } = useAuditModal();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+
+  const handleAuditClick = () => {
+    trackClientEvent('cta_click', 'Header: Book an Architecture Audit');
+    openModal();
+  };
 
   return (
     <>
@@ -16,28 +22,33 @@ export function Header(): React.ReactElement {
           <div className="flex items-center gap-8">
             <Link
               href="/"
-              className="flex items-center gap-2 font-mono text-base font-bold tracking-tight text-[var(--color-ink-primary)] hover:text-[var(--color-accent-signal)] transition-colors"
+              className="flex items-center gap-2.5 font-mono text-base font-bold tracking-tight text-[var(--color-ink-primary)] hover:text-[var(--color-accent-signal)] transition-colors"
             >
               <span className="inline-block h-2.5 w-2.5 bg-[var(--color-accent-signal)]" aria-hidden="true" />
-              <span>wtfear</span>
-              <span className="text-[var(--color-ink-muted)] font-normal text-xs">/ agency</span>
+              <span>WTFearB</span>
+              <span className="hidden sm:inline-block text-[var(--color-ink-muted)] font-normal text-xs pl-1 border-l border-[var(--color-border-hairline)]">
+                Make &ldquo;What If&rdquo; Work.
+              </span>
             </Link>
 
-            <nav className="hidden md:flex items-center gap-6 font-mono text-xs text-[var(--color-ink-secondary)]" aria-label="Main Navigation">
-              <Link href="#blueprints" className="hover:text-[var(--color-ink-primary)] transition-colors">
-                // Blueprints
+            <nav className="hidden lg:flex items-center gap-6 font-mono text-xs text-[var(--color-ink-secondary)]" aria-label="Main Navigation">
+              <Link href="/" className="hover:text-[var(--color-ink-primary)] transition-colors">
+                Home
               </Link>
-              <Link href="#sandbox" className="hover:text-[var(--color-ink-primary)] transition-colors">
-                // Live Sandbox
+              <Link href="/services" className="hover:text-[var(--color-ink-primary)] transition-colors">
+                Services
               </Link>
-              <Link href="#pricing" className="hover:text-[var(--color-ink-primary)] transition-colors">
-                // Pricing & Scope
+              <Link href="/blueprints" className="hover:text-[var(--color-ink-primary)] transition-colors">
+                Engineering Blueprints
               </Link>
-              <Link href="#stack" className="hover:text-[var(--color-ink-primary)] transition-colors">
-                // Tech Stack
+              <Link href="/projects" className="hover:text-[var(--color-ink-primary)] transition-colors">
+                Projects
               </Link>
-              <Link href="#faq" className="hover:text-[var(--color-ink-primary)] transition-colors">
-                // FAQ
+              <Link href="/about" className="hover:text-[var(--color-ink-primary)] transition-colors">
+                About
+              </Link>
+              <Link href="/contact" className="hover:text-[var(--color-ink-primary)] transition-colors">
+                Contact
               </Link>
             </nav>
           </div>
@@ -45,16 +56,16 @@ export function Header(): React.ReactElement {
           <div className="flex items-center gap-3">
             <button
               type="button"
-              onClick={openModal}
+              onClick={handleAuditClick}
               className="hidden sm:inline-flex items-center justify-center border border-[var(--color-ink-primary)] bg-[var(--color-ink-primary)] px-4 py-2 font-mono text-xs font-semibold text-white hover:bg-[var(--color-accent-signal)] hover:border-[var(--color-accent-signal)] transition-colors"
             >
-              15-MIN AUDIT ($0) &rarr;
+              Book an Architecture Audit &rarr;
             </button>
 
             <button
               type="button"
               onClick={() => setMobileNavOpen(true)}
-              className="inline-flex md:hidden p-2 text-[var(--color-ink-primary)] border border-[var(--color-border-hairline)]"
+              className="inline-flex lg:hidden p-2 text-[var(--color-ink-primary)] border border-[var(--color-border-hairline)]"
               aria-label="Open mobile navigation"
             >
               <span className="font-mono text-xs font-bold">[MENU]</span>

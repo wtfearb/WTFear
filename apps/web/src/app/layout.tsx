@@ -20,14 +20,16 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://wtfear.agency'),
   title: {
-    default: 'wtfear — Product & AI Engineering Studio | Governed AI & High-Performance Web',
-    template: '%s | wtfear Engineering Studio',
+    default: 'WTFearB — Product & AI Engineering Studio | Make "What If" Work.',
+    template: '%s | WTFearB Engineering Studio',
   },
   description:
-    'Senior Product and AI Engineering Studio that designs, builds, and ships governed AI agents, Next.js 15 web applications, and distributed backends in 2-week sprints with 100% client GitHub IP ownership.',
-  applicationName: 'wtfear.agency',
-  authors: [{ name: 'wtfear Engineering Pod', url: 'https://wtfear.agency' }],
+    'WTFearB is an elite systems engineering studio that builds and deploys governed AI agents, Next.js 15 web applications, and distributed event pipelines in deterministic 2-week sprints with 100% client GitHub IP ownership.',
+  applicationName: 'WTFearB',
+  authors: [{ name: 'WTFearB Engineering Pod', url: 'https://wtfear.agency' }],
   keywords: [
+    'WTFearB',
+    'Make What If Work',
     'AI engineering studio',
     'governed AI agents',
     'Next.js 15 App Router agency',
@@ -40,11 +42,11 @@ export const metadata: Metadata = {
     canonical: 'https://wtfear.agency',
   },
   openGraph: {
-    title: 'wtfear — Product & AI Engineering Studio',
+    title: 'WTFearB — Product & AI Engineering Studio | Make "What If" Work.',
     description:
       'Ship governed AI agents and production software in weekly sprints. 100% GitHub IP ownership from commit #1.',
     url: 'https://wtfear.agency',
-    siteName: 'wtfear.agency',
+    siteName: 'WTFearB',
     locale: 'en_US',
     type: 'website',
     images: [
@@ -52,13 +54,13 @@ export const metadata: Metadata = {
         url: 'https://wtfear.agency/api/og',
         width: 1200,
         height: 630,
-        alt: 'wtfear Engineering Studio',
+        alt: 'WTFearB Engineering Studio',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'wtfear — Product & AI Engineering Studio',
+    title: 'WTFearB — Product & AI Engineering Studio | Make "What If" Work.',
     description:
       'Ship governed AI agents and production software in weekly sprints. 100% GitHub IP ownership from commit #1.',
     images: ['https://wtfear.agency/api/og'],

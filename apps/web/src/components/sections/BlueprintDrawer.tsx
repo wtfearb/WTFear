@@ -96,7 +96,7 @@ export function BlueprintDrawer({ blueprintId, onClose }: BlueprintDrawerProps):
               aria-label="Close blueprint inspection drawer"
               className="p-2 font-mono text-xs border border-[var(--color-terminal-border)] hover:border-[var(--color-accent-signal)] hover:text-white transition-colors"
             >
-              [ESC / ✕]
+              [ESC / &times;]
             </button>
           </div>
 

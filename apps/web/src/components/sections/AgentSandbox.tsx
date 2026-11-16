@@ -48,7 +48,7 @@ export interface SandboxScenario {
 export const SANDBOX_SCENARIOS: readonly SandboxScenario[] = [
   {
     id: 'webhook-signature-mismatch',
-    label: '01 / Webhook HMAC Drift',
+    label: '01 Webhook HMAC mismatch',
     categoryBadge: 'HIGH GROUNDING (0.91)',
     incomingTicket: {
       requester: 'devops@fintech-client.io',
@@ -87,7 +87,7 @@ export const SANDBOX_SCENARIOS: readonly SandboxScenario[] = [
   },
   {
     id: 'unindexed-enterprise-sla',
-    label: '02 / Ambiguous Custom SLA Credit',
+    label: '02 Ambiguous enterprise SLA request',
     categoryBadge: 'BORDERLINE GROUNDING (0.74)',
     incomingTicket: {
       requester: 'vp-eng@seriesb-health.com',
@@ -117,7 +117,7 @@ export const SANDBOX_SCENARIOS: readonly SandboxScenario[] = [
   },
   {
     id: 'prompt-injection-override',
-    label: '03 / Adversarial Prompt Injection',
+    label: '03 Adversarial prompt injection',
     categoryBadge: 'INGRESS POLICY BLOCK',
     incomingTicket: {
       requester: 'attacker@disposable-mail.org',
@@ -133,7 +133,7 @@ export const SANDBOX_SCENARIOS: readonly SandboxScenario[] = [
   },
   {
     id: 'multi-region-replication-lag',
-    label: '04 / Replication Lag Spillover',
+    label: '04 Multi-region replication lag',
     categoryBadge: 'HIGH GROUNDING (0.89)',
     incomingTicket: {
       requester: 'sre-lead@streamplatform.tv',
@@ -217,10 +217,10 @@ export function AgentSandbox(): React.ReactElement {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[var(--color-terminal-border)]">
           <div>
             <span className="font-mono text-xs uppercase tracking-widest text-[var(--color-accent-signal)] font-semibold">
-              Interactive Governance Verifier
+              Interactive AI Governance Sandbox
             </span>
-            <h3 id="sandbox-heading" className="text-2xl sm:text-3xl font-bold mt-1 text-white">
-              Test Our Deterministic RAG &amp; Hallucination Gate Live
+            <h3 id="sandbox-heading" className="text-2xl sm:text-3xl lg:text-4xl font-bold mt-1 text-white">
+              See How Responsible AI Should Work.
             </h3>
           </div>
           <div className="flex flex-wrap gap-2" role="tablist" aria-label="Sample ticket scenarios">
@@ -259,13 +259,13 @@ export function AgentSandbox(): React.ReactElement {
               </p>
             </div>
 
-            <div className="space-y-4 p-4 border border-[var(--color-terminal-border)] bg-[var(--color-terminal-surface)]">
+            <div className="space-y-5 p-5 border border-[var(--color-terminal-border)] bg-[var(--color-terminal-surface)]">
               <div>
                 <label
                   htmlFor="confidence-slider"
-                  className="flex justify-between font-mono text-xs mb-1"
+                  className="flex justify-between font-mono text-xs mb-1.5"
                 >
-                  <span className="text-white">MIN CONFIDENCE GATE</span>
+                  <span className="text-white font-medium">Autonomous Confidence Threshold</span>
                   <span className="text-[var(--color-accent-signal)] font-bold">{confidenceGate.toFixed(2)}</span>
                 </label>
                 <input
@@ -275,17 +275,27 @@ export function AgentSandbox(): React.ReactElement {
                   max={0.95}
                   step={0.01}
                   value={confidenceGate}
-                  onChange={(e) => setConfidenceGate(parseFloat(e.target.value))}
-                  className="w-full accent-[var(--color-accent-signal)] cursor-pointer"
+                  onChange={(e) => {
+                    const val = parseFloat(e.target.value);
+                    setConfidenceGate(val);
+                    trackClientEvent('sandbox_change', 'Autonomous Confidence Threshold Adjusted', {
+                      confidenceThreshold: val,
+                    });
+                  }}
+                  className="w-full accent-[var(--color-accent-signal)] cursor-pointer h-2 bg-[var(--color-terminal-bg)] rounded-lg"
                 />
+                <div className="flex justify-between font-mono text-[10px] text-[var(--color-terminal-muted)] mt-1">
+                  <span>0.70 (Permissive)</span>
+                  <span>0.95 (Strict Governance)</span>
+                </div>
               </div>
 
               <div>
                 <label
                   htmlFor="grounding-slider"
-                  className="flex justify-between font-mono text-xs mb-1"
+                  className="flex justify-between font-mono text-xs mb-1.5"
                 >
-                  <span className="text-white">MIN DENSE GROUNDING GATE</span>
+                  <span className="text-white font-medium">Minimum Grounding Score</span>
                   <span className="text-[var(--color-accent-signal)] font-bold">{groundingGate.toFixed(2)}</span>
                 </label>
                 <input
@@ -295,9 +305,19 @@ export function AgentSandbox(): React.ReactElement {
                   max={0.9}
                   step={0.01}
                   value={groundingGate}
-                  onChange={(e) => setGroundingGate(parseFloat(e.target.value))}
-                  className="w-full accent-[var(--color-accent-signal)] cursor-pointer"
+                  onChange={(e) => {
+                    const val = parseFloat(e.target.value);
+                    setGroundingGate(val);
+                    trackClientEvent('sandbox_change', 'Minimum Grounding Score Adjusted', {
+                      groundingScore: val,
+                    });
+                  }}
+                  className="w-full accent-[var(--color-accent-signal)] cursor-pointer h-2 bg-[var(--color-terminal-bg)] rounded-lg"
                 />
+                <div className="flex justify-between font-mono text-[10px] text-[var(--color-terminal-muted)] mt-1">
+                  <span>0.65 (Loose Citation)</span>
+                  <span>0.90 (Exact Matching)</span>
+                </div>
               </div>
             </div>
 

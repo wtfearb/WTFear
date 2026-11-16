@@ -27,15 +27,15 @@ export function generateRootJsonLd(): Record<string, unknown> {
       {
         '@type': 'Organization',
         '@id': `${baseUrl}/#organization`,
-        name: 'wtfear',
-        alternateName: 'wtfear Engineering Studio',
+        name: 'WTFearB',
+        alternateName: 'WTFearB Product & AI Engineering Studio',
         url: baseUrl,
         logo: `${baseUrl}/icon.png`,
         description:
-          'Senior Product & AI Engineering Studio shipping governed AI agents, Next.js 15 web apps, and distributed backends in 2-week sprints with 100% client GitHub IP ownership.',
+          'WTFearB is a senior product and AI engineering studio that makes "What If" work, shipping governed AI agents, Next.js 15 web applications, and distributed event backends with 100% client GitHub IP ownership.',
         contactPoint: {
           '@type': 'ContactPoint',
-          email: 'hello@wtfear.agency',
+          email: 'wtfearb@gmail.com',
           contactType: 'technical sales & architecture audit',
         },
       },
