@@ -13,7 +13,10 @@ import { ProjectsPreviewSection } from '@/components/sections/ProjectsPreviewSec
 import { FaqSection } from '@/components/sections/FaqSection';
 import { FinalCtaSection } from '@/components/sections/FinalCtaSection';
 
-export default function HomePage(): React.ReactElement {
+import { getSiteSettings } from '@/lib/db';
+
+export default async function HomePage(): Promise<React.ReactElement> {
+  const siteSettings = await getSiteSettings();
   return (
     <div className="flex min-h-screen flex-col bg-[var(--color-canvas)] text-[var(--color-ink-primary)] selection:bg-[var(--color-accent-signal)] selection:text-white">
       {/* Primary Sticky Header */}
@@ -43,7 +46,7 @@ export default function HomePage(): React.ReactElement {
         <ProcessSection />
 
         {/* Section 08: Engagement Models & Scope Calculator */}
-        <EngagementSection />
+        <EngagementSection hideCommercialFigures={siteSettings.hideCommercialFigures} />
 
         {/* Section 09: Projects Preview */}
         <ProjectsPreviewSection />

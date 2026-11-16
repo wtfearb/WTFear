@@ -1,9 +1,32 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { ADMIN_COOKIE_NAME, verifyAdminToken } from '@/lib/auth/admin-auth';
 
-export function middleware(request: NextRequest): NextResponse {
+export async function middleware(request: NextRequest): Promise<NextResponse> {
   const isProduction = process.env.NODE_ENV === 'production';
   const pathname = request.nextUrl.pathname;
+
+  // Gate Admin Routes & APIs
+  if (pathname.startsWith('/admin') && pathname !== '/admin/login') {
+    const adminToken = request.cookies.get(ADMIN_COOKIE_NAME)?.value;
+    const isValid = await verifyAdminToken(adminToken);
+    if (!isValid) {
+      const loginUrl = new URL('/admin/login', request.url);
+      loginUrl.searchParams.set('from', pathname);
+      return NextResponse.redirect(loginUrl);
+    }
+  }
+
+  if (pathname.startsWith('/api/admin') && !pathname.startsWith('/api/admin/auth')) {
+    const adminToken = request.cookies.get(ADMIN_COOKIE_NAME)?.value;
+    const isValid = await verifyAdminToken(adminToken);
+    if (!isValid) {
+      return NextResponse.json(
+        { error: 'Unauthorized: Valid admin session required.' },
+        { status: 401 }
+      );
+    }
+  }
 
   // Build strict Content-Security-Policy that supports Next.js SSG client hydration,
   // Cloudflare Turnstile, Cal.com embeds, and Vercel Analytics/Speed Insights.

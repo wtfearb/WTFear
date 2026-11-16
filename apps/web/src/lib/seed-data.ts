@@ -54,6 +54,7 @@ export interface ComplexityMultiplier {
 
 export interface SiteSettings {
   portfolioDisplayMode: 'showcase_10_projects' | 'coming_soon_empty_state';
+  hideCommercialFigures?: boolean;
 }
 
 export const COMPLEXITY_MULTIPLIERS: readonly ComplexityMultiplier[] = [

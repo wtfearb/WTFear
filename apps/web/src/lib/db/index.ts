@@ -23,6 +23,24 @@ export const isDatabaseConfigured = Boolean(databaseUrl && databaseUrl.length > 
 const neonSql = isDatabaseConfigured ? neon(databaseUrl!) : null;
 export const db = neonSql ? drizzle(neonSql, { schema }) : null;
 
+export interface EnrichedActivityEvent extends schema.ActivityEvent {
+  country?: string;
+  city?: string;
+  deviceType?: string;
+}
+
+export interface TelemetryMetrics {
+  totalSessions: number;
+  totalPageViews: number;
+  totalSandboxRuns: number;
+  totalCalculatorInteractions: number;
+  totalAuditSubmissions: number;
+  recentEvents: EnrichedActivityEvent[];
+  topViewedPages: { path: string; count: number }[];
+  topInspectedItems: { label: string; count: number }[];
+  topCalculatorConfigs: { label: string; count: number }[];
+}
+
 // ============================================================================
 // IN-MEMORY FALLBACK STORE (Active during local builds, preview branches, and offline dev)
 // ============================================================================
@@ -74,6 +92,161 @@ class InMemoryDatabase {
       isPublished: pr.isPublished,
       updatedAt: new Date(pr.updatedAt),
     }));
+
+    // Seed realistic sample sessions & telemetry events for instant preview visualization
+    const sampleSessions: schema.VisitorSession[] = [
+      {
+        id: 'sess_us_sf_01',
+        sessionToken: 'tok_sf_enterprise_982',
+        ipHash: 'e3b0c44298fc1c149afbf4c8996fb924',
+        country: 'United States',
+        city: 'San Francisco, CA',
+        deviceType: 'desktop',
+        userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
+        referrer: 'https://news.ycombinator.com',
+        utmSource: 'hackernews',
+        entryPath: '/',
+        lastPath: '/blueprints/ai-triage',
+        pageViewsCount: 4,
+        startedAt: new Date(Date.now() - 42 * 60 * 1000),
+        lastSeenAt: new Date(Date.now() - 3 * 60 * 1000),
+      },
+      {
+        id: 'sess_uk_lon_02',
+        sessionToken: 'tok_lon_fintech_419',
+        ipHash: '5e884898da28047151d0e56f8dc62927',
+        country: 'United Kingdom',
+        city: 'London',
+        deviceType: 'desktop',
+        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        referrer: 'https://github.com/wtfearb',
+        utmSource: 'github',
+        entryPath: '/projects',
+        lastPath: '/audit',
+        pageViewsCount: 6,
+        startedAt: new Date(Date.now() - 110 * 60 * 1000),
+        lastSeenAt: new Date(Date.now() - 8 * 60 * 1000),
+      },
+      {
+        id: 'sess_de_ber_03',
+        sessionToken: 'tok_ber_infra_112',
+        ipHash: '4b227777d4dd1fc61c6f884f48641d02',
+        country: 'Germany',
+        city: 'Berlin',
+        deviceType: 'mobile',
+        userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X)',
+        referrer: 'https://twitter.com',
+        utmSource: 'twitter',
+        entryPath: '/',
+        lastPath: '/#pricing',
+        pageViewsCount: 3,
+        startedAt: new Date(Date.now() - 180 * 60 * 1000),
+        lastSeenAt: new Date(Date.now() - 25 * 60 * 1000),
+      },
+    ];
+
+    for (const s of sampleSessions) {
+      this.sessions.set(s.sessionToken, s);
+    }
+
+    this.events = [
+      {
+        id: 'evt_01',
+        sessionId: 'sess_us_sf_01',
+        eventType: 'page_view',
+        path: '/',
+        targetLabel: 'Homepage Monograph',
+        payloadJson: { referrer: 'https://news.ycombinator.com' },
+        createdAt: new Date(Date.now() - 42 * 60 * 1000),
+      },
+      {
+        id: 'evt_02',
+        sessionId: 'sess_us_sf_01',
+        eventType: 'sandbox_change',
+        path: '/#sandbox',
+        targetLabel: 'Confidence: 0.88, Grounding: 0.82',
+        payloadJson: { confidenceThreshold: 0.88, groundingScore: 0.82, status: 'RESOLVED_AUTONOMOUSLY' },
+        createdAt: new Date(Date.now() - 35 * 60 * 1000),
+      },
+      {
+        id: 'evt_03',
+        sessionId: 'sess_us_sf_01',
+        eventType: 'blueprint_inspect',
+        path: '/blueprints/ai-triage',
+        targetLabel: 'Governed Support & Ops Triage Agent',
+        payloadJson: { blueprintId: 'ai-triage', category: 'AI AGENTS' },
+        createdAt: new Date(Date.now() - 15 * 60 * 1000),
+      },
+      {
+        id: 'evt_04',
+        sessionId: 'sess_uk_lon_02',
+        eventType: 'calculator_change',
+        path: '/#pricing',
+        targetLabel: 'Model: sprint, Complexity: governed_ai',
+        payloadJson: { model: 'sprint', complexity: 'governed_ai', evalHarness: true, estimatedUsd: 8300 },
+        createdAt: new Date(Date.now() - 22 * 60 * 1000),
+      },
+      {
+        id: 'evt_05',
+        sessionId: 'sess_uk_lon_02',
+        eventType: 'project_click',
+        path: '/projects/sentinel-rag-triage',
+        targetLabel: 'Sentinel RAG Triage Engine',
+        payloadJson: { slug: 'sentinel-rag-triage', industry: 'Enterprise SaaS' },
+        createdAt: new Date(Date.now() - 12 * 60 * 1000),
+      },
+      {
+        id: 'evt_06',
+        sessionId: 'sess_uk_lon_02',
+        eventType: 'audit_submit',
+        path: '/audit',
+        targetLabel: '15-Min Architecture Audit',
+        payloadJson: { workEmail: 'alex.vane@apexfintech.co.uk', timeline: '2-week-sprint' },
+        createdAt: new Date(Date.now() - 8 * 60 * 1000),
+      },
+    ];
+
+    // Seed sample audit leads
+    this.leads = [
+      {
+        id: 'lead_seed_01',
+        sessionId: 'sess_uk_lon_02',
+        workEmail: 'alex.vane@apexfintech.co.uk',
+        companyDomain: 'apexfintech.co.uk',
+        targetTimeline: '2-week-sprint',
+        bottleneckDescription: 'Multi-tenant RAG pipeline hallucinates fee structures when processing cross-border FX contracts; need deterministic Pydantic citation gates and pgvector HNSW hybrid search.',
+        calculatorSnapshotJson: {
+          model: 'sprint',
+          complexity: 'governed_ai',
+          includeEvalHarness: true,
+          priceRangeUsd: { min: 6500, max: 8500 },
+        },
+        leadScore: 92,
+        qualificationTier: 'HIGH_INTENT',
+        status: 'NEW',
+        adminNotes: 'High-intent lead. SOW candidate for upcoming Monday sprint slot.',
+        createdAt: new Date(Date.now() - 8 * 60 * 1000),
+      },
+      {
+        id: 'lead_seed_02',
+        sessionId: 'sess_us_sf_01',
+        workEmail: 'cto@nexuslogistics.io',
+        companyDomain: 'nexuslogistics.io',
+        targetTimeline: '4-week-mvp',
+        bottleneckDescription: 'Need a sub-15ms edge webhook ingestion spine with Redis Streams and automated DLQ replay to replace legacy Zapier pipeline.',
+        calculatorSnapshotJson: {
+          model: 'mvp',
+          complexity: 'distributed',
+          includeEvalHarness: true,
+          priceRangeUsd: { min: 14000, max: 24000 },
+        },
+        leadScore: 85,
+        qualificationTier: 'TIER_1',
+        status: 'REVIEWED',
+        adminNotes: 'Reviewed architecture monograph. Emailed calendar invite.',
+        createdAt: new Date(Date.now() - 36 * 60 * 1000),
+      },
+    ];
   }
 
   // Session operations
@@ -120,6 +293,12 @@ class InMemoryDatabase {
     return this.sessions.get(token);
   }
 
+  getSessions(limit = 100): schema.VisitorSession[] {
+    return Array.from(this.sessions.values())
+      .sort((a, b) => b.lastSeenAt.getTime() - a.lastSeenAt.getTime())
+      .slice(0, limit);
+  }
+
   // Event operations
   recordEvent(event: schema.NewActivityEvent): schema.ActivityEvent {
     const item: schema.ActivityEvent = {
@@ -131,12 +310,22 @@ class InMemoryDatabase {
       payloadJson: event.payloadJson ?? null,
       createdAt: event.createdAt ? new Date(event.createdAt) : new Date(),
     };
-    this.events.push(item);
+    this.events.unshift(item);
     return item;
   }
 
-  getEvents(limit = 100): schema.ActivityEvent[] {
-    return [...this.events].reverse().slice(0, limit);
+  getEvents(limit = 100): EnrichedActivityEvent[] {
+    return this.events.slice(0, limit).map((evt) => {
+      const session =
+        this.sessions.get(evt.sessionId) ||
+        Array.from(this.sessions.values()).find((s) => s.id === evt.sessionId);
+      return {
+        ...evt,
+        country: session?.country || undefined,
+        city: session?.city || undefined,
+        deviceType: session?.deviceType || undefined,
+      };
+    });
   }
 
   // Lead operations
@@ -151,16 +340,33 @@ class InMemoryDatabase {
       calculatorSnapshotJson: lead.calculatorSnapshotJson ?? null,
       leadScore: lead.leadScore ?? 0,
       qualificationTier: lead.qualificationTier,
-      status: lead.status || 'new',
+      status: lead.status || 'NEW',
       adminNotes: lead.adminNotes || null,
       createdAt: lead.createdAt ? new Date(lead.createdAt) : new Date(),
     };
-    this.leads.push(item);
+    this.leads.unshift(item);
     return item;
   }
 
-  getLeads(limit = 50): schema.AuditLead[] {
-    return [...this.leads].reverse().slice(0, limit);
+  getLeads(limit = 100): schema.AuditLead[] {
+    return [...this.leads].slice(0, limit);
+  }
+
+  updateLead(id: string, patch: { status?: string; adminNotes?: string }): schema.AuditLead | null {
+    const lead = this.leads.find((l) => l.id === id);
+    if (!lead) return null;
+    if (patch.status !== undefined) lead.status = patch.status;
+    if (patch.adminNotes !== undefined) lead.adminNotes = patch.adminNotes;
+    return lead;
+  }
+
+  deleteLead(id: string): boolean {
+    const idx = this.leads.findIndex((l) => l.id === id);
+    if (idx >= 0) {
+      this.leads.splice(idx, 1);
+      return true;
+    }
+    return false;
   }
 
   // Portfolio operations
@@ -173,9 +379,56 @@ class InMemoryDatabase {
     return this.projects.find((p) => p.slug === slug);
   }
 
+  upsertProject(p: schema.NewPortfolioProject): schema.PortfolioProject {
+    const existingIdx = this.projects.findIndex(
+      (proj) => (p.id && proj.id === p.id) || proj.slug === p.slug
+    );
+    const item: schema.PortfolioProject = {
+      id: p.id || crypto.randomUUID(),
+      slug: p.slug,
+      indexNumber: p.indexNumber ?? this.projects.length + 1,
+      title: p.title,
+      industry: p.industry,
+      category: p.category,
+      summary: p.summary,
+      problem: p.problem,
+      solution: p.solution,
+      architectureNodesJson: p.architectureNodesJson,
+      stackTags: p.stackTags,
+      keyFeatures: p.keyFeatures,
+      outcomesSummary: p.outcomesSummary,
+      liveUrl: p.liveUrl ?? null,
+      repoUrl: p.repoUrl ?? null,
+      isPublished: p.isPublished ?? true,
+      updatedAt: new Date(),
+    };
+    if (existingIdx >= 0) {
+      this.projects[existingIdx] = item;
+    } else {
+      this.projects.push(item);
+    }
+    return item;
+  }
+
+  deleteProject(id: string): boolean {
+    const idx = this.projects.findIndex((p) => p.id === id);
+    if (idx >= 0) {
+      this.projects.splice(idx, 1);
+      return true;
+    }
+    return false;
+  }
+
   // Pricing operations
-  getPricing(): schema.PricingConfig[] {
-    return this.pricing.filter((p) => p.isPublished);
+  getPricing(publishedOnly = true): schema.PricingConfig[] {
+    return publishedOnly ? this.pricing.filter((p) => p.isPublished) : this.pricing;
+  }
+
+  updatePricing(modelSlug: string, patch: Partial<schema.PricingConfig>): schema.PricingConfig | null {
+    const item = this.pricing.find((pr) => pr.modelSlug === modelSlug);
+    if (!item) return null;
+    Object.assign(item, patch, { updatedAt: new Date() });
+    return item;
   }
 
   // Settings
@@ -186,6 +439,67 @@ class InMemoryDatabase {
   updateSettings(patch: Partial<SiteSettings>): SiteSettings {
     this.settings = { ...this.settings, ...patch };
     return { ...this.settings };
+  }
+
+  getMetrics(): TelemetryMetrics {
+    const totalSessions = Math.max(this.sessions.size, 1);
+    let totalPageViews = 0;
+    for (const s of this.sessions.values()) {
+      totalPageViews += s.pageViewsCount;
+    }
+
+    let totalSandboxRuns = 0;
+    let totalCalculatorInteractions = 0;
+    let totalAuditSubmissions = this.leads.length;
+
+    const pageCountMap = new Map<string, number>();
+    const labelCountMap = new Map<string, number>();
+    const calcCountMap = new Map<string, number>();
+
+    for (const evt of this.events) {
+      if (evt.eventType === 'sandbox_change') totalSandboxRuns++;
+      if (evt.eventType === 'calculator_change') {
+        totalCalculatorInteractions++;
+        if (evt.targetLabel) {
+          calcCountMap.set(evt.targetLabel, (calcCountMap.get(evt.targetLabel) || 0) + 1);
+        }
+      }
+      if (evt.eventType === 'audit_submit') totalAuditSubmissions++;
+
+      if (evt.path) {
+        pageCountMap.set(evt.path, (pageCountMap.get(evt.path) || 0) + 1);
+      }
+      if (evt.targetLabel) {
+        labelCountMap.set(evt.targetLabel, (labelCountMap.get(evt.targetLabel) || 0) + 1);
+      }
+    }
+
+    const topViewedPages = Array.from(pageCountMap.entries())
+      .map(([path, count]) => ({ path, count }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 5);
+
+    const topInspectedItems = Array.from(labelCountMap.entries())
+      .map(([label, count]) => ({ label, count }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 5);
+
+    const topCalculatorConfigs = Array.from(calcCountMap.entries())
+      .map(([label, count]) => ({ label, count }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 5);
+
+    return {
+      totalSessions,
+      totalPageViews: Math.max(totalPageViews, totalSessions),
+      totalSandboxRuns,
+      totalCalculatorInteractions,
+      totalAuditSubmissions,
+      recentEvents: this.getEvents(50),
+      topViewedPages,
+      topInspectedItems,
+      topCalculatorConfigs,
+    };
   }
 }
 
@@ -229,19 +543,94 @@ export async function getPortfolioProjectBySlug(slug: string): Promise<schema.Po
   return memoryStore.getProjectBySlug(slug) || null;
 }
 
-export async function getPricingConfigs(): Promise<schema.PricingConfig[]> {
+export async function upsertPortfolioProject(
+  project: schema.NewPortfolioProject
+): Promise<schema.PortfolioProject> {
   if (db) {
     try {
-      const rows = await db
+      const existing = await db
         .select()
-        .from(schema.pricingConfigs)
-        .where(eq(schema.pricingConfigs.isPublished, true));
+        .from(schema.portfolioProjects)
+        .where(eq(schema.portfolioProjects.slug, project.slug))
+        .limit(1);
+
+      if (existing.length > 0) {
+        const [updated] = await db
+          .update(schema.portfolioProjects)
+          .set({
+            ...project,
+            updatedAt: new Date(),
+          })
+          .where(eq(schema.portfolioProjects.slug, project.slug))
+          .returning();
+        memoryStore.upsertProject(project);
+        return updated;
+      }
+
+      const [created] = await db
+        .insert(schema.portfolioProjects)
+        .values({
+          ...project,
+          id: project.id || crypto.randomUUID(),
+          updatedAt: new Date(),
+        })
+        .returning();
+      memoryStore.upsertProject(project);
+      return created;
+    } catch (err) {
+      console.warn('[DB] Failed to upsert project to Neon, using memory store fallback:', err);
+    }
+  }
+  return memoryStore.upsertProject(project);
+}
+
+export async function deletePortfolioProject(id: string): Promise<boolean> {
+  if (db) {
+    try {
+      await db.delete(schema.portfolioProjects).where(eq(schema.portfolioProjects.id, id));
+    } catch (err) {
+      console.warn('[DB] Failed to delete project from Neon:', err);
+    }
+  }
+  return memoryStore.deleteProject(id);
+}
+
+export async function getPricingConfigs(publishedOnly = true): Promise<schema.PricingConfig[]> {
+  if (db) {
+    try {
+      const query = publishedOnly
+        ? db.select().from(schema.pricingConfigs).where(eq(schema.pricingConfigs.isPublished, true))
+        : db.select().from(schema.pricingConfigs);
+      const rows = await query;
       if (rows && rows.length > 0) return rows;
     } catch (err) {
       console.warn('[DB] Failed to query Neon pricingConfigs, falling back to in-memory store:', err);
     }
   }
-  return memoryStore.getPricing();
+  return memoryStore.getPricing(publishedOnly);
+}
+
+export async function updatePricingConfig(
+  modelSlug: string,
+  patch: Partial<schema.PricingConfig>
+): Promise<schema.PricingConfig | null> {
+  if (db) {
+    try {
+      const [updated] = await db
+        .update(schema.pricingConfigs)
+        .set({
+          ...patch,
+          updatedAt: new Date(),
+        })
+        .where(eq(schema.pricingConfigs.modelSlug, modelSlug))
+        .returning();
+      memoryStore.updatePricing(modelSlug, patch);
+      return updated || null;
+    } catch (err) {
+      console.warn('[DB] Failed to update pricing config in Neon, using memory store fallback:', err);
+    }
+  }
+  return memoryStore.updatePricing(modelSlug, patch);
 }
 
 export async function upsertVisitorSession(
@@ -290,6 +679,21 @@ export async function upsertVisitorSession(
   return memoryStore.upsertSession(session);
 }
 
+export async function getVisitorSessions(limit = 100): Promise<schema.VisitorSession[]> {
+  if (db) {
+    try {
+      return await db
+        .select()
+        .from(schema.visitorSessions)
+        .orderBy(desc(schema.visitorSessions.lastSeenAt))
+        .limit(limit);
+    } catch (err) {
+      console.warn('[DB] Failed to fetch visitor sessions from Neon:', err);
+    }
+  }
+  return memoryStore.getSessions(limit);
+}
+
 export async function recordActivityEvent(
   event: schema.NewActivityEvent
 ): Promise<schema.ActivityEvent> {
@@ -311,6 +715,14 @@ export async function recordActivityEvent(
   return memoryStore.recordEvent(event);
 }
 
+export async function getActivityEvents(limit = 100): Promise<EnrichedActivityEvent[]> {
+  return memoryStore.getEvents(limit);
+}
+
+export async function getTelemetryMetrics(): Promise<TelemetryMetrics> {
+  return memoryStore.getMetrics();
+}
+
 export async function createAuditLead(lead: schema.NewAuditLead): Promise<schema.AuditLead> {
   if (db) {
     try {
@@ -330,7 +742,7 @@ export async function createAuditLead(lead: schema.NewAuditLead): Promise<schema
   return memoryStore.createLead(lead);
 }
 
-export async function getAuditLeads(limit = 50): Promise<schema.AuditLead[]> {
+export async function getAuditLeads(limit = 100): Promise<schema.AuditLead[]> {
   if (db) {
     try {
       return await db
@@ -345,8 +757,43 @@ export async function getAuditLeads(limit = 50): Promise<schema.AuditLead[]> {
   return memoryStore.getLeads(limit);
 }
 
+export async function updateAuditLead(
+  id: string,
+  patch: { status?: string; adminNotes?: string }
+): Promise<schema.AuditLead | null> {
+  if (db) {
+    try {
+      const [updated] = await db
+        .update(schema.auditLeads)
+        .set(patch)
+        .where(eq(schema.auditLeads.id, id))
+        .returning();
+      memoryStore.updateLead(id, patch);
+      return updated || null;
+    } catch (err) {
+      console.warn('[DB] Failed to update audit lead in Neon, using memory store fallback:', err);
+    }
+  }
+  return memoryStore.updateLead(id, patch);
+}
+
+export async function deleteAuditLead(id: string): Promise<boolean> {
+  if (db) {
+    try {
+      await db.delete(schema.auditLeads).where(eq(schema.auditLeads.id, id));
+    } catch (err) {
+      console.warn('[DB] Failed to delete audit lead in Neon:', err);
+    }
+  }
+  return memoryStore.deleteLead(id);
+}
+
 export async function getSiteSettings(): Promise<SiteSettings> {
   return memoryStore.getSettings();
+}
+
+export async function updateSiteSettings(patch: Partial<SiteSettings>): Promise<SiteSettings> {
+  return memoryStore.updateSettings(patch);
 }
 
 export async function setPortfolioDisplayMode(

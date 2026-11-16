@@ -10,7 +10,11 @@ import { calculateEngagementScope } from '@/lib/state/engagement-calculator';
 import { useAuditModal } from '../modals/AuditModalProvider';
 import { trackClientEvent } from '../TelemetryTracker';
 
-export function EngagementSection(): React.ReactElement {
+interface EngagementSectionProps {
+  hideCommercialFigures?: boolean;
+}
+
+export function EngagementSection({ hideCommercialFigures = false }: EngagementSectionProps): React.ReactElement {
   const { openModal } = useAuditModal();
 
   const [model, setModel] = useState<EngagementModelType>('sprint');
@@ -177,7 +181,9 @@ export function EngagementSection(): React.ReactElement {
                   data-testid="calculator-price-range"
                   className="font-mono text-3xl sm:text-4xl font-bold text-[var(--color-ink-primary)] tracking-tight"
                 >
-                  {scope.priceRangeUsd.min === 0
+                  {hideCommercialFigures
+                    ? 'Custom Scope — Book Audit for Quote'
+                    : scope.priceRangeUsd.min === 0
                     ? '$0 / Free Architecture Audit'
                     : `$${scope.priceRangeUsd.min.toLocaleString()} – $${scope.priceRangeUsd.max.toLocaleString()} USD`}
                 </div>
