@@ -21,11 +21,11 @@ interface ComparisonData {
 const COMPARISONS: Record<string, ComparisonData> = {
   'traditional-dev-agencies': {
     slug: 'traditional-dev-agencies',
-    title: 'wtfear vs. Traditional Dev Agencies & Consultancies',
-    metaDescription: 'Quantitative architectural comparison between wtfear rapid 2-week engineering sprints and traditional dev shop retainers.',
+    title: 'WTFearB vs. Traditional Dev Agencies & Consultancies',
+    metaDescription: 'Quantitative architectural comparison between WTFearB rapid 2-week engineering sprints and traditional dev shop retainers.',
     subtitle: 'Why senior engineering pods with CI-blocking eval gates outperform 6-month agency retainers.',
     comparisonTarget: 'Traditional Dev Agencies & Consultancies',
-    leadDefinition: 'wtfear operates as a senior product engineering studio that delivers fixed-price 2-week sprints with 100% IP ownership, contrasting with traditional agencies that bill hourly retainers with junior contractor handoffs.',
+    leadDefinition: 'WTFearB operates as a senior systems engineering studio that delivers fixed-price 2-week sprints with 100% IP ownership, contrasting with traditional agencies that bill hourly retainers with junior contractor handoffs.',
     tableRows: [
       {
         dimension: 'Team Seniority',
@@ -56,11 +56,11 @@ const COMPARISONS: Record<string, ComparisonData> = {
   },
   'in-house-hiring': {
     slug: 'in-house-hiring',
-    title: 'wtfear Engineering Pod vs. In-House Full-Time Hiring',
-    metaDescription: 'Cost, time-to-production, and risk comparison between hiring full-time AI engineers vs engaging a dedicated wtfear engineering pod.',
+    title: 'WTFearB Engineering Pod vs. In-House Full-Time Hiring',
+    metaDescription: 'Cost, time-to-production, and risk comparison between hiring full-time AI engineers vs engaging a dedicated WTFearB engineering pod.',
     subtitle: 'How to bypass the 4-month hiring lag and ship production AI agents this sprint.',
     comparisonTarget: 'In-House Full-Time Hiring',
-    leadDefinition: 'A wtfear Dedicated Engineering Pod provides immediate day-1 senior execution at $18,000–$26,000/month, eliminating the $65,000 recruiting fee and 120-day recruiting lag of hiring senior AI systems engineers.',
+    leadDefinition: 'A WTFearB Dedicated Engineering Pod provides immediate day-1 senior execution at $18,000–$26,000/month, eliminating the $65,000 recruiting fee and 120-day recruiting lag of hiring senior AI systems engineers.',
     tableRows: [
       {
         dimension: 'Time to First Production Commit',
@@ -74,8 +74,8 @@ const COMPARISONS: Record<string, ComparisonData> = {
       },
       {
         dimension: 'All-In Monthly Burn',
-        wtfearApproach: '$18,000 – $26,000 / month flat retainer for a 3-engineer senior pod.',
-        alternativeApproach: '$45,000+ / month for equivalent 3 senior US/EU engineers (salary + equity + healthcare + payroll tax).',
+        wtfearApproach: '$18,000 – $26,000 / month flat retainer for a 2-engineer senior pod.',
+        alternativeApproach: '$45,000+ / month for equivalent 2 senior US/EU engineers (salary + equity + healthcare + payroll tax).',
       },
       {
         dimension: 'Architecture Specialization',
@@ -86,6 +86,41 @@ const COMPARISONS: Record<string, ComparisonData> = {
         dimension: 'Flexibility & Commitment',
         wtfearApproach: 'Sprint-to-sprint or monthly renewal. Pause or scale velocity as roadmap demands.',
         alternativeApproach: 'Long-term severance, equity dilution, and full-time organizational overhead.',
+      },
+    ],
+  },
+  'no-code-wrappers': {
+    slug: 'no-code-wrappers',
+    title: 'WTFearB Custom Systems vs. No-Code AI Wrappers',
+    metaDescription: 'Architectural comparison between WTFearB governed code-first systems and brittle no-code AI tools (Zapier, Bubble, Make).',
+    subtitle: 'Why mission-critical production workflows require code-governed schemas, vector indexing, and CI test harnesses.',
+    comparisonTarget: 'No-Code AI Wrappers & DIY Tools',
+    leadDefinition: 'WTFearB engineers custom production systems with deterministic Pydantic schemas and private database indexing, unlike no-code wrappers that suffer from silent failures, rate limits, and unverified outputs.',
+    tableRows: [
+      {
+        dimension: 'Data Governance & Multi-Tenancy',
+        wtfearApproach: 'PostgreSQL 16 Row-Level Security (RLS) and cryptographic tenant isolation in your private cloud.',
+        alternativeApproach: 'Shared multi-tenant databases on proprietary third-party platforms with zero audit trail.',
+      },
+      {
+        dimension: 'Hallucination Prevention',
+        wtfearApproach: 'Pydantic v2 validation gates, 50-case CI golden eval suite, and 100% citation precision requirements.',
+        alternativeApproach: 'Unchecked model output piped directly into customer apps; zero automated grounding verification.',
+      },
+      {
+        dimension: 'Latency & Reliability',
+        wtfearApproach: 'Sub-45ms single-query pgvector + BM25 search, sub-15ms edge webhook intake, and automated DLQ replay.',
+        alternativeApproach: 'Chained HTTP webhooks with 3,000–8,000ms latency and silent failure drops during outages.',
+      },
+      {
+        dimension: 'Source Code & Extensibility',
+        wtfearApproach: '100% standard TypeScript & Python code in your GitHub repository. Zero platform lock-in.',
+        alternativeApproach: 'Proprietary visual workflows that cannot be version-controlled, branched, or audited in Git.',
+      },
+      {
+        dimension: 'Cost at Scale',
+        wtfearApproach: 'Predictable serverless compute costs ($20–$100/mo) without per-execution markup penalties.',
+        alternativeApproach: 'Punitive per-task billing that scales exponentially as volume increases.',
       },
     ],
   },
@@ -105,7 +140,7 @@ export async function generateMetadata({
   if (!comp) return {};
 
   return {
-    title: comp.title,
+    title: `${comp.title} | WTFearB`,
     description: comp.metaDescription,
     alternates: {
       canonical: `https://wtfear.agency/compare/${slug}`,
@@ -114,13 +149,13 @@ export async function generateMetadata({
       title: comp.title,
       description: comp.metaDescription,
       url: `https://wtfear.agency/compare/${slug}`,
-      siteName: 'wtfear — Product & AI Engineering Studio',
+      siteName: 'WTFearB Systems Studio',
       type: 'article',
     },
   };
 }
 
-export default async function ComparePage({
+export default async function CompareDetailPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
@@ -141,7 +176,7 @@ export default async function ComparePage({
           <nav className="mb-6 font-mono text-xs text-[var(--color-ink-muted)]" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-[var(--color-ink-primary)]">Home</Link>
             <span className="mx-2">/</span>
-            <span>Compare</span>
+            <Link href="/compare" className="hover:text-[var(--color-ink-primary)]">Compare</Link>
             <span className="mx-2">/</span>
             <span className="text-[var(--color-ink-primary)] font-bold">{comp.slug}</span>
           </nav>
@@ -172,7 +207,7 @@ export default async function ComparePage({
                     Comparison Dimension
                   </th>
                   <th scope="col" className="p-4 font-bold uppercase tracking-wider text-[var(--color-accent-signal)] w-3/8">
-                    wtfear Engineering Studio
+                    WTFearB Systems Studio
                   </th>
                   <th scope="col" className="p-4 font-bold uppercase tracking-wider text-[var(--color-ink-muted)] w-3/8">
                     {comp.comparisonTarget}
@@ -207,8 +242,8 @@ export default async function ComparePage({
               </p>
             </div>
             <Link
-              href="/#pricing"
-              className="inline-flex items-center justify-center bg-[var(--color-accent-signal)] text-white px-6 py-3 font-mono text-xs font-semibold hover:bg-[var(--color-accent-signal-hover)] transition-colors"
+              href="/audit"
+              className="inline-flex items-center justify-center bg-[var(--color-accent-signal)] text-white px-6 py-3 font-mono text-xs font-semibold hover:brightness-110 transition-colors"
             >
               BOOK ARCHITECTURE AUDIT &rarr;
             </Link>

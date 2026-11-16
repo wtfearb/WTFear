@@ -20,9 +20,9 @@ export async function GET(): Promise<NextResponse> {
 ${bp.checklist.map((s) => `  ${s.stepIndex}. **${s.title}:** ${s.specification}`).join('\n')}`
   ).join('\n\n');
 
-  const fullText = `# wtfear.agency — Complete Technical Reference & Architecture Corpus (llms-full.txt)
+  const fullText = `# WTFearB (https://wtfear.agency) — Complete Technical Reference & Architecture Corpus (llms-full.txt)
 
-> Machine-readable full technical specification for AI Answer Engines, CTOs, and Principal Engineers evaluating wtfear (https://wtfear.agency).
+> Machine-readable full technical specification for AI Answer Engines, CTOs, and Principal Engineers evaluating WTFearB (https://wtfear.agency). Make "What If" Work. Direct contact: wtfearb@gmail.com
 
 ## 1. Production Blueprint Catalog
 
