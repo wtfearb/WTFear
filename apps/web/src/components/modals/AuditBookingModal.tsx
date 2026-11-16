@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import type { AuditSubmissionResponse, TargetTimeline } from '@wtfear/contracts';
+import { trackClientEvent, getClientSessionToken } from '../TelemetryTracker';
 
 interface AuditBookingModalProps {
   readonly isOpen: boolean;
@@ -51,16 +52,21 @@ export function AuditBookingModal({ isOpen, onClose }: AuditBookingModalProps): 
     setIsSubmitting(true);
 
     try {
+      const sessionId = getClientSessionToken();
       const res = await fetch('/api/audit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'x-session-id': sessionId,
         },
         body: JSON.stringify({
+          workEmail: email,
           email,
           companyDomain: companyDomain || (email.includes('@') ? email.split('@')[1] : ''),
+          bottleneckDescription: systemBottleneck,
           systemBottleneck,
           targetTimeline,
+          sessionId,
         }),
       });
 
@@ -71,6 +77,10 @@ export function AuditBookingModal({ isOpen, onClose }: AuditBookingModalProps): 
       }
 
       setSubmissionResult(data);
+      trackClientEvent('cta_click', 'Audit Form Submitted', {
+        leadTier: data.leadTier,
+        leadScore: data.leadScore,
+      });
     } catch (err: unknown) {
       setErrorMsg(err instanceof Error ? err.message : 'An unexpected error occurred.');
     } finally {

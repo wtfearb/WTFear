@@ -21,7 +21,7 @@ export type OpenTelemetrySpanName =
 // ---------------------------------------------------------------------------
 // 2. Audit Lead & Qualification Contracts (/api/audit)
 // ---------------------------------------------------------------------------
-export type TargetTimeline = 'immediate' | 'month' | 'exploring';
+export type TargetTimeline = 'immediate' | 'month' | 'within_month' | 'exploring';
 
 export type LeadTier = 'TIER_1_FAST_TRACK' | 'TIER_2_NURTURE';
 
@@ -34,11 +34,15 @@ export type LeadStage =
   | 'NURTURE';
 
 export interface AuditSubmissionRequest {
-  readonly email: string;
-  readonly companyDomain: string;
-  readonly systemBottleneck: string;
+  readonly email?: string;
+  readonly workEmail?: string;
+  readonly companyDomain?: string;
+  readonly systemBottleneck?: string;
+  readonly bottleneckDescription?: string;
   readonly targetTimeline: TargetTimeline;
+  readonly sessionId?: string;
   readonly calculatorScope?: string;
+  readonly calculatorSnapshotJson?: Record<string, unknown>;
   readonly turnstileToken?: string;
 }
 

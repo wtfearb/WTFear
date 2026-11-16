@@ -4,8 +4,8 @@ import type {
   AuditSubmissionRequest,
   AuditSubmissionResponse,
   LeadTier,
-  TargetTimeline,
 } from '@wtfear/contracts';
+import { createAuditLead } from '@/lib/db';
 
 const GENERIC_EMAIL_DOMAINS = new Set([
   'gmail.com',
@@ -35,24 +35,35 @@ const TECHNICAL_KEYWORDS = [
   'kafka',
   'redis',
   'queue',
+  'drizzle',
+  'neon',
+  'distributed',
+  'rls',
 ];
 
-export async function POST(req: NextRequest): Promise<NextResponse<AuditSubmissionResponse | { error: string; message: string }>> {
+export async function POST(
+  req: NextRequest
+): Promise<NextResponse<AuditSubmissionResponse | { error: string; message: string }>> {
   const traceId = req.headers.get('traceparent') || crypto.randomUUID();
 
   try {
     const body = (await req.json()) as AuditSubmissionRequest;
-    const { email, companyDomain, systemBottleneck, targetTimeline } = body;
+    const rawEmail = body.workEmail || body.email;
+    const rawBottleneck = body.bottleneckDescription || body.systemBottleneck;
+    const rawTimeline = body.targetTimeline;
+    const rawDomain = body.companyDomain;
+    const sessionId = body.sessionId || req.headers.get('x-session-id') || undefined;
+    const calculatorSnapshotJson = body.calculatorSnapshotJson || (body.calculatorScope ? { scope: body.calculatorScope } : undefined);
 
     // 1. Validation Invariants
-    if (!email || !email.includes('@')) {
+    if (!rawEmail || !rawEmail.includes('@')) {
       return NextResponse.json(
         { error: 'INVALID_EMAIL', message: 'A valid corporate or engineering work email is required.' },
         { status: 400 }
       );
     }
 
-    if (!systemBottleneck || systemBottleneck.trim().length < 15) {
+    if (!rawBottleneck || rawBottleneck.trim().length < 15) {
       return NextResponse.json(
         {
           error: 'BOTTLENECK_TOO_SHORT',
@@ -62,9 +73,9 @@ export async function POST(req: NextRequest): Promise<NextResponse<AuditSubmissi
       );
     }
 
-    const emailNormalized = email.trim().toLowerCase();
+    const emailNormalized = rawEmail.trim().toLowerCase();
     const domainFromEmail = emailNormalized.split('@')[1];
-    const resolvedDomain = companyDomain?.trim().toLowerCase() || domainFromEmail;
+    const resolvedDomain = rawDomain?.trim().toLowerCase() || domainFromEmail;
 
     // 2. Deterministic Lead Scoring & Tier Assignment
     let leadScore = 0;
@@ -78,31 +89,47 @@ export async function POST(req: NextRequest): Promise<NextResponse<AuditSubmissi
     }
 
     // Urgency / Timeline score
-    if (targetTimeline === 'immediate') {
+    if (rawTimeline === 'immediate') {
       leadScore += 35;
-    } else if (targetTimeline === 'month') {
+    } else if (rawTimeline === 'within_month' || rawTimeline === 'month') {
       leadScore += 20;
     } else {
       leadScore += 10;
     }
 
     // Technical depth of bottleneck description
-    const lowerBottleneck = systemBottleneck.toLowerCase();
+    const lowerBottleneck = rawBottleneck.toLowerCase();
     let keywordHits = 0;
     for (const kw of TECHNICAL_KEYWORDS) {
       if (lowerBottleneck.includes(kw)) keywordHits += 1;
     }
-    const depthScore = Math.min(30, keywordHits * 10 + (systemBottleneck.length > 50 ? 10 : 5));
+    const depthScore = Math.min(30, keywordHits * 10 + (rawBottleneck.length > 50 ? 10 : 5));
     leadScore += depthScore;
 
     const leadTier: LeadTier = leadScore >= 70 ? 'TIER_1_FAST_TRACK' : 'TIER_2_NURTURE';
     const leadId = crypto.randomUUID();
 
+    // 3. Persist to Neon Postgres or in-memory fallback store
+    await createAuditLead({
+      id: leadId,
+      sessionId,
+      workEmail: emailNormalized,
+      companyDomain: resolvedDomain,
+      targetTimeline: rawTimeline,
+      bottleneckDescription: rawBottleneck.trim(),
+      calculatorSnapshotJson: calculatorSnapshotJson || null,
+      leadScore,
+      qualificationTier: leadTier,
+      status: 'new',
+      adminNotes: `Lead scoring: ${leadScore} (Domain: ${isCorporate ? 'Corporate +35' : 'Generic +10'}, Urgency: ${rawTimeline}, Hits: ${keywordHits})`,
+      createdAt: new Date(),
+    });
+
     const bookingUrl =
       leadTier === 'TIER_1_FAST_TRACK'
         ? `https://cal.com/wtfear/15min-architecture-audit?email=${encodeURIComponent(
             emailNormalized
-          )}&notes=${encodeURIComponent(systemBottleneck.slice(0, 150))}`
+          )}&notes=${encodeURIComponent(rawBottleneck.slice(0, 150))}`
         : 'https://cal.com/wtfear/15min-architecture-audit';
 
     const responsePayload: AuditSubmissionResponse = {
@@ -127,10 +154,11 @@ export async function POST(req: NextRequest): Promise<NextResponse<AuditSubmissi
       },
     });
   } catch (error: unknown) {
+    console.error('[API /audit] Processing error:', error);
     return NextResponse.json(
       {
         error: 'INGRESS_ERROR',
-        message: error instanceof Error ? error.message : 'Internal edge error processing audit intake.',
+        message: error instanceof Error ? error.message : 'Internal error processing audit intake.',
       },
       { status: 500 }
     );

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
+import { trackClientEvent } from '../TelemetryTracker';
 
 export type SandboxScenarioId =
   | 'webhook-signature-mismatch'
@@ -229,7 +230,10 @@ export function AgentSandbox(): React.ReactElement {
                 role="tab"
                 type="button"
                 aria-selected={selectedId === item.id}
-                onClick={() => setSelectedId(item.id)}
+                onClick={() => {
+                  setSelectedId(item.id);
+                  trackClientEvent('sandbox_change', `Scenario: ${item.label}`, { scenarioId: item.id });
+                }}
                 className={`px-3 py-2 font-mono text-xs border transition-colors ${
                   selectedId === item.id
                     ? 'border-[var(--color-accent-signal)] bg-[var(--color-terminal-surface)] text-white font-semibold'

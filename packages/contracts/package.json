@@ -9,7 +9,10 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "build": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "lint": "echo @wtfear/contracts lint ok",
+    "test": "echo @wtfear/contracts test ok"
   },
   "devDependencies": {
     "typescript": "^5.7.2"

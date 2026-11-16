@@ -8,6 +8,7 @@ import type {
 } from '@wtfear/contracts';
 import { calculateEngagementScope } from '@/lib/state/engagement-calculator';
 import { useAuditModal } from '../modals/AuditModalProvider';
+import { trackClientEvent } from '../TelemetryTracker';
 
 export function EngagementSection(): React.ReactElement {
   const { openModal } = useAuditModal();
@@ -75,7 +76,11 @@ export function EngagementSection(): React.ReactElement {
                         name="engagement-model"
                         value={item.id}
                         checked={model === item.id}
-                        onChange={() => setModel(item.id as EngagementModelType)}
+                        onChange={() => {
+                          const nextModel = item.id as EngagementModelType;
+                          setModel(nextModel);
+                          trackClientEvent('calculator_change', `Model: ${item.label}`, { model: nextModel, complexity });
+                        }}
                         className="accent-[var(--color-accent-signal)]"
                       />
                       <span className="font-mono text-xs font-bold text-[var(--color-ink-primary)]">
@@ -115,7 +120,11 @@ export function EngagementSection(): React.ReactElement {
                         name="architecture-complexity"
                         value={item.id}
                         checked={complexity === item.id}
-                        onChange={() => setComplexity(item.id as ArchitectureComplexity)}
+                        onChange={() => {
+                          const nextComp = item.id as ArchitectureComplexity;
+                          setComplexity(nextComp);
+                          trackClientEvent('calculator_change', `Complexity: ${item.label}`, { model, complexity: nextComp });
+                        }}
                         className="accent-[var(--color-accent-signal)]"
                       />
                       <span className="font-mono text-xs font-semibold text-[var(--color-ink-primary)]">

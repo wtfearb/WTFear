@@ -9,6 +9,7 @@ import {
   type BlueprintItem,
 } from '@/lib/state/blueprints-machine';
 import { BlueprintDrawer } from './BlueprintDrawer';
+import { trackClientEvent } from '../TelemetryTracker';
 
 const CATEGORIES: readonly BlueprintCategory[] = ['ALL', 'AI AGENTS', 'SAAS & PORTALS', 'SYSTEMS'];
 
@@ -180,7 +181,10 @@ export function BlueprintsSection(): React.ReactElement {
               <div className="pt-4 border-t border-[var(--color-border-hairline)]">
                 <button
                   type="button"
-                  onClick={() => dispatch({ type: 'OPEN_DRAWER', id: bp.id })}
+                  onClick={() => {
+                    dispatch({ type: 'OPEN_DRAWER', id: bp.id });
+                    trackClientEvent('blueprint_inspect', bp.title, { blueprintId: bp.id });
+                  }}
                   className="w-full inline-flex items-center justify-center border border-[var(--color-ink-primary)] py-2.5 px-4 font-mono text-xs font-semibold text-[var(--color-ink-primary)] hover:bg-[var(--color-ink-primary)] hover:text-white transition-colors"
                 >
                   Inspect {bp.title} &rarr;

@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { generateRootJsonLd } from '@/lib/schema/json-ld';
 import { AuditModalProvider } from '@/components/modals/AuditModalProvider';
+import { TelemetryTracker } from '@/components/TelemetryTracker';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -91,6 +92,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-[var(--color-canvas)] text-[var(--color-ink-primary)] antialiased selection:bg-[var(--color-accent-signal)] selection:text-white">
         <AuditModalProvider>
+          <TelemetryTracker />
           {children}
         </AuditModalProvider>
       </body>
