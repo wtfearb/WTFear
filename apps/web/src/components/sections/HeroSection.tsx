@@ -24,8 +24,8 @@ export function HeroSection(): React.ReactElement {
       className="relative border-b border-[var(--color-border-hairline)] bg-[var(--color-canvas)] pt-12 pb-16 md:pt-20 md:pb-24 overflow-hidden"
     >
       <div className="mx-auto max-w-[var(--max-w-editorial)] px-4 sm:px-6 lg:px-8">
-        {/* Definition Lead for AEO and technical indexing */}
-        <div className="mb-6 p-4 border border-[var(--color-border-hairline)] bg-[var(--color-surface-pure)]">
+        {/* Definition Lead for AEO and technical indexing (Hidden visually, preserved in DOM for AI answer engines) */}
+        <div className="sr-only">
           <dl className="font-mono text-xs text-[var(--color-ink-secondary)] leading-relaxed">
             <dt className="inline font-bold text-[var(--color-ink-primary)]">
               <dfn>WTFearB (Product &amp; AI Engineering Studio)</dfn>:

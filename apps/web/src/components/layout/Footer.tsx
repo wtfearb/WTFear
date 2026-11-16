@@ -7,7 +7,7 @@ export function Footer(): React.ReactElement {
       <div className="mx-auto max-w-[var(--max-w-editorial)] px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-12 border-b border-[var(--color-border-hairline)]">
           {/* Studio Summary */}
-          <div className="md:col-span-5 space-y-4">
+          <div className="md:col-span-7 space-y-4">
             <div className="flex items-center gap-2.5 font-mono text-base font-bold text-[var(--color-ink-primary)]">
               <span className="inline-block h-2.5 w-2.5 bg-[var(--color-accent-signal)]" aria-hidden="true" />
               <span>WTFearB</span>
@@ -25,7 +25,7 @@ export function Footer(): React.ReactElement {
           </div>
 
           {/* Directory Navigation */}
-          <div className="md:col-span-3 space-y-3">
+          <div className="md:col-span-5 space-y-3 sm:pl-8">
             <h4 className="font-mono text-xs uppercase tracking-widest text-[var(--color-ink-primary)] font-semibold">
               Route Directory
             </h4>
@@ -55,51 +55,19 @@ export function Footer(): React.ReactElement {
                   Contact &amp; Audit
                 </Link>
               </li>
-              <li>
-                <Link href="/admin" className="text-[var(--color-ink-muted)] hover:text-[var(--color-ink-primary)] transition-colors">
-                  Admin Console
-                </Link>
-              </li>
             </ul>
           </div>
 
-          {/* Machine-Readable & Comparisons */}
-          <div className="md:col-span-4 space-y-3">
-            <h4 className="font-mono text-xs uppercase tracking-widest text-[var(--color-ink-primary)] font-semibold">
-              Technical Corpus &amp; Feeds
-            </h4>
-            <ul className="space-y-2 font-mono text-xs">
-              <li>
-                <Link href="/llms.txt" className="hover:text-[var(--color-accent-signal)] transition-colors">
-                  /llms.txt (AI Crawler Context)
-                </Link>
-              </li>
-              <li>
-                <Link href="/llms-full.txt" className="hover:text-[var(--color-accent-signal)] transition-colors">
-                  /llms-full.txt (Technical Corpus)
-                </Link>
-              </li>
-              <li>
-                <Link href="/compare/traditional-dev-agencies" className="hover:text-[var(--color-accent-signal)] transition-colors">
-                  WTFearB vs Traditional Consultancies
-                </Link>
-              </li>
-              <li>
-                <Link href="/playbooks/governed-rag-evaluation-harness" className="hover:text-[var(--color-accent-signal)] transition-colors">
-                  Playbook: Eliminating Hallucinations in RAG
-                </Link>
-              </li>
-              <li>
-                <Link href="/sitemap.xml" className="hover:text-[var(--color-accent-signal)] transition-colors">
-                  /sitemap.xml
-                </Link>
-              </li>
-              <li>
-                <Link href="/robots.txt" className="hover:text-[var(--color-accent-signal)] transition-colors">
-                  /robots.txt
-                </Link>
-              </li>
-            </ul>
+          {/* Machine-Readable & Feeds (Hidden visually for humans, preserved in DOM for AI search crawlers) */}
+          <div className="sr-only" aria-hidden="false">
+            <nav aria-label="Machine Feeds">
+              <Link href="/llms.txt">/llms.txt (AI Crawler Context)</Link>
+              <Link href="/llms-full.txt">/llms-full.txt (Technical Corpus)</Link>
+              <Link href="/compare/traditional-dev-agencies">WTFearB vs Traditional Consultancies</Link>
+              <Link href="/playbooks/governed-rag-evaluation-harness">Playbook: Eliminating Hallucinations in RAG</Link>
+              <Link href="/sitemap.xml">/sitemap.xml</Link>
+              <Link href="/robots.txt">/robots.txt</Link>
+            </nav>
           </div>
         </div>
 

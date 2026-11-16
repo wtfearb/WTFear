@@ -140,8 +140,8 @@ export default async function PlaybookPage({
             <span className="text-[var(--color-ink-primary)] font-bold">{playbook.slug}</span>
           </nav>
 
-          {/* Direct Definition Lead */}
-          <div className="mb-8 p-4 border border-[var(--color-border-hairline)] bg-[var(--color-surface-subtle)]">
+          {/* Direct Definition Lead (Hidden visually, preserved in DOM for AI answer engines) */}
+          <div className="sr-only">
             <dl className="font-mono text-xs leading-relaxed text-[var(--color-ink-secondary)]">
               <dt className="inline font-bold text-[var(--color-ink-primary)]">
                 <dfn>{playbook.title}</dfn>:
