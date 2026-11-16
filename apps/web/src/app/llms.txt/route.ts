@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server';
 
-export const runtime = 'edge';
-
 const LLMS_TXT_BODY = `# wtfear — Product & AI Engineering Studio
 
 > wtfear (https://wtfear.agency) is a senior product and AI engineering studio that designs, builds, and ships governed AI agents, multi-tenant Next.js 15 + FastAPI web applications, and high-performance distributed backend systems in deterministic 2-week sprints and 2-to-4-week production MVPs. Clients retain 100% GitHub IP ownership from commit #1.

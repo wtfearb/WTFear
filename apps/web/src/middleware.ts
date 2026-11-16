@@ -2,28 +2,24 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest): NextResponse {
-  // Generate a random 16-byte base64 nonce for CSP
-  const nonce = Buffer.from(crypto.randomUUID()).toString('base64');
-
-  // Build strict Content-Security-Policy with per-request nonce
-  // Allowing Turnstile (challenges.cloudflare.com) and Cal.com embed if used
+  // Build strict Content-Security-Policy that supports Next.js SSG client hydration,
+  // Cloudflare Turnstile, Cal.com embeds, and Vercel Analytics/Speed Insights.
   const cspHeader = `
     default-src 'self';
-    script-src 'self' 'nonce-${nonce}' 'strict-dynamic' https://challenges.cloudflare.com https://cal.com;
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://cal.com https://va.vercel-scripts.com;
     style-src 'self' 'unsafe-inline';
-    img-src 'self' blob: data: https://wtfear.agency;
+    img-src 'self' blob: data: https://wtfear.agency https://*.vercel.app;
     font-src 'self' data:;
     object-src 'none';
     base-uri 'self';
     form-action 'self';
     frame-src 'self' https://challenges.cloudflare.com https://cal.com;
-    connect-src 'self' https://challenges.cloudflare.com;
+    connect-src 'self' https://challenges.cloudflare.com https://cal.com https://vitals.vercel-insights.com;
     upgrade-insecure-requests;
   `.replace(/\s{2,}/g, ' ').trim();
 
-  // Clone request headers and inject nonce & CSP
+  // Clone request headers and inject CSP
   const requestHeaders = new Headers(request.headers);
-  requestHeaders.set('x-nonce', nonce);
   requestHeaders.set('content-security-policy', cspHeader);
 
   const response = NextResponse.next({
@@ -32,8 +28,11 @@ export function middleware(request: NextRequest): NextResponse {
     },
   });
 
-  // Set CSP on outgoing response headers
+  // Set CSP and security headers on outgoing response
   response.headers.set('content-security-policy', cspHeader);
+  response.headers.set('x-content-type-options', 'nosniff');
+  response.headers.set('x-frame-options', 'DENY');
+  response.headers.set('referrer-policy', 'strict-origin-when-cross-origin');
 
   return response;
 }

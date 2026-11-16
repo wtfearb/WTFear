@@ -2,8 +2,6 @@ import { NextResponse } from 'next/server';
 import { BLUEPRINT_CATALOG } from '@/lib/state/blueprints-machine';
 import { calculateEngagementScope } from '@/lib/state/engagement-calculator';
 
-export const runtime = 'edge';
-
 export async function GET(): Promise<NextResponse> {
   const sprintSample = calculateEngagementScope({
     model: 'sprint',
