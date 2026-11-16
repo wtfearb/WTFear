@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "entries": {
+    "gitleaks": {
+      "tool": "gitleaks",
+      "verdict": "PASS",
+      "treeHash": "b35b7b861718e64697073a9df98b66c82789d6b1822616f6d5bc7e3ca364835b",
+      "root": "c:\\Users\\THARUN PARSA\\Documents\\WTFear",
+      "at": "2026-11-16T10:02:23.404Z",
+      "findingCount": 0,
+      "blockingCount": 0,
+      "scanScope": "full",
+      "findingRules": [],
+      "acceptedDebtCount": 0,
+      "previousAcceptedDebtCount": 0,
+      "acceptedExpiringSoonCount": 0,
+      "acceptedCriticals": []
+    },
+    "opengrep": {
+      "tool": "opengrep",
+      "verdict": "PASS",
+      "treeHash": "b35b7b861718e64697073a9df98b66c82789d6b1822616f6d5bc7e3ca364835b",
+      "root": "c:\\Users\\THARUN PARSA\\Documents\\WTFear",
+      "at": "2026-11-16T10:01:37.820Z",
+      "findingCount": 0,
+      "blockingCount": 0,
+      "scanScope": "full",
+      "findingRules": [],
+      "acceptedDebtCount": 0,
+      "previousAcceptedDebtCount": 0,
+      "acceptedExpiringSoonCount": 0,
+      "acceptedCriticals": []
+    },
+    "fastapi": {
+      "tool": "fastapi",
+      "verdict": "PASS",
+      "treeHash": "b35b7b861718e64697073a9df98b66c82789d6b1822616f6d5bc7e3ca364835b",
+      "root": "c:\\Users\\THARUN PARSA\\Documents\\WTFear",
+      "at": "2026-11-16T10:01:42.349Z",
+      "findingCount": 1,
+      "blockingCount": 0,
+      "scanScope": "full",
+      "findingRules": [
+        "rate-limit-coverage"
+      ],
+      "acceptedDebtCount": 0,
+      "previousAcceptedDebtCount": 0,
+      "acceptedExpiringSoonCount": 0,
+      "acceptedCriticals": []
+    },
+    "nextjs": {
+      "tool": "nextjs",
+      "verdict": "PASS",
+      "treeHash": "b35b7b861718e64697073a9df98b66c82789d6b1822616f6d5bc7e3ca364835b",
+      "root": "c:\\Users\\THARUN PARSA\\Documents\\WTFear",
+      "at": "2026-11-16T10:01:46.081Z",
+      "findingCount": 1,
+      "blockingCount": 0,
+      "scanScope": "full",
+      "findingRules": [
+        "server-action-auth-not-applicable"
+      ],
+      "acceptedDebtCount": 0,
+      "previousAcceptedDebtCount": 0,
+      "acceptedExpiringSoonCount": 0,
+      "acceptedCriticals": []
+    }
+  }
+}
