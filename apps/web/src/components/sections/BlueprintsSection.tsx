@@ -1194,10 +1194,10 @@ export function BlueprintsSection(): React.ReactElement {
             </div>
           </div>
 
-          {/* 3B & 4: MAIN WORKBENCH BODY (LEFT RAIL ~26% + RIGHT CANVAS ~74%) */}
+          {/* 3B & 4: MAIN WORKBENCH BODY (LEFT RAIL + RIGHT CANVAS) */}
           <div className="flex flex-col lg:flex-row items-stretch">
-            {/* LEFT INFORMATION RAIL (~26% width) */}
-            <div className="lg:w-[26%] bg-[#111318] border-b lg:border-b-0 lg:border-r border-[#1E212A] p-6 flex flex-col justify-between shrink-0">
+            {/* LEFT INFORMATION RAIL (lg:w-[320px] shrink-0) */}
+            <div className="w-full lg:w-[320px] bg-[#111318] border-b lg:border-b-0 lg:border-r border-[#1E212A] p-5 sm:p-6 flex flex-col justify-between shrink-0">
               <div>
                 <h3 className="font-sans font-bold text-[18px] sm:text-[19px] text-[#FFFFFF] leading-snug">
                   {activeBlueprint.title}
@@ -1279,28 +1279,28 @@ export function BlueprintsSection(): React.ReactElement {
                 </div>
               </div>
 
-              {/* BOTTOM ACTIONS (HORIZONTAL SIDE BY SIDE) */}
-              <div className="flex items-center gap-2 pt-6 mt-6 border-t border-[#1E212A]">
+              {/* BOTTOM ACTIONS (HORIZONTAL SIDE BY SIDE, ZERO OVERFLOW) */}
+              <div className="flex items-center gap-2 pt-5 mt-6 border-t border-[#1E212A]">
                 <button
                   type="button"
                   onClick={() => handleInspect(activeBlueprint.id, activeBlueprint.title)}
-                  className="flex-1 inline-flex items-center justify-center gap-1.5 bg-[#FFFFFF] hover:bg-[#E2E2E8] text-[#0A0A0C] font-mono text-[11px] font-bold py-2.5 px-3 rounded-[3px] transition-colors whitespace-nowrap"
+                  className="flex-1 min-w-0 inline-flex items-center justify-center gap-1 bg-[#FFFFFF] hover:bg-[#E2E2E8] text-[#0A0A0C] font-mono text-[10px] sm:text-[10.5px] font-bold py-2.5 px-2 rounded-[3px] transition-colors whitespace-nowrap"
                 >
                   <span>INSPECT BLUEPRINT</span>
-                  <span>&rarr;</span>
+                  <span aria-hidden="true">→</span>
                 </button>
                 <Link
                   href={`/blueprints/${activeBlueprint.id}`}
-                  className="flex-1 inline-flex items-center justify-center gap-1.5 bg-transparent hover:bg-[#1C1F2A] border border-[#2A2E3B] hover:border-white text-[#FFFFFF] font-mono text-[11px] font-bold py-2.5 px-3 rounded-[3px] transition-colors whitespace-nowrap"
+                  className="flex-1 min-w-0 inline-flex items-center justify-center gap-1 bg-transparent hover:bg-[#1C1F2A] border border-[#2A2E3B] hover:border-white text-[#FFFFFF] font-mono text-[10px] sm:text-[10.5px] font-bold py-2.5 px-2 rounded-[3px] transition-colors whitespace-nowrap"
                 >
                   <span>VIEW FULL SPEC</span>
-                  <span>&nearr;</span>
+                  <span aria-hidden="true">↗</span>
                 </Link>
               </div>
             </div>
 
-            {/* RIGHT ARCHITECTURE CANVAS (~74% width) */}
-            <div className="lg:w-[74%] bg-[#0C0D10] flex-1 min-h-[440px] flex flex-col justify-between overflow-x-auto">
+            {/* RIGHT ARCHITECTURE CANVAS (flex-1 min-w-0) */}
+            <div className="flex-1 min-w-0 bg-[#0C0D10] min-h-[440px] flex flex-col justify-between overflow-x-auto">
               {activeBlueprint.id === 'ai-triage' && (
                 <AiTriageArchitectureCanvas selectedNode={selectedNode} setSelectedNode={setSelectedNode} />
               )}
