@@ -4,40 +4,11 @@ import React from 'react';
 import Link from 'next/link';
 import { trackClientEvent } from '../TelemetryTracker';
 
-interface FeatureHighlight {
-  readonly number: string;
-  readonly title: string;
-  readonly description: string;
-}
-
-const FEATURE_HIGHLIGHTS: readonly FeatureHighlight[] = [
-  {
-    number: '01',
-    title: 'END-TO-END',
-    description: 'From discovery to deployment',
-  },
-  {
-    number: '02',
-    title: 'CLIENT-OWNED',
-    description: 'Clear ownership and handover',
-  },
-  {
-    number: '03',
-    title: 'HUMAN-LED',
-    description: 'Automation with appropriate oversight',
-  },
-  {
-    number: '04',
-    title: 'BUILT TO EVOLVE',
-    description: 'Designed for iteration and growth',
-  },
-];
-
 export function HeroSection(): React.ReactElement {
   return (
     <section
       aria-labelledby="hero-title"
-      className="relative bg-[#F9F9FB] border-b border-[#E2E2E8] pt-6 pb-10 md:pt-8 md:pb-12 overflow-hidden"
+      className="relative bg-[#F9F9FB] border-b border-[#E2E2E8] pt-6 pb-12 md:pt-8 md:pb-14 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Definition Lead for AEO and technical indexing (Hidden visually, preserved in DOM for AI answer engines) */}
@@ -57,7 +28,7 @@ export function HeroSection(): React.ReactElement {
           {/* Left Column: Headline, Copy & CTAs */}
           <div className="lg:col-span-6 space-y-4 sm:space-y-5">
             {/* Eyebrow Badge */}
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 bg-[#FFFFFF] border border-[#E2E2E8]">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#FFFFFF] border border-[#E2E2E8]">
               <span className="w-1.5 h-1.5 rounded-full bg-[#C83E1B] shrink-0" aria-hidden="true" />
               <span className="font-mono text-[11px] font-bold uppercase tracking-[0.08em] text-[#C83E1B]">
                 PRODUCT &amp; AI ENGINEERING STUDIO
@@ -67,7 +38,7 @@ export function HeroSection(): React.ReactElement {
             {/* Main Headline with Orange 'What If' */}
             <h1
               id="hero-title"
-              className="font-sans font-extrabold text-[#0A0A0C] text-[40px] sm:text-[52px] lg:text-[58px] leading-[1.04] tracking-[-0.035em]"
+              className="font-sans font-extrabold text-[#0A0A0C] text-[44px] sm:text-[54px] lg:text-[62px] leading-[1.04] tracking-[-0.035em]"
             >
               Make <span className="text-[#C83E1B]">&lsquo;What If&rsquo;</span>
               <br />
@@ -153,7 +124,7 @@ export function HeroSection(): React.ReactElement {
                     strokeLinejoin="round"
                   />
 
-                  {/* S-Curve Arrow 02 -> 03 (routed down and across into top center of 03 BUILD) */}
+                  {/* S-Curve Arrow 02 -> 03 */}
                   <path
                     d="M 480 61 L 496 61 Q 502 61 502 67 L 502 119 Q 502 125 496 125 L 124 125 Q 118 125 118 131 L 118 148"
                     fill="none"
@@ -336,25 +307,312 @@ export function HeroSection(): React.ReactElement {
           </div>
         </div>
 
-        {/* Four Feature Highlights Below Hero */}
-        <div className="border-t border-[#E2E2E8] mt-7 pt-6 md:mt-8 md:pt-7">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {FEATURE_HIGHLIGHTS.map((item) => (
-              <div
-                key={item.number}
-                className="bg-[#FFFFFF] border border-[#E2E2E8] p-4 sm:p-5 flex flex-col justify-start transition-all hover:border-[#C83E1B]/40 hover:shadow-xs"
-              >
-                <span className="font-mono text-[13px] font-bold text-[#C83E1B] mb-1.5">
-                  {item.number}
-                </span>
-                <h3 className="font-sans text-[15px] sm:text-[16px] font-extrabold tracking-[-0.02em] text-[#0A0A0C] uppercase mb-1">
-                  {item.title}
+        {/* SECTION 01 BOTTOM STRIP: OUR ENGINEERING PRINCIPLES // HOW WE WORK */}
+        <div className="mt-10 md:mt-12 pt-6">
+          {/* Header Bar */}
+          <div className="flex items-center justify-between mb-5">
+            <div className="flex items-center gap-2">
+              <span className="font-mono text-[14px] font-bold text-[#C83E1B]" aria-hidden="true">
+                /
+              </span>
+              <span className="font-mono text-[12px] font-bold uppercase tracking-[0.08em] text-[#0A0A0C]">
+                OUR ENGINEERING PRINCIPLES
+              </span>
+            </div>
+            <div className="hidden sm:block flex-1 h-px bg-[#E2E2E8] mx-6" aria-hidden="true" />
+            <span className="font-mono text-[11px] font-bold uppercase tracking-[0.08em] text-[#5A5D6A]">
+              // HOW WE WORK
+            </span>
+          </div>
+
+          {/* 4 Architectural Principle Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+            {/* CARD 01: END-TO-END */}
+            <div className="bg-[#FFFFFF] border border-[#E2E2E8] rounded-[10px] p-5 sm:p-6 flex flex-col justify-between shadow-[0_2px_8px_rgba(10,10,12,0.03)] hover:border-[#C83E1B]/40 transition-all">
+              <div>
+                <span className="font-mono text-[13px] font-bold text-[#C83E1B]">01</span>
+                <h3 className="font-sans text-[16px] font-extrabold tracking-[-0.02em] text-[#0A0A0C] uppercase mt-1 mb-1">
+                  END-TO-END
                 </h3>
-                <p className="font-sans text-[13px] leading-[1.45] text-[#5A5D6A]">
-                  {item.description}
+                <p className="font-sans text-[12.5px] leading-[1.45] text-[#5A5D6A]">
+                  From discovery to deployment
                 </p>
               </div>
-            ))}
+
+              {/* Isometric Layered Stack SVG Illustration */}
+              <div className="relative w-full h-[130px] my-4 flex items-center justify-center">
+                <svg
+                  viewBox="0 0 200 120"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-full h-full block select-none"
+                  aria-hidden="true"
+                >
+                  {/* Crop marks */}
+                  <path d="M 32 28 L 32 20 L 40 20" stroke="#CBD0DC" strokeWidth="1" fill="none" />
+                  <path d="M 160 20 L 168 20 L 168 28" stroke="#CBD0DC" strokeWidth="1" fill="none" />
+                  <path d="M 32 92 L 32 100 L 40 100" stroke="#CBD0DC" strokeWidth="1" fill="none" />
+                  <path d="M 160 100 L 168 100 L 168 92" stroke="#CBD0DC" strokeWidth="1" fill="none" />
+
+                  {/* Top Layer */}
+                  <polygon
+                    points="100,24 146,41 100,58 54,41"
+                    stroke="#4A4D57"
+                    strokeWidth="1.25"
+                    fill="#FFFFFF"
+                  />
+                  {/* Middle Layer (Signal Orange Accent) */}
+                  <polygon
+                    points="100,43 146,60 100,77 54,60"
+                    stroke="#C83E1B"
+                    strokeWidth="1.4"
+                    fill="#C83E1B"
+                    fillOpacity="0.32"
+                  />
+                  {/* Bottom Layer */}
+                  <polygon
+                    points="100,62 146,79 100,96 54,79"
+                    stroke="#4A4D57"
+                    strokeWidth="1.25"
+                    fill="#FFFFFF"
+                  />
+                </svg>
+              </div>
+
+              {/* Bottom Tag */}
+              <div className="pt-3 border-t border-[#F0F1F5] flex items-center gap-1.5 font-mono text-[10px] sm:text-[10.5px] uppercase tracking-[0.06em] text-[#5A5D6A]">
+                <span className="text-[#C83E1B] font-bold">/</span>
+                <span>DISCOVER &rarr; BUILD &rarr; DEPLOY</span>
+              </div>
+            </div>
+
+            {/* CARD 02: CLIENT-OWNED */}
+            <div className="bg-[#FFFFFF] border border-[#E2E2E8] rounded-[10px] p-5 sm:p-6 flex flex-col justify-between shadow-[0_2px_8px_rgba(10,10,12,0.03)] hover:border-[#C83E1B]/40 transition-all">
+              <div>
+                <span className="font-mono text-[13px] font-bold text-[#C83E1B]">02</span>
+                <h3 className="font-sans text-[16px] font-extrabold tracking-[-0.02em] text-[#0A0A0C] uppercase mt-1 mb-1">
+                  CLIENT-OWNED
+                </h3>
+                <p className="font-sans text-[12.5px] leading-[1.45] text-[#5A5D6A]">
+                  Clear ownership and handover.
+                </p>
+              </div>
+
+              {/* Isometric Folders SVG Illustration */}
+              <div className="relative w-full h-[130px] my-4 flex items-center justify-center">
+                <svg
+                  viewBox="0 0 200 120"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-full h-full block select-none"
+                  aria-hidden="true"
+                >
+                  {/* Crop marks */}
+                  <path d="M 32 28 L 32 20 L 40 20" stroke="#CBD0DC" strokeWidth="1" fill="none" />
+                  <path d="M 160 20 L 168 20 L 168 28" stroke="#CBD0DC" strokeWidth="1" fill="none" />
+                  <path d="M 32 92 L 32 100 L 40 100" stroke="#CBD0DC" strokeWidth="1" fill="none" />
+                  <path d="M 160 100 L 168 100 L 168 92" stroke="#CBD0DC" strokeWidth="1" fill="none" />
+
+                  {/* Back Folder */}
+                  <path
+                    d="M 66 38 L 84 38 L 92 46 L 132 46 L 132 86 L 66 86 Z"
+                    stroke="#CBD0DC"
+                    strokeWidth="1.2"
+                    fill="none"
+                  />
+                  {/* Middle Folder */}
+                  <path
+                    d="M 76 43 L 94 43 L 102 51 L 142 51 L 142 91 L 76 91 Z"
+                    stroke="#8E92A0"
+                    strokeWidth="1.2"
+                    fill="none"
+                  />
+                  {/* Front Folder (Code Symbol) */}
+                  <path
+                    d="M 86 48 L 104 48 L 112 56 L 152 56 L 152 96 L 86 96 Z"
+                    stroke="#C83E1B"
+                    strokeWidth="1.4"
+                    fill="#FFF8F6"
+                  />
+                  {/* Code Symbol </ > */}
+                  <path
+                    d="M 112 70 L 106 76 L 112 82"
+                    stroke="#0A0A0C"
+                    strokeWidth="1.75"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <line
+                    x1="121"
+                    y1="67"
+                    x2="117"
+                    y2="85"
+                    stroke="#0A0A0C"
+                    strokeWidth="1.75"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M 126 70 L 132 76 L 126 82"
+                    stroke="#0A0A0C"
+                    strokeWidth="1.75"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+
+              {/* Bottom Tag */}
+              <div className="pt-3 border-t border-[#F0F1F5] flex items-center gap-1.5 font-mono text-[10px] sm:text-[10.5px] uppercase tracking-[0.06em] text-[#5A5D6A]">
+                <span className="text-[#C83E1B] font-bold">/</span>
+                <span>YOUR CODE &bull; YOUR DATA &bull; YOUR IP</span>
+              </div>
+            </div>
+
+            {/* CARD 03: HUMAN-LED (OBSIDIAN DARK HERO CARD) */}
+            <div className="bg-[#12141A] border border-[#262832] rounded-[10px] p-5 sm:p-6 flex flex-col justify-between shadow-[0_4px_20px_rgba(0,0,0,0.25)] relative overflow-hidden transition-all hover:border-[#C83E1B]/60">
+              {/* Top-Right Orange Chamfer Notch */}
+              <div
+                className="absolute top-0 right-0 w-5 h-5 overflow-hidden pointer-events-none"
+                aria-hidden="true"
+              >
+                <div className="absolute top-0 right-0 w-0 h-0 border-t-[16px] border-t-[#C83E1B] border-l-[16px] border-l-transparent" />
+              </div>
+
+              <div>
+                <span className="font-mono text-[13px] font-bold text-[#E0532C]">03</span>
+                <h3 className="font-sans text-[16px] font-extrabold tracking-[-0.02em] text-[#FFFFFF] uppercase mt-1 mb-1">
+                  HUMAN-LED
+                </h3>
+                <p className="font-sans text-[12.5px] leading-[1.45] text-[#9FA3B0]">
+                  Automation with appropriate oversight.
+                </p>
+              </div>
+
+              {/* Target / Avatar Radar SVG Illustration */}
+              <div className="relative w-full h-[130px] my-4 flex items-center justify-center">
+                <svg
+                  viewBox="0 0 200 120"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-full h-full block select-none"
+                  aria-hidden="true"
+                >
+                  {/* Crop marks */}
+                  <path d="M 32 28 L 32 20 L 40 20" stroke="#3A3E4E" strokeWidth="1" fill="none" />
+                  <path d="M 160 20 L 168 20 L 168 28" stroke="#3A3E4E" strokeWidth="1" fill="none" />
+                  <path d="M 32 92 L 32 100 L 40 100" stroke="#3A3E4E" strokeWidth="1" fill="none" />
+                  <path d="M 160 100 L 168 100 L 168 92" stroke="#3A3E4E" strokeWidth="1" fill="none" />
+
+                  {/* Outer Radar Target Circle */}
+                  <circle
+                    cx="100"
+                    cy="60"
+                    r="34"
+                    stroke="#C83E1B"
+                    strokeWidth="1.25"
+                    strokeOpacity="0.85"
+                  />
+
+                  {/* Radar Crosshair ticks */}
+                  <line x1="100" y1="20" x2="100" y2="24" stroke="#5A5D6A" strokeWidth="1.2" />
+                  <line x1="100" y1="96" x2="100" y2="100" stroke="#5A5D6A" strokeWidth="1.2" />
+                  <line x1="60" y1="60" x2="64" y2="60" stroke="#5A5D6A" strokeWidth="1.2" />
+                  <line x1="136" y1="60" x2="140" y2="60" stroke="#5A5D6A" strokeWidth="1.2" />
+
+                  {/* Human Avatar Profile */}
+                  <circle cx="100" cy="52" r="8" stroke="#FFFFFF" strokeWidth="1.5" fill="none" />
+                  <path
+                    d="M 87 74 C 87 66 93 63 100 63 C 107 63 113 66 113 74"
+                    stroke="#FFFFFF"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+
+                  {/* 4-pointed Sparkle Star (Signal Orange) */}
+                  <path
+                    d="M 134 38 Q 134 43 139 43 Q 134 43 134 48 Q 134 43 129 43 Q 134 43 134 38 Z"
+                    fill="#E0532C"
+                  />
+                </svg>
+              </div>
+
+              {/* Bottom Tag */}
+              <div className="pt-3 border-t border-[#232631] flex items-center gap-1.5 font-mono text-[10px] sm:text-[10.5px] uppercase tracking-[0.06em] text-[#9FA3B0]">
+                <span className="text-[#C83E1B] font-bold">/</span>
+                <span>AUTOMATE &bull; AUGMENT &bull; OVERSIGHT</span>
+              </div>
+            </div>
+
+            {/* CARD 04: BUILT TO EVOLVE */}
+            <div className="bg-[#FFFFFF] border border-[#E2E2E8] rounded-[10px] p-5 sm:p-6 flex flex-col justify-between shadow-[0_2px_8px_rgba(10,10,12,0.03)] hover:border-[#C83E1B]/40 transition-all">
+              <div>
+                <span className="font-mono text-[13px] font-bold text-[#C83E1B]">04</span>
+                <h3 className="font-sans text-[16px] font-extrabold tracking-[-0.02em] text-[#0A0A0C] uppercase mt-1 mb-1">
+                  BUILT TO EVOLVE
+                </h3>
+                <p className="font-sans text-[12.5px] leading-[1.45] text-[#5A5D6A]">
+                  Designed for iteration and growth.
+                </p>
+              </div>
+
+              {/* Translucent Angled Panes & Growth Curve SVG */}
+              <div className="relative w-full h-[130px] my-4 flex items-center justify-center">
+                <svg
+                  viewBox="0 0 200 120"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-full h-full block select-none"
+                  aria-hidden="true"
+                >
+                  {/* Crop marks */}
+                  <path d="M 32 28 L 32 20 L 40 20" stroke="#CBD0DC" strokeWidth="1" fill="none" />
+                  <path d="M 160 20 L 168 20 L 168 28" stroke="#CBD0DC" strokeWidth="1" fill="none" />
+                  <path d="M 32 92 L 32 100 L 40 100" stroke="#CBD0DC" strokeWidth="1" fill="none" />
+                  <path d="M 160 100 L 168 100 L 168 92" stroke="#CBD0DC" strokeWidth="1" fill="none" />
+
+                  {/* Back Pane */}
+                  <polygon
+                    points="68,40 98,28 98,84 68,96"
+                    stroke="#A0A5B5"
+                    strokeWidth="1.2"
+                    fill="none"
+                  />
+
+                  {/* Front Translucent Pane (Signal Orange Tint) */}
+                  <polygon
+                    points="92,42 122,30 122,86 92,98"
+                    stroke="#C83E1B"
+                    strokeWidth="1.4"
+                    fill="#C83E1B"
+                    fillOpacity="0.25"
+                  />
+
+                  {/* Dynamic Growth Upward Arrow */}
+                  <path
+                    d="M 76 96 C 88 94 116 88 136 46"
+                    stroke="#C83E1B"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                  <path
+                    d="M 126 48 L 137 45 L 135 56"
+                    stroke="#C83E1B"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    fill="none"
+                  />
+                </svg>
+              </div>
+
+              {/* Bottom Tag */}
+              <div className="pt-3 border-t border-[#F0F1F5] flex items-center gap-1.5 font-mono text-[10px] sm:text-[10.5px] uppercase tracking-[0.06em] text-[#5A5D6A]">
+                <span className="text-[#C83E1B] font-bold">/</span>
+                <span>ITERATE &bull; SCALE &bull; ADAPT</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

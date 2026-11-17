@@ -33,9 +33,9 @@ export function Header(): React.ReactElement {
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full bg-[#FFFFFF]/95 backdrop-blur-md border-b border-[#E2E2E8] shadow-[0_1px_3px_rgba(10,10,12,0.02)]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
-          {/* Left Brand Lockup */}
+      <header className="sticky top-0 z-40 w-full bg-[#FFFFFF]/95 backdrop-blur-md border-b border-[#E2E2E8]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-6">
+          {/* Left Brand Lockup - Prominent Logo */}
           <Link
             href="/"
             className="flex items-center gap-3 shrink-0 group py-1"
@@ -43,28 +43,18 @@ export function Header(): React.ReactElement {
           >
             {/* Precision Brand Mark */}
             <span
-              className="w-4 h-4 bg-[#C83E1B] shrink-0 transition-all duration-200 group-hover:scale-105 group-hover:shadow-[0_0_10px_rgba(200,62,27,0.45)]"
+              className="w-4 h-4 sm:w-4.5 sm:h-4.5 bg-[#C83E1B] shrink-0 transition-transform duration-200 group-hover:scale-105"
               aria-hidden="true"
             />
             
-            {/* Wordmark */}
-            <span className="font-sans font-black text-[18px] tracking-[-0.03em] text-[#0A0A0C] transition-colors group-hover:text-[#C83E1B]">
+            {/* Wordmark Logo */}
+            <span className="font-sans font-black text-[21px] sm:text-[23px] tracking-[-0.03em] text-[#0A0A0C] transition-colors group-hover:text-[#C83E1B]">
               WTFearB
-            </span>
-
-            {/* Divider */}
-            <span className="hidden sm:inline-block h-4 w-px bg-[#D5D7E0] mx-0.5" aria-hidden="true" />
-
-            {/* Elevated Brand Tagline Pill */}
-            <span className="hidden sm:inline-flex items-center gap-1 font-mono text-[11px] font-medium tracking-tight text-[#3F414A] bg-[#F4F4F6] border border-[#E2E2E8] px-2.5 py-1 rounded-[3px] transition-colors group-hover:border-[#C83E1B]/30">
-              <span>Make</span>
-              <span className="text-[#C83E1B] font-bold">&ldquo;What If&rdquo;</span>
-              <span>Work.</span>
             </span>
           </Link>
 
           {/* Center Navigation with Active Orange Bottom Bar */}
-          <nav className="hidden lg:flex items-center gap-7" aria-label="Main Navigation">
+          <nav className="hidden lg:flex items-center gap-8" aria-label="Main Navigation">
             {NAV_ITEMS.map((item) => {
               const isActive =
                 item.href === '/'
@@ -75,10 +65,10 @@ export function Header(): React.ReactElement {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`font-sans text-[13px] transition-colors relative py-1.5 ${
+                  className={`font-sans text-[13.5px] transition-colors relative py-1.5 ${
                     isActive
                       ? 'font-semibold text-[#0A0A0C]'
-                      : 'font-medium text-[#5A5D6A] hover:text-[#0A0A0C]'
+                      : 'font-medium text-[#4B4E59] hover:text-[#0A0A0C]'
                   }`}
                 >
                   {item.label}
@@ -98,15 +88,10 @@ export function Header(): React.ReactElement {
             <button
               type="button"
               onClick={handleAuditClick}
-              className="group/cta bg-[#0A0A0C] hover:bg-[#C83E1B] text-white border border-[#0A0A0C] hover:border-[#C83E1B] font-mono text-[12px] font-bold tracking-[0.03em] px-4 py-2.5 inline-flex items-center gap-2 transition-all duration-200 cursor-pointer shadow-xs hover:shadow-[0_4px_16px_rgba(200,62,27,0.25)]"
+              className="bg-[#0A0A0C] hover:bg-[#1E2028] text-white font-mono text-[12px] font-semibold px-4 py-2.5 inline-flex items-center gap-2 transition-colors cursor-pointer"
             >
               <span>Book an Architecture Audit</span>
-              <span
-                className="inline-block transition-transform duration-200 group-hover/cta:translate-x-0.5"
-                aria-hidden="true"
-              >
-                &rarr;
-              </span>
+              <span aria-hidden="true">&rarr;</span>
             </button>
 
             <button
