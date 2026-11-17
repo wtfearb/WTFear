@@ -132,180 +132,192 @@ export function CapabilitiesGrid(): React.ReactElement {
           </div>
         </div>
 
-        {/* 2. MAIN CAPABILITY ATLAS GRID: STICKY LEFT SIDEBAR + 6-CARD GRID */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start relative">
-          {/* LEFT STICKY SIDEBAR: // CAPABILITY SCOPE */}
-          <aside className="lg:col-span-4 lg:sticky lg:top-24 self-start bg-[#0C0D10] border border-[#1E212A] rounded-[6px] p-6 sm:p-7 text-[#FFFFFF] relative overflow-hidden shadow-[0_16px_40px_rgba(10,10,12,0.16)]">
-            {/* Background SVG Grid & Dot Matrix Texture */}
-            <div className="absolute inset-0 pointer-events-none opacity-40 select-none overflow-hidden" aria-hidden="true">
-              <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <pattern id="sidebarGrid" width="20" height="20" patternUnits="userSpaceOnUse">
-                    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1B1E26" strokeWidth="1" />
-                  </pattern>
-                  <pattern id="sidebarDots" width="12" height="12" patternUnits="userSpaceOnUse">
-                    <circle cx="2" cy="2" r="0.75" fill="#252832" />
-                  </pattern>
-                </defs>
-                <rect width="100%" height="70%" fill="url(#sidebarGrid)" />
-                <rect y="70%" width="100%" height="30%" fill="url(#sidebarDots)" />
-              </svg>
-            </div>
-
-            {/* Sidebar Title */}
-            <div className="font-mono text-[12px] font-bold uppercase tracking-[0.08em] text-[#FFFFFF] mb-3 relative z-10">
-              // CAPABILITY SCOPE
-            </div>
-
-            {/* Top Centerpiece SVG: Interlocking 3-Axis System Gyro & Concentric Core */}
-            <div className="w-full h-[180px] my-2 relative z-10 flex items-center justify-center">
-              <svg
-                viewBox="0 0 260 190"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-full h-full block select-none"
-                aria-hidden="true"
-              >
-                <defs>
-                  <linearGradient id="sidebarOrangeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#C83E1B" stopOpacity="0.65" />
-                    <stop offset="100%" stopColor="#C83E1B" stopOpacity="0.18" />
-                  </linearGradient>
-                </defs>
-
-                {/* Central Telemetry Axis */}
-                <line
-                  x1="130"
-                  y1="16"
-                  x2="130"
-                  y2="174"
-                  stroke="#2D313E"
-                  strokeDasharray="3 3"
-                  strokeWidth="1"
-                />
-                <circle cx="130" cy="16" r="2" fill="#C83E1B" />
-                <circle cx="130" cy="174" r="2" fill="#686C7A" />
-
-                {/* Outer Isometric Wireframe Octagonal Gyro Frame */}
-                <polygon
-                  points="130,28 212,66 212,124 130,162 48,124 48,66"
-                  fill="none"
-                  stroke="#3F4352"
-                  strokeWidth="1.2"
-                />
-                {/* Node coordinates */}
-                <circle cx="130" cy="28" r="2" fill="#686C7A" />
-                <circle cx="212" cy="66" r="2" fill="#686C7A" />
-                <circle cx="212" cy="124" r="2" fill="#686C7A" />
-                <circle cx="130" cy="162" r="2" fill="#686C7A" />
-                <circle cx="48" cy="124" r="2" fill="#686C7A" />
-                <circle cx="48" cy="66" r="2" fill="#686C7A" />
-
-                {/* Middle Glowing Signal Orange Isometric Torus / Core Ring */}
-                <polygon
-                  points="130,52 192,82 192,108 130,138 68,108 68,82"
-                  fill="url(#sidebarOrangeGrad)"
-                  stroke="#C83E1B"
-                  strokeWidth="1.6"
-                />
-
-                {/* Inner Suspended Hollow Core Prism */}
-                <polygon
-                  points="130,72 162,88 130,104 98,88"
-                  fill="#0C0D10"
-                  stroke="#FF6B47"
-                  strokeWidth="1.3"
-                />
-                {/* Glowing Center Pulse Dot */}
-                <circle cx="130" cy="88" r="3.5" fill="#C83E1B" />
-                <circle cx="130" cy="88" r="8" stroke="#C83E1B" strokeOpacity="0.4" strokeWidth="1" />
-
-                {/* Orbiting Telemetry Callout Ticks */}
-                <line x1="68" y1="66" x2="80" y2="72" stroke="#C83E1B" strokeWidth="1" />
-                <circle cx="68" cy="66" r="1.5" fill="#C83E1B" />
-                <line x1="192" y1="66" x2="180" y2="72" stroke="#C83E1B" strokeWidth="1" />
-                <circle cx="192" cy="66" r="1.5" fill="#C83E1B" />
-                <line x1="130" y1="138" x2="130" y2="152" stroke="#C83E1B" strokeWidth="1" />
-                <circle cx="130" cy="152" r="1.5" fill="#C83E1B" />
-              </svg>
-            </div>
-
-            {/* Three Conceptual Capability Groups */}
-            <div className="divide-y divide-[#222530] border-t border-[#222530] mt-4 relative z-10">
-              {/* GROUP 01 — SYSTEMS */}
-              <div className="group/item py-3.5 first:pt-4 last:pb-1 flex items-start gap-3.5 transition-colors duration-200 hover:bg-[#14161B]/70 -mx-2 px-2 rounded-[4px]">
-                {/* Icon: Distributed Server Architecture */}
-                <div className="w-7 h-7 shrink-0 flex items-center justify-center text-[#C83E1B] mt-0.5" aria-hidden="true">
-                  <svg viewBox="0 0 28 28" fill="none" className="w-6 h-6 stroke-current" strokeWidth="1.5">
-                    <rect x="4" y="5" width="20" height="4.5" rx="1" />
-                    <rect x="4" y="11.5" width="20" height="4.5" rx="1" />
-                    <rect x="4" y="18" width="20" height="4.5" rx="1" />
-                    <circle cx="7.5" cy="7.25" r="0.75" fill="#C83E1B" />
-                    <circle cx="7.5" cy="13.75" r="0.75" fill="#C83E1B" />
-                    <circle cx="7.5" cy="20.25" r="0.75" fill="#C83E1B" />
-                    <path d="M 20 7.25 L 22 7.25" strokeLinecap="round" />
-                    <path d="M 20 13.75 L 22 13.75" strokeLinecap="round" />
-                    <path d="M 20 20.25 L 22 20.25" strokeLinecap="round" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="font-sans text-[13.5px] font-extrabold uppercase tracking-[0.04em] text-[#FFFFFF] group-hover/item:text-[#C83E1B] transition-colors">
-                    SYSTEMS
-                  </h3>
-                  <p className="font-mono text-[11.5px] leading-[1.45] text-[#9FA3B0] mt-0.5">
-                    Build reliable, scalable foundations.
-                  </p>
-                </div>
+        {/* 2. MAIN CAPABILITY ATLAS GRID: FULL-HEIGHT LEFT OBSIDIAN SIDEBAR + 6-CARD GRID */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch relative">
+          {/* LEFT OBSIDIAN SIDEBAR: Full height matching right cards, eliminating white space */}
+          <div className="lg:col-span-4 h-full">
+            <aside className="h-full min-h-[750px] lg:min-h-[880px] flex flex-col justify-between bg-[#0C0D10] border border-[#1E212A] rounded-[6px] p-6 sm:p-7 text-[#FFFFFF] relative overflow-hidden shadow-[0_16px_40px_rgba(10,10,12,0.16)]">
+              {/* Background SVG Grid & Dot Matrix Texture */}
+              <div className="absolute inset-0 pointer-events-none opacity-40 select-none overflow-hidden" aria-hidden="true">
+                <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <pattern id="sidebarGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1B1E26" strokeWidth="1" />
+                    </pattern>
+                    <pattern id="sidebarDots" width="12" height="12" patternUnits="userSpaceOnUse">
+                      <circle cx="2" cy="2" r="0.75" fill="#252832" />
+                    </pattern>
+                  </defs>
+                  <rect width="100%" height="65%" fill="url(#sidebarGrid)" />
+                  <rect y="65%" width="100%" height="35%" fill="url(#sidebarDots)" />
+                </svg>
               </div>
 
-              {/* GROUP 02 — PRODUCT */}
-              <div className="group/item py-3.5 first:pt-4 last:pb-1 flex items-start gap-3.5 transition-colors duration-200 hover:bg-[#14161B]/70 -mx-2 px-2 rounded-[4px]">
-                {/* Icon: Split Interface Frame */}
-                <div className="w-7 h-7 shrink-0 flex items-center justify-center text-[#C83E1B] mt-0.5" aria-hidden="true">
-                  <svg viewBox="0 0 28 28" fill="none" className="w-6 h-6 stroke-current" strokeWidth="1.5">
-                    <rect x="3.5" y="4" width="21" height="20" rx="2" />
-                    <line x1="3.5" y1="9" x2="24.5" y2="9" />
-                    <line x1="10.5" y1="9" x2="10.5" y2="24" />
-                    <circle cx="6" cy="6.5" r="0.75" fill="#C83E1B" />
-                    <circle cx="8.5" cy="6.5" r="0.75" fill="#C83E1B" />
-                  </svg>
+              <div>
+                {/* Sidebar Title */}
+                <div className="font-mono text-[12px] font-bold uppercase tracking-[0.08em] text-[#FFFFFF] mb-3 relative z-10">
+                  // CAPABILITY SCOPE
                 </div>
-                <div>
-                  <h3 className="font-sans text-[13.5px] font-extrabold uppercase tracking-[0.04em] text-[#FFFFFF] group-hover/item:text-[#C83E1B] transition-colors">
-                    PRODUCT
-                  </h3>
-                  <p className="font-mono text-[11.5px] leading-[1.45] text-[#9FA3B0] mt-0.5">
-                    Turn ideas into usable, valuable products.
-                  </p>
-                </div>
-              </div>
 
-              {/* GROUP 03 — AUTOMATION */}
-              <div className="group/item py-3.5 first:pt-4 last:pb-1 flex items-start gap-3.5 transition-colors duration-200 hover:bg-[#14161B]/70 -mx-2 px-2 rounded-[4px]">
-                {/* Icon: Synchronized Lightning / Flow Pulse */}
-                <div className="w-7 h-7 shrink-0 flex items-center justify-center text-[#C83E1B] mt-0.5" aria-hidden="true">
-                  <svg viewBox="0 0 28 28" fill="none" className="w-6 h-6 stroke-current" strokeWidth="1.5">
-                    <path
-                      d="M15 3 L6 15 H14 L13 25 L22 13 H14 L15 3 Z"
+                {/* Top Centerpiece SVG: Interlocking 3-Axis System Gyro & Concentric Core */}
+                <div className="w-full h-[180px] my-2 relative z-10 flex items-center justify-center">
+                  <svg
+                    viewBox="0 0 260 190"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-full h-full block select-none"
+                    aria-hidden="true"
+                  >
+                    <defs>
+                      <linearGradient id="sidebarOrangeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#C83E1B" stopOpacity="0.65" />
+                        <stop offset="100%" stopColor="#C83E1B" stopOpacity="0.18" />
+                      </linearGradient>
+                    </defs>
+
+                    {/* Central Telemetry Axis */}
+                    <line
+                      x1="130"
+                      y1="16"
+                      x2="130"
+                      y2="174"
+                      stroke="#2D313E"
+                      strokeDasharray="3 3"
+                      strokeWidth="1"
+                    />
+                    <circle cx="130" cy="16" r="2" fill="#C83E1B" />
+                    <circle cx="130" cy="174" r="2" fill="#686C7A" />
+
+                    {/* Outer Isometric Wireframe Octagonal Gyro Frame */}
+                    <polygon
+                      points="130,28 212,66 212,124 130,162 48,124 48,66"
+                      fill="none"
+                      stroke="#3F4352"
+                      strokeWidth="1.2"
+                    />
+                    {/* Node coordinates */}
+                    <circle cx="130" cy="28" r="2" fill="#686C7A" />
+                    <circle cx="212" cy="66" r="2" fill="#686C7A" />
+                    <circle cx="212" cy="124" r="2" fill="#686C7A" />
+                    <circle cx="130" cy="162" r="2" fill="#686C7A" />
+                    <circle cx="48" cy="124" r="2" fill="#686C7A" />
+                    <circle cx="48" cy="66" r="2" fill="#686C7A" />
+
+                    {/* Middle Glowing Signal Orange Isometric Torus / Core Ring */}
+                    <polygon
+                      points="130,52 192,82 192,108 130,138 68,108 68,82"
+                      fill="url(#sidebarOrangeGrad)"
                       stroke="#C83E1B"
                       strokeWidth="1.6"
-                      fill="#C83E1B"
-                      fillOpacity="0.18"
-                      strokeLinejoin="round"
                     />
+
+                    {/* Inner Suspended Hollow Core Prism */}
+                    <polygon
+                      points="130,72 162,88 130,104 98,88"
+                      fill="#0C0D10"
+                      stroke="#FF6B47"
+                      strokeWidth="1.3"
+                    />
+                    {/* Glowing Center Pulse Dot */}
+                    <circle cx="130" cy="88" r="3.5" fill="#C83E1B" />
+                    <circle cx="130" cy="88" r="8" stroke="#C83E1B" strokeOpacity="0.4" strokeWidth="1" />
+
+                    {/* Orbiting Telemetry Callout Ticks */}
+                    <line x1="68" y1="66" x2="80" y2="72" stroke="#C83E1B" strokeWidth="1" />
+                    <circle cx="68" cy="66" r="1.5" fill="#C83E1B" />
+                    <line x1="192" y1="66" x2="180" y2="72" stroke="#C83E1B" strokeWidth="1" />
+                    <circle cx="192" cy="66" r="1.5" fill="#C83E1B" />
+                    <line x1="130" y1="138" x2="130" y2="152" stroke="#C83E1B" strokeWidth="1" />
+                    <circle cx="130" cy="152" r="1.5" fill="#C83E1B" />
                   </svg>
                 </div>
-                <div>
-                  <h3 className="font-sans text-[13.5px] font-extrabold uppercase tracking-[0.04em] text-[#FFFFFF] group-hover/item:text-[#C83E1B] transition-colors">
-                    AUTOMATION
-                  </h3>
-                  <p className="font-mono text-[11.5px] leading-[1.45] text-[#9FA3B0] mt-0.5">
-                    Reduce friction and improve operational efficiency.
-                  </p>
+
+                {/* Three Conceptual Capability Groups */}
+                <div className="divide-y divide-[#222530] border-t border-[#222530] mt-4 relative z-10">
+                  {/* GROUP 01 — SYSTEMS */}
+                  <div className="group/item py-3.5 first:pt-4 last:pb-1 flex items-start gap-3.5 transition-colors duration-200 hover:bg-[#14161B]/70 -mx-2 px-2 rounded-[4px]">
+                    <div className="w-7 h-7 shrink-0 flex items-center justify-center text-[#C83E1B] mt-0.5" aria-hidden="true">
+                      <svg viewBox="0 0 28 28" fill="none" className="w-6 h-6 stroke-current" strokeWidth="1.5">
+                        <rect x="4" y="5" width="20" height="4.5" rx="1" />
+                        <rect x="4" y="11.5" width="20" height="4.5" rx="1" />
+                        <rect x="4" y="18" width="20" height="4.5" rx="1" />
+                        <circle cx="7.5" cy="7.25" r="0.75" fill="#C83E1B" />
+                        <circle cx="7.5" cy="13.75" r="0.75" fill="#C83E1B" />
+                        <circle cx="7.5" cy="20.25" r="0.75" fill="#C83E1B" />
+                        <path d="M 20 7.25 L 22 7.25" strokeLinecap="round" />
+                        <path d="M 20 13.75 L 22 13.75" strokeLinecap="round" />
+                        <path d="M 20 20.25 L 22 20.25" strokeLinecap="round" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="font-sans text-[13.5px] font-extrabold uppercase tracking-[0.04em] text-[#FFFFFF] group-hover/item:text-[#C83E1B] transition-colors">
+                        SYSTEMS
+                      </h3>
+                      <p className="font-mono text-[11.5px] leading-[1.45] text-[#9FA3B0] mt-0.5">
+                        Build reliable, scalable foundations.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* GROUP 02 — PRODUCT */}
+                  <div className="group/item py-3.5 first:pt-4 last:pb-1 flex items-start gap-3.5 transition-colors duration-200 hover:bg-[#14161B]/70 -mx-2 px-2 rounded-[4px]">
+                    <div className="w-7 h-7 shrink-0 flex items-center justify-center text-[#C83E1B] mt-0.5" aria-hidden="true">
+                      <svg viewBox="0 0 28 28" fill="none" className="w-6 h-6 stroke-current" strokeWidth="1.5">
+                        <rect x="3.5" y="4" width="21" height="20" rx="2" />
+                        <line x1="3.5" y1="9" x2="24.5" y2="9" />
+                        <line x1="10.5" y1="9" x2="10.5" y2="24" />
+                        <circle cx="6" cy="6.5" r="0.75" fill="#C83E1B" />
+                        <circle cx="8.5" cy="6.5" r="0.75" fill="#C83E1B" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="font-sans text-[13.5px] font-extrabold uppercase tracking-[0.04em] text-[#FFFFFF] group-hover/item:text-[#C83E1B] transition-colors">
+                        PRODUCT
+                      </h3>
+                      <p className="font-mono text-[11.5px] leading-[1.45] text-[#9FA3B0] mt-0.5">
+                        Turn ideas into usable, valuable products.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* GROUP 03 — AUTOMATION */}
+                  <div className="group/item py-3.5 first:pt-4 last:pb-1 flex items-start gap-3.5 transition-colors duration-200 hover:bg-[#14161B]/70 -mx-2 px-2 rounded-[4px]">
+                    <div className="w-7 h-7 shrink-0 flex items-center justify-center text-[#C83E1B] mt-0.5" aria-hidden="true">
+                      <svg viewBox="0 0 28 28" fill="none" className="w-6 h-6 stroke-current" strokeWidth="1.5">
+                        <path
+                          d="M15 3 L6 15 H14 L13 25 L22 13 H14 L15 3 Z"
+                          stroke="#C83E1B"
+                          strokeWidth="1.6"
+                          fill="#C83E1B"
+                          fillOpacity="0.18"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="font-sans text-[13.5px] font-extrabold uppercase tracking-[0.04em] text-[#FFFFFF] group-hover/item:text-[#C83E1B] transition-colors">
+                        AUTOMATION
+                      </h3>
+                      <p className="font-mono text-[11.5px] leading-[1.45] text-[#9FA3B0] mt-0.5">
+                        Reduce friction and improve operational efficiency.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </aside>
+
+              {/* Bottom Architectural Grounding Bar */}
+              <div className="mt-8 pt-4 border-t border-[#1E212A] relative z-10 flex flex-col gap-1.5">
+                <div className="flex items-center justify-between font-mono text-[10px] text-[#5A5D6A]">
+                  <span>// ARCHITECTURAL SCOPE</span>
+                  <span className="text-[#C83E1B] font-bold">100% IP HANDOVER</span>
+                </div>
+                <div className="font-mono text-[11px] leading-relaxed text-[#9FA3B0]">
+                  Grounded systems engineering with transparent architecture and zero vendor lock-in.
+                </div>
+              </div>
+            </aside>
+          </div>
 
           {/* RIGHT 6-CARD GRID (2 columns × 3 rows) */}
           <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-5">
