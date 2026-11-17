@@ -8,7 +8,7 @@ export function HeroSection(): React.ReactElement {
   return (
     <section
       aria-labelledby="hero-title"
-      className="relative bg-[#F9F9FB] border-b border-[#E2E2E8] pt-6 pb-12 md:pt-8 md:pb-14 overflow-hidden"
+      className="relative bg-[#F9F9FB] border-b border-[#E2E2E8] pt-6 pb-8 md:pt-8 md:pb-10 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Definition Lead for AEO and technical indexing (Hidden visually, preserved in DOM for AI answer engines) */}
@@ -308,49 +308,49 @@ export function HeroSection(): React.ReactElement {
         </div>
 
         {/* SECTION 01 BOTTOM STRIP: OUR ENGINEERING PRINCIPLES // HOW WE WORK */}
-        <div className="mt-10 md:mt-12 pt-6">
+        <div className="mt-7 md:mt-8 pt-4">
           {/* Header Bar */}
-          <div className="flex items-center justify-between mb-5">
+          <div className="flex items-center justify-between mb-3.5 sm:mb-4">
             <div className="flex items-center gap-2">
-              <span className="font-mono text-[14px] font-bold text-[#C83E1B]" aria-hidden="true">
+              <span className="font-mono text-[13px] font-bold text-[#C83E1B]" aria-hidden="true">
                 /
               </span>
-              <span className="font-mono text-[12px] font-bold uppercase tracking-[0.08em] text-[#0A0A0C]">
+              <span className="font-mono text-[11px] sm:text-[11.5px] font-bold uppercase tracking-[0.08em] text-[#0A0A0C]">
                 OUR ENGINEERING PRINCIPLES
               </span>
             </div>
             <div className="hidden sm:block flex-1 h-px bg-[#E2E2E8] mx-6" aria-hidden="true" />
-            <span className="font-mono text-[11px] font-bold uppercase tracking-[0.08em] text-[#5A5D6A]">
+            <span className="font-mono text-[10.5px] sm:text-[11px] font-bold uppercase tracking-[0.08em] text-[#5A5D6A]">
               // HOW WE WORK
             </span>
           </div>
 
-          {/* 4 Architectural Principle Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+          {/* 4 Architectural Principle Cards (Compact Space-Optimized Grid) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
             {/* CARD 01: END-TO-END */}
-            <div className="group relative bg-[#FFFFFF] hover:bg-[#0C0D10] border border-[#E2E2E8] hover:border-[#2D3039] rounded-[10px] p-5 sm:p-6 flex flex-col justify-between shadow-[0_2px_8px_rgba(10,10,12,0.03)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.35)] transition-all duration-300 ease-out hover:-translate-y-0.5 overflow-hidden">
+            <div className="group relative bg-[#FFFFFF] hover:bg-[#0C0D10] border border-[#E2E2E8] hover:border-[#2D3039] rounded-[8px] p-3.5 sm:p-4 flex flex-col justify-between shadow-[0_2px_6px_rgba(10,10,12,0.02)] hover:shadow-[0_10px_28px_rgba(0,0,0,0.3)] transition-all duration-300 ease-out hover:-translate-y-0.5 overflow-hidden">
               {/* Top-Right Orange Chamfer Notch (Reveals on Hover) */}
               <div
-                className="absolute top-0 right-0 w-5 h-5 overflow-hidden pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                className="absolute top-0 right-0 w-4 h-4 overflow-hidden pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 aria-hidden="true"
               >
-                <div className="absolute top-0 right-0 w-0 h-0 border-t-[16px] border-t-[#C83E1B] border-l-[16px] border-l-transparent" />
+                <div className="absolute top-0 right-0 w-0 h-0 border-t-[14px] border-t-[#C83E1B] border-l-[14px] border-l-transparent" />
               </div>
 
               <div>
-                <span className="font-mono text-[13px] font-bold text-[#C83E1B] transition-colors duration-300">
+                <span className="font-mono text-[12px] font-bold text-[#C83E1B] transition-colors duration-300">
                   01
                 </span>
-                <h3 className="font-sans text-[16px] font-extrabold tracking-[-0.02em] text-[#0A0A0C] group-hover:text-[#FFFFFF] uppercase mt-1 mb-1 transition-colors duration-300">
+                <h3 className="font-sans text-[14.5px] sm:text-[15px] font-extrabold tracking-[-0.02em] text-[#0A0A0C] group-hover:text-[#FFFFFF] uppercase mt-0.5 mb-0.5 transition-colors duration-300">
                   END-TO-END
                 </h3>
-                <p className="font-sans text-[12.5px] leading-[1.45] text-[#5A5D6A] group-hover:text-[#9FA3B0] transition-colors duration-300">
+                <p className="font-sans text-[11.5px] leading-[1.35] text-[#5A5D6A] group-hover:text-[#9FA3B0] transition-colors duration-300">
                   From discovery to deployment
                 </p>
               </div>
 
-              {/* Isometric Layered Stack SVG Illustration */}
-              <div className="relative w-full h-[130px] my-4 flex items-center justify-center">
+              {/* Isometric Layered Stack SVG Illustration (Compact) */}
+              <div className="relative w-full h-[76px] sm:h-[82px] my-1.5 flex items-center justify-center">
                 <svg
                   viewBox="0 0 200 120"
                   fill="none"
@@ -408,36 +408,36 @@ export function HeroSection(): React.ReactElement {
               </div>
 
               {/* Bottom Tag */}
-              <div className="pt-3 border-t border-[#F0F1F5] group-hover:border-[#232631] flex items-center gap-1.5 font-mono text-[10px] sm:text-[10.5px] uppercase tracking-[0.06em] text-[#5A5D6A] group-hover:text-[#9FA3B0] transition-colors duration-300">
+              <div className="pt-2 sm:pt-2.5 border-t border-[#F0F1F5] group-hover:border-[#232631] flex items-center gap-1.5 font-mono text-[9.5px] sm:text-[10px] uppercase tracking-[0.06em] text-[#5A5D6A] group-hover:text-[#9FA3B0] transition-colors duration-300">
                 <span className="text-[#C83E1B] font-bold">/</span>
                 <span>DISCOVER &rarr; BUILD &rarr; DEPLOY</span>
               </div>
             </div>
 
             {/* CARD 02: CLIENT-OWNED */}
-            <div className="group relative bg-[#FFFFFF] hover:bg-[#0C0D10] border border-[#E2E2E8] hover:border-[#2D3039] rounded-[10px] p-5 sm:p-6 flex flex-col justify-between shadow-[0_2px_8px_rgba(10,10,12,0.03)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.35)] transition-all duration-300 ease-out hover:-translate-y-0.5 overflow-hidden">
+            <div className="group relative bg-[#FFFFFF] hover:bg-[#0C0D10] border border-[#E2E2E8] hover:border-[#2D3039] rounded-[8px] p-3.5 sm:p-4 flex flex-col justify-between shadow-[0_2px_6px_rgba(10,10,12,0.02)] hover:shadow-[0_10px_28px_rgba(0,0,0,0.3)] transition-all duration-300 ease-out hover:-translate-y-0.5 overflow-hidden">
               {/* Top-Right Orange Chamfer Notch */}
               <div
-                className="absolute top-0 right-0 w-5 h-5 overflow-hidden pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                className="absolute top-0 right-0 w-4 h-4 overflow-hidden pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 aria-hidden="true"
               >
-                <div className="absolute top-0 right-0 w-0 h-0 border-t-[16px] border-t-[#C83E1B] border-l-[16px] border-l-transparent" />
+                <div className="absolute top-0 right-0 w-0 h-0 border-t-[14px] border-t-[#C83E1B] border-l-[14px] border-l-transparent" />
               </div>
 
               <div>
-                <span className="font-mono text-[13px] font-bold text-[#C83E1B] transition-colors duration-300">
+                <span className="font-mono text-[12px] font-bold text-[#C83E1B] transition-colors duration-300">
                   02
                 </span>
-                <h3 className="font-sans text-[16px] font-extrabold tracking-[-0.02em] text-[#0A0A0C] group-hover:text-[#FFFFFF] uppercase mt-1 mb-1 transition-colors duration-300">
+                <h3 className="font-sans text-[14.5px] sm:text-[15px] font-extrabold tracking-[-0.02em] text-[#0A0A0C] group-hover:text-[#FFFFFF] uppercase mt-0.5 mb-0.5 transition-colors duration-300">
                   CLIENT-OWNED
                 </h3>
-                <p className="font-sans text-[12.5px] leading-[1.45] text-[#5A5D6A] group-hover:text-[#9FA3B0] transition-colors duration-300">
+                <p className="font-sans text-[11.5px] leading-[1.35] text-[#5A5D6A] group-hover:text-[#9FA3B0] transition-colors duration-300">
                   Clear ownership and handover.
                 </p>
               </div>
 
-              {/* Isometric Folders SVG Illustration */}
-              <div className="relative w-full h-[130px] my-4 flex items-center justify-center">
+              {/* Isometric Folders SVG Illustration (Compact) */}
+              <div className="relative w-full h-[76px] sm:h-[82px] my-1.5 flex items-center justify-center">
                 <svg
                   viewBox="0 0 200 120"
                   fill="none"
@@ -520,36 +520,36 @@ export function HeroSection(): React.ReactElement {
               </div>
 
               {/* Bottom Tag */}
-              <div className="pt-3 border-t border-[#F0F1F5] group-hover:border-[#232631] flex items-center gap-1.5 font-mono text-[10px] sm:text-[10.5px] uppercase tracking-[0.06em] text-[#5A5D6A] group-hover:text-[#9FA3B0] transition-colors duration-300">
+              <div className="pt-2 sm:pt-2.5 border-t border-[#F0F1F5] group-hover:border-[#232631] flex items-center gap-1.5 font-mono text-[9.5px] sm:text-[10px] uppercase tracking-[0.06em] text-[#5A5D6A] group-hover:text-[#9FA3B0] transition-colors duration-300">
                 <span className="text-[#C83E1B] font-bold">/</span>
                 <span>YOUR CODE &bull; YOUR DATA &bull; YOUR IP</span>
               </div>
             </div>
 
             {/* CARD 03: HUMAN-LED */}
-            <div className="group relative bg-[#FFFFFF] hover:bg-[#0C0D10] border border-[#E2E2E8] hover:border-[#2D3039] rounded-[10px] p-5 sm:p-6 flex flex-col justify-between shadow-[0_2px_8px_rgba(10,10,12,0.03)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.35)] transition-all duration-300 ease-out hover:-translate-y-0.5 overflow-hidden">
+            <div className="group relative bg-[#FFFFFF] hover:bg-[#0C0D10] border border-[#E2E2E8] hover:border-[#2D3039] rounded-[8px] p-3.5 sm:p-4 flex flex-col justify-between shadow-[0_2px_6px_rgba(10,10,12,0.02)] hover:shadow-[0_10px_28px_rgba(0,0,0,0.3)] transition-all duration-300 ease-out hover:-translate-y-0.5 overflow-hidden">
               {/* Top-Right Orange Chamfer Notch */}
               <div
-                className="absolute top-0 right-0 w-5 h-5 overflow-hidden pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                className="absolute top-0 right-0 w-4 h-4 overflow-hidden pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 aria-hidden="true"
               >
-                <div className="absolute top-0 right-0 w-0 h-0 border-t-[16px] border-t-[#C83E1B] border-l-[16px] border-l-transparent" />
+                <div className="absolute top-0 right-0 w-0 h-0 border-t-[14px] border-t-[#C83E1B] border-l-[14px] border-l-transparent" />
               </div>
 
               <div>
-                <span className="font-mono text-[13px] font-bold text-[#C83E1B] group-hover:text-[#E0532C] transition-colors duration-300">
+                <span className="font-mono text-[12px] font-bold text-[#C83E1B] group-hover:text-[#E0532C] transition-colors duration-300">
                   03
                 </span>
-                <h3 className="font-sans text-[16px] font-extrabold tracking-[-0.02em] text-[#0A0A0C] group-hover:text-[#FFFFFF] uppercase mt-1 mb-1 transition-colors duration-300">
+                <h3 className="font-sans text-[14.5px] sm:text-[15px] font-extrabold tracking-[-0.02em] text-[#0A0A0C] group-hover:text-[#FFFFFF] uppercase mt-0.5 mb-0.5 transition-colors duration-300">
                   HUMAN-LED
                 </h3>
-                <p className="font-sans text-[12.5px] leading-[1.45] text-[#5A5D6A] group-hover:text-[#9FA3B0] transition-colors duration-300">
+                <p className="font-sans text-[11.5px] leading-[1.35] text-[#5A5D6A] group-hover:text-[#9FA3B0] transition-colors duration-300">
                   Automation with appropriate oversight.
                 </p>
               </div>
 
-              {/* Target / Avatar Radar SVG Illustration */}
-              <div className="relative w-full h-[130px] my-4 flex items-center justify-center">
+              {/* Target / Avatar Radar SVG Illustration (Compact) */}
+              <div className="relative w-full h-[76px] sm:h-[82px] my-1.5 flex items-center justify-center">
                 <svg
                   viewBox="0 0 200 120"
                   fill="none"
@@ -653,36 +653,36 @@ export function HeroSection(): React.ReactElement {
               </div>
 
               {/* Bottom Tag */}
-              <div className="pt-3 border-t border-[#F0F1F5] group-hover:border-[#232631] flex items-center gap-1.5 font-mono text-[10px] sm:text-[10.5px] uppercase tracking-[0.06em] text-[#5A5D6A] group-hover:text-[#9FA3B0] transition-colors duration-300">
+              <div className="pt-2 sm:pt-2.5 border-t border-[#F0F1F5] group-hover:border-[#232631] flex items-center gap-1.5 font-mono text-[9.5px] sm:text-[10px] uppercase tracking-[0.06em] text-[#5A5D6A] group-hover:text-[#9FA3B0] transition-colors duration-300">
                 <span className="text-[#C83E1B] font-bold">/</span>
                 <span>AUTOMATE &bull; AUGMENT &bull; OVERSIGHT</span>
               </div>
             </div>
 
             {/* CARD 04: BUILT TO EVOLVE */}
-            <div className="group relative bg-[#FFFFFF] hover:bg-[#0C0D10] border border-[#E2E2E8] hover:border-[#2D3039] rounded-[10px] p-5 sm:p-6 flex flex-col justify-between shadow-[0_2px_8px_rgba(10,10,12,0.03)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.35)] transition-all duration-300 ease-out hover:-translate-y-0.5 overflow-hidden">
+            <div className="group relative bg-[#FFFFFF] hover:bg-[#0C0D10] border border-[#E2E2E8] hover:border-[#2D3039] rounded-[8px] p-3.5 sm:p-4 flex flex-col justify-between shadow-[0_2px_6px_rgba(10,10,12,0.02)] hover:shadow-[0_10px_28px_rgba(0,0,0,0.3)] transition-all duration-300 ease-out hover:-translate-y-0.5 overflow-hidden">
               {/* Top-Right Orange Chamfer Notch */}
               <div
-                className="absolute top-0 right-0 w-5 h-5 overflow-hidden pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                className="absolute top-0 right-0 w-4 h-4 overflow-hidden pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 aria-hidden="true"
               >
-                <div className="absolute top-0 right-0 w-0 h-0 border-t-[16px] border-t-[#C83E1B] border-l-[16px] border-l-transparent" />
+                <div className="absolute top-0 right-0 w-0 h-0 border-t-[14px] border-t-[#C83E1B] border-l-[14px] border-l-transparent" />
               </div>
 
               <div>
-                <span className="font-mono text-[13px] font-bold text-[#C83E1B] transition-colors duration-300">
+                <span className="font-mono text-[12px] font-bold text-[#C83E1B] transition-colors duration-300">
                   04
                 </span>
-                <h3 className="font-sans text-[16px] font-extrabold tracking-[-0.02em] text-[#0A0A0C] group-hover:text-[#FFFFFF] uppercase mt-1 mb-1 transition-colors duration-300">
+                <h3 className="font-sans text-[14.5px] sm:text-[15px] font-extrabold tracking-[-0.02em] text-[#0A0A0C] group-hover:text-[#FFFFFF] uppercase mt-0.5 mb-0.5 transition-colors duration-300">
                   BUILT TO EVOLVE
                 </h3>
-                <p className="font-sans text-[12.5px] leading-[1.45] text-[#5A5D6A] group-hover:text-[#9FA3B0] transition-colors duration-300">
+                <p className="font-sans text-[11.5px] leading-[1.35] text-[#5A5D6A] group-hover:text-[#9FA3B0] transition-colors duration-300">
                   Designed for iteration and growth.
                 </p>
               </div>
 
-              {/* Translucent Angled Panes & Growth Curve SVG */}
-              <div className="relative w-full h-[130px] my-4 flex items-center justify-center">
+              {/* Translucent Angled Panes & Growth Curve SVG (Compact) */}
+              <div className="relative w-full h-[76px] sm:h-[82px] my-1.5 flex items-center justify-center">
                 <svg
                   viewBox="0 0 200 120"
                   fill="none"
@@ -753,7 +753,7 @@ export function HeroSection(): React.ReactElement {
               </div>
 
               {/* Bottom Tag */}
-              <div className="pt-3 border-t border-[#F0F1F5] group-hover:border-[#232631] flex items-center gap-1.5 font-mono text-[10px] sm:text-[10.5px] uppercase tracking-[0.06em] text-[#5A5D6A] group-hover:text-[#9FA3B0] transition-colors duration-300">
+              <div className="pt-2 sm:pt-2.5 border-t border-[#F0F1F5] group-hover:border-[#232631] flex items-center gap-1.5 font-mono text-[9.5px] sm:text-[10px] uppercase tracking-[0.06em] text-[#5A5D6A] group-hover:text-[#9FA3B0] transition-colors duration-300">
                 <span className="text-[#C83E1B] font-bold">/</span>
                 <span>ITERATE &bull; SCALE &bull; ADAPT</span>
               </div>
