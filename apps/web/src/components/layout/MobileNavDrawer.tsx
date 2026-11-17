@@ -56,9 +56,14 @@ export function MobileNavDrawer({
       >
         <div className="space-y-6">
           <div className="flex items-center justify-between border-b border-[var(--color-border-hairline)] pb-4">
-            <div className="flex items-center gap-2 font-mono text-sm font-bold text-[var(--color-ink-primary)]">
-              <span className="h-2 w-2 bg-[var(--color-accent-signal)]" />
-              <span>WTFearB</span>
+            <div className="flex items-center gap-2">
+              <span className="h-3 w-3 bg-[#C83E1B]" />
+              <span className="font-sans font-black text-base tracking-tight text-[#0A0A0C]">
+                WTFearB
+              </span>
+              <span className="text-[10px] font-mono text-[#5A5D6A] bg-[#F4F4F6] border border-[#E2E2E8] px-1.5 py-0.5 rounded-xs">
+                Make &ldquo;What If&rdquo; Work.
+              </span>
             </div>
             <button
               ref={closeBtnRef}

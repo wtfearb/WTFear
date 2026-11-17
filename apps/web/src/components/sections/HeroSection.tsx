@@ -37,7 +37,7 @@ export function HeroSection(): React.ReactElement {
   return (
     <section
       aria-labelledby="hero-title"
-      className="relative bg-[#F9F9FB] border-b border-[#E2E2E8] pt-12 pb-16 md:pt-16 md:pb-20 overflow-hidden"
+      className="relative bg-[#F9F9FB] border-b border-[#E2E2E8] pt-6 pb-10 md:pt-8 md:pb-12 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Definition Lead for AEO and technical indexing (Hidden visually, preserved in DOM for AI answer engines) */}
@@ -53,40 +53,40 @@ export function HeroSection(): React.ReactElement {
         </div>
 
         {/* Two-Column Hero Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           {/* Left Column: Headline, Copy & CTAs */}
-          <div className="lg:col-span-6 space-y-6">
+          <div className="lg:col-span-6 space-y-4 sm:space-y-5">
             {/* Eyebrow Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#FFFFFF] border border-[#E2E2E8]">
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 bg-[#FFFFFF] border border-[#E2E2E8]">
               <span className="w-1.5 h-1.5 rounded-full bg-[#C83E1B] shrink-0" aria-hidden="true" />
               <span className="font-mono text-[11px] font-bold uppercase tracking-[0.08em] text-[#C83E1B]">
                 PRODUCT &amp; AI ENGINEERING STUDIO
               </span>
             </div>
 
-            {/* Main Headline */}
+            {/* Main Headline with Orange 'What If' */}
             <h1
               id="hero-title"
-              className="font-sans font-extrabold text-[#0A0A0C] text-[44px] sm:text-[56px] lg:text-[64px] leading-[1.05] tracking-[-0.035em]"
+              className="font-sans font-extrabold text-[#0A0A0C] text-[40px] sm:text-[52px] lg:text-[58px] leading-[1.04] tracking-[-0.035em]"
             >
-              Make &lsquo;What If&rsquo;
+              Make <span className="text-[#C83E1B]">&lsquo;What If&rsquo;</span>
               <br />
               Work.
             </h1>
 
             {/* Supporting Paragraph */}
-            <p className="font-sans text-[17px] sm:text-[18px] leading-[1.6] text-[#3F414A] max-w-[540px]">
+            <p className="font-sans text-[16px] sm:text-[17px] leading-[1.55] text-[#3F414A] max-w-[500px]">
               We turn business problems and ambitious ideas into practical software — through thoughtful engineering, useful automation, and systems designed to grow.
             </p>
 
             {/* CTA Button Group */}
-            <div className="pt-2 flex flex-wrap items-center gap-4">
+            <div className="pt-1 flex flex-wrap items-center gap-3.5">
               <Link
                 href="/contact"
                 onClick={() =>
                   trackClientEvent('cta_click', 'Hero Discuss a Project', { href: '/contact' })
                 }
-                className="bg-[#0A0A0C] hover:bg-[#1E2028] text-[#FFFFFF] font-mono text-[13px] font-semibold px-6 py-3.5 inline-flex items-center justify-center gap-2.5 transition-colors cursor-pointer"
+                className="bg-[#0A0A0C] hover:bg-[#C83E1B] text-[#FFFFFF] font-mono text-[13px] font-semibold px-5 py-3 inline-flex items-center justify-center gap-2.5 transition-colors cursor-pointer border border-[#0A0A0C] hover:border-[#C83E1B]"
               >
                 <span>Discuss a Project</span>
                 <span aria-hidden="true">&rarr;</span>
@@ -99,7 +99,7 @@ export function HeroSection(): React.ReactElement {
                     href: '/blueprints',
                   })
                 }
-                className="bg-[#FFFFFF] hover:bg-[#F3F4F7] text-[#0A0A0C] border border-[#D5D7E0] font-sans text-[13px] font-semibold px-6 py-3.5 inline-flex items-center justify-center transition-colors cursor-pointer"
+                className="bg-[#FFFFFF] hover:bg-[#F3F4F7] text-[#0A0A0C] border border-[#D5D7E0] font-sans text-[13px] font-semibold px-5 py-3 inline-flex items-center justify-center transition-colors cursor-pointer"
               >
                 Explore Our Engineering
               </Link>
@@ -108,19 +108,19 @@ export function HeroSection(): React.ReactElement {
 
           {/* Right Column: // DELIVERY WORKFLOW Diagram Card */}
           <div className="lg:col-span-6">
-            <div className="bg-[#FFFFFF] border border-[#E2E2E8] p-5 sm:p-7 w-full shadow-xs">
+            <div className="bg-[#FFFFFF] border border-[#E2E2E8] p-4 sm:p-5 w-full shadow-xs">
               {/* Top Header Row inside Card */}
-              <div className="flex items-center justify-between mb-4">
-                <span className="font-mono text-[12px] font-bold tracking-[0.05em] text-[#0A0A0C]">
+              <div className="flex items-center justify-between mb-3">
+                <span className="font-mono text-[11px] sm:text-[12px] font-bold tracking-[0.05em] text-[#0A0A0C]">
                   // DELIVERY WORKFLOW
                 </span>
-                <span className="font-mono text-[12px] font-bold tracking-[0.05em] text-[#C83E1B]">
+                <span className="font-mono text-[11px] sm:text-[12px] font-bold tracking-[0.05em] text-[#C83E1B]">
                   SYSTEM ENGINEERING
                 </span>
               </div>
 
               {/* Diagram Canvas with Technical Grid & 4 Connected Workflow Nodes */}
-              <div className="relative bg-[#FAFBFD] border border-[#ECEEF3] p-4 sm:p-6 overflow-hidden">
+              <div className="relative bg-[#FAFBFD] border border-[#ECEEF3] p-3 sm:p-4 overflow-hidden">
                 <svg
                   viewBox="0 0 520 250"
                   fill="none"
@@ -326,7 +326,7 @@ export function HeroSection(): React.ReactElement {
               </div>
 
               {/* Bottom Caption Bar inside Right Card */}
-              <div className="mt-4 pt-3 flex items-center gap-2.5">
+              <div className="mt-3 pt-2.5 flex items-center gap-2.5">
                 <span className="w-[3px] h-3.5 bg-[#C83E1B] shrink-0" aria-hidden="true" />
                 <span className="font-mono text-[11px] font-bold uppercase tracking-[0.06em] text-[#3F414A]">
                   FROM POSSIBILITY TO WORKING SYSTEMS
@@ -337,20 +337,20 @@ export function HeroSection(): React.ReactElement {
         </div>
 
         {/* Four Feature Highlights Below Hero */}
-        <div className="border-t border-[#E2E2E8] mt-12 pt-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="border-t border-[#E2E2E8] mt-7 pt-6 md:mt-8 md:pt-7">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {FEATURE_HIGHLIGHTS.map((item) => (
               <div
                 key={item.number}
-                className="bg-[#FFFFFF] border border-[#E2E2E8] p-6 flex flex-col justify-start"
+                className="bg-[#FFFFFF] border border-[#E2E2E8] p-4 sm:p-5 flex flex-col justify-start transition-all hover:border-[#C83E1B]/40 hover:shadow-xs"
               >
-                <span className="font-mono text-[14px] font-bold text-[#C83E1B] mb-2">
+                <span className="font-mono text-[13px] font-bold text-[#C83E1B] mb-1.5">
                   {item.number}
                 </span>
-                <h3 className="font-sans text-[17px] font-extrabold tracking-[-0.02em] text-[#0A0A0C] uppercase mb-1.5">
+                <h3 className="font-sans text-[15px] sm:text-[16px] font-extrabold tracking-[-0.02em] text-[#0A0A0C] uppercase mb-1">
                   {item.title}
                 </h3>
-                <p className="font-sans text-[13px] leading-[1.5] text-[#5A5D6A]">
+                <p className="font-sans text-[13px] leading-[1.45] text-[#5A5D6A]">
                   {item.description}
                 </p>
               </div>

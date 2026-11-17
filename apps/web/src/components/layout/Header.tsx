@@ -33,20 +33,33 @@ export function Header(): React.ReactElement {
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full bg-[#FFFFFF]/95 backdrop-blur-sm border-b border-[#E2E2E8]">
+      <header className="sticky top-0 z-40 w-full bg-[#FFFFFF]/95 backdrop-blur-md border-b border-[#E2E2E8] shadow-[0_1px_3px_rgba(10,10,12,0.02)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
           {/* Left Brand Lockup */}
-          <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
+          <Link
+            href="/"
+            className="flex items-center gap-3 shrink-0 group py-1"
+            aria-label="WTFearB Home"
+          >
+            {/* Precision Brand Mark */}
             <span
-              className="w-3.5 h-3.5 bg-[#C83E1B] inline-block shrink-0 transition-transform group-hover:scale-105"
+              className="w-4 h-4 bg-[#C83E1B] shrink-0 transition-all duration-200 group-hover:scale-105 group-hover:shadow-[0_0_10px_rgba(200,62,27,0.45)]"
               aria-hidden="true"
             />
-            <span className="font-sans font-extrabold text-[16px] tracking-[-0.02em] text-[#0A0A0C]">
+            
+            {/* Wordmark */}
+            <span className="font-sans font-black text-[18px] tracking-[-0.03em] text-[#0A0A0C] transition-colors group-hover:text-[#C83E1B]">
               WTFearB
             </span>
-            <span className="hidden sm:inline-block h-4 w-px bg-[#E2E2E8] mx-1.5" aria-hidden="true" />
-            <span className="hidden sm:inline-block font-sans text-[12px] text-[#5A5D6A]">
-              Make &ldquo;What If&rdquo; Work.
+
+            {/* Divider */}
+            <span className="hidden sm:inline-block h-4 w-px bg-[#D5D7E0] mx-0.5" aria-hidden="true" />
+
+            {/* Elevated Brand Tagline Pill */}
+            <span className="hidden sm:inline-flex items-center gap-1 font-mono text-[11px] font-medium tracking-tight text-[#3F414A] bg-[#F4F4F6] border border-[#E2E2E8] px-2.5 py-1 rounded-[3px] transition-colors group-hover:border-[#C83E1B]/30">
+              <span>Make</span>
+              <span className="text-[#C83E1B] font-bold">&ldquo;What If&rdquo;</span>
+              <span>Work.</span>
             </span>
           </Link>
 
@@ -65,7 +78,7 @@ export function Header(): React.ReactElement {
                   className={`font-sans text-[13px] transition-colors relative py-1.5 ${
                     isActive
                       ? 'font-semibold text-[#0A0A0C]'
-                      : 'font-medium text-[#3F414A] hover:text-[#0A0A0C]'
+                      : 'font-medium text-[#5A5D6A] hover:text-[#0A0A0C]'
                   }`}
                 >
                   {item.label}
@@ -85,16 +98,21 @@ export function Header(): React.ReactElement {
             <button
               type="button"
               onClick={handleAuditClick}
-              className="bg-[#0A0A0C] hover:bg-[#1E2028] text-white font-mono text-[12px] font-semibold px-4 py-2.5 inline-flex items-center gap-2 transition-colors cursor-pointer"
+              className="group/cta bg-[#0A0A0C] hover:bg-[#C83E1B] text-white border border-[#0A0A0C] hover:border-[#C83E1B] font-mono text-[12px] font-bold tracking-[0.03em] px-4 py-2.5 inline-flex items-center gap-2 transition-all duration-200 cursor-pointer shadow-xs hover:shadow-[0_4px_16px_rgba(200,62,27,0.25)]"
             >
               <span>Book an Architecture Audit</span>
-              <span aria-hidden="true">&rarr;</span>
+              <span
+                className="inline-block transition-transform duration-200 group-hover/cta:translate-x-0.5"
+                aria-hidden="true"
+              >
+                &rarr;
+              </span>
             </button>
 
             <button
               type="button"
               onClick={() => setMobileNavOpen(true)}
-              className="inline-flex lg:hidden p-2 text-[#0A0A0C] border border-[#E2E2E8] hover:bg-[#F9F9FB] transition-colors"
+              className="inline-flex lg:hidden p-2 text-[#0A0A0C] border border-[#E2E2E8] hover:bg-[#F9F9FB] transition-colors cursor-pointer"
               aria-expanded={mobileNavOpen}
               aria-label="Toggle navigation menu"
             >
