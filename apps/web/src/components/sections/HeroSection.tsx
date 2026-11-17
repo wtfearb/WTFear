@@ -328,13 +328,23 @@ export function HeroSection(): React.ReactElement {
           {/* 4 Architectural Principle Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
             {/* CARD 01: END-TO-END */}
-            <div className="bg-[#FFFFFF] border border-[#E2E2E8] rounded-[10px] p-5 sm:p-6 flex flex-col justify-between shadow-[0_2px_8px_rgba(10,10,12,0.03)] hover:border-[#C83E1B]/40 transition-all">
+            <div className="group relative bg-[#FFFFFF] hover:bg-[#0C0D10] border border-[#E2E2E8] hover:border-[#2D3039] rounded-[10px] p-5 sm:p-6 flex flex-col justify-between shadow-[0_2px_8px_rgba(10,10,12,0.03)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.35)] transition-all duration-300 ease-out hover:-translate-y-0.5 overflow-hidden">
+              {/* Top-Right Orange Chamfer Notch (Reveals on Hover) */}
+              <div
+                className="absolute top-0 right-0 w-5 h-5 overflow-hidden pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                aria-hidden="true"
+              >
+                <div className="absolute top-0 right-0 w-0 h-0 border-t-[16px] border-t-[#C83E1B] border-l-[16px] border-l-transparent" />
+              </div>
+
               <div>
-                <span className="font-mono text-[13px] font-bold text-[#C83E1B]">01</span>
-                <h3 className="font-sans text-[16px] font-extrabold tracking-[-0.02em] text-[#0A0A0C] uppercase mt-1 mb-1">
+                <span className="font-mono text-[13px] font-bold text-[#C83E1B] transition-colors duration-300">
+                  01
+                </span>
+                <h3 className="font-sans text-[16px] font-extrabold tracking-[-0.02em] text-[#0A0A0C] group-hover:text-[#FFFFFF] uppercase mt-1 mb-1 transition-colors duration-300">
                   END-TO-END
                 </h3>
-                <p className="font-sans text-[12.5px] leading-[1.45] text-[#5A5D6A]">
+                <p className="font-sans text-[12.5px] leading-[1.45] text-[#5A5D6A] group-hover:text-[#9FA3B0] transition-colors duration-300">
                   From discovery to deployment
                 </p>
               </div>
@@ -349,17 +359,36 @@ export function HeroSection(): React.ReactElement {
                   aria-hidden="true"
                 >
                   {/* Crop marks */}
-                  <path d="M 32 28 L 32 20 L 40 20" stroke="#CBD0DC" strokeWidth="1" fill="none" />
-                  <path d="M 160 20 L 168 20 L 168 28" stroke="#CBD0DC" strokeWidth="1" fill="none" />
-                  <path d="M 32 92 L 32 100 L 40 100" stroke="#CBD0DC" strokeWidth="1" fill="none" />
-                  <path d="M 160 100 L 168 100 L 168 92" stroke="#CBD0DC" strokeWidth="1" fill="none" />
+                  <path
+                    d="M 32 28 L 32 20 L 40 20"
+                    className="stroke-[#CBD0DC] group-hover:stroke-[#3A3E4E] transition-colors duration-300"
+                    strokeWidth="1"
+                    fill="none"
+                  />
+                  <path
+                    d="M 160 20 L 168 20 L 168 28"
+                    className="stroke-[#CBD0DC] group-hover:stroke-[#3A3E4E] transition-colors duration-300"
+                    strokeWidth="1"
+                    fill="none"
+                  />
+                  <path
+                    d="M 32 92 L 32 100 L 40 100"
+                    className="stroke-[#CBD0DC] group-hover:stroke-[#3A3E4E] transition-colors duration-300"
+                    strokeWidth="1"
+                    fill="none"
+                  />
+                  <path
+                    d="M 160 100 L 168 100 L 168 92"
+                    className="stroke-[#CBD0DC] group-hover:stroke-[#3A3E4E] transition-colors duration-300"
+                    strokeWidth="1"
+                    fill="none"
+                  />
 
                   {/* Top Layer */}
                   <polygon
                     points="100,24 146,41 100,58 54,41"
-                    stroke="#4A4D57"
+                    className="stroke-[#4A4D57] group-hover:stroke-[#8E92A0] fill-[#FFFFFF] group-hover:fill-[#1A1C24] transition-all duration-300"
                     strokeWidth="1.25"
-                    fill="#FFFFFF"
                   />
                   {/* Middle Layer (Signal Orange Accent) */}
                   <polygon
@@ -367,33 +396,42 @@ export function HeroSection(): React.ReactElement {
                     stroke="#C83E1B"
                     strokeWidth="1.4"
                     fill="#C83E1B"
-                    fillOpacity="0.32"
+                    className="fill-opacity-30 group-hover:fill-opacity-50 transition-all duration-300"
                   />
                   {/* Bottom Layer */}
                   <polygon
                     points="100,62 146,79 100,96 54,79"
-                    stroke="#4A4D57"
+                    className="stroke-[#4A4D57] group-hover:stroke-[#8E92A0] fill-[#FFFFFF] group-hover:fill-[#1A1C24] transition-all duration-300"
                     strokeWidth="1.25"
-                    fill="#FFFFFF"
                   />
                 </svg>
               </div>
 
               {/* Bottom Tag */}
-              <div className="pt-3 border-t border-[#F0F1F5] flex items-center gap-1.5 font-mono text-[10px] sm:text-[10.5px] uppercase tracking-[0.06em] text-[#5A5D6A]">
+              <div className="pt-3 border-t border-[#F0F1F5] group-hover:border-[#232631] flex items-center gap-1.5 font-mono text-[10px] sm:text-[10.5px] uppercase tracking-[0.06em] text-[#5A5D6A] group-hover:text-[#9FA3B0] transition-colors duration-300">
                 <span className="text-[#C83E1B] font-bold">/</span>
                 <span>DISCOVER &rarr; BUILD &rarr; DEPLOY</span>
               </div>
             </div>
 
             {/* CARD 02: CLIENT-OWNED */}
-            <div className="bg-[#FFFFFF] border border-[#E2E2E8] rounded-[10px] p-5 sm:p-6 flex flex-col justify-between shadow-[0_2px_8px_rgba(10,10,12,0.03)] hover:border-[#C83E1B]/40 transition-all">
+            <div className="group relative bg-[#FFFFFF] hover:bg-[#0C0D10] border border-[#E2E2E8] hover:border-[#2D3039] rounded-[10px] p-5 sm:p-6 flex flex-col justify-between shadow-[0_2px_8px_rgba(10,10,12,0.03)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.35)] transition-all duration-300 ease-out hover:-translate-y-0.5 overflow-hidden">
+              {/* Top-Right Orange Chamfer Notch */}
+              <div
+                className="absolute top-0 right-0 w-5 h-5 overflow-hidden pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                aria-hidden="true"
+              >
+                <div className="absolute top-0 right-0 w-0 h-0 border-t-[16px] border-t-[#C83E1B] border-l-[16px] border-l-transparent" />
+              </div>
+
               <div>
-                <span className="font-mono text-[13px] font-bold text-[#C83E1B]">02</span>
-                <h3 className="font-sans text-[16px] font-extrabold tracking-[-0.02em] text-[#0A0A0C] uppercase mt-1 mb-1">
+                <span className="font-mono text-[13px] font-bold text-[#C83E1B] transition-colors duration-300">
+                  02
+                </span>
+                <h3 className="font-sans text-[16px] font-extrabold tracking-[-0.02em] text-[#0A0A0C] group-hover:text-[#FFFFFF] uppercase mt-1 mb-1 transition-colors duration-300">
                   CLIENT-OWNED
                 </h3>
-                <p className="font-sans text-[12.5px] leading-[1.45] text-[#5A5D6A]">
+                <p className="font-sans text-[12.5px] leading-[1.45] text-[#5A5D6A] group-hover:text-[#9FA3B0] transition-colors duration-300">
                   Clear ownership and handover.
                 </p>
               </div>
@@ -408,22 +446,42 @@ export function HeroSection(): React.ReactElement {
                   aria-hidden="true"
                 >
                   {/* Crop marks */}
-                  <path d="M 32 28 L 32 20 L 40 20" stroke="#CBD0DC" strokeWidth="1" fill="none" />
-                  <path d="M 160 20 L 168 20 L 168 28" stroke="#CBD0DC" strokeWidth="1" fill="none" />
-                  <path d="M 32 92 L 32 100 L 40 100" stroke="#CBD0DC" strokeWidth="1" fill="none" />
-                  <path d="M 160 100 L 168 100 L 168 92" stroke="#CBD0DC" strokeWidth="1" fill="none" />
+                  <path
+                    d="M 32 28 L 32 20 L 40 20"
+                    className="stroke-[#CBD0DC] group-hover:stroke-[#3A3E4E] transition-colors duration-300"
+                    strokeWidth="1"
+                    fill="none"
+                  />
+                  <path
+                    d="M 160 20 L 168 20 L 168 28"
+                    className="stroke-[#CBD0DC] group-hover:stroke-[#3A3E4E] transition-colors duration-300"
+                    strokeWidth="1"
+                    fill="none"
+                  />
+                  <path
+                    d="M 32 92 L 32 100 L 40 100"
+                    className="stroke-[#CBD0DC] group-hover:stroke-[#3A3E4E] transition-colors duration-300"
+                    strokeWidth="1"
+                    fill="none"
+                  />
+                  <path
+                    d="M 160 100 L 168 100 L 168 92"
+                    className="stroke-[#CBD0DC] group-hover:stroke-[#3A3E4E] transition-colors duration-300"
+                    strokeWidth="1"
+                    fill="none"
+                  />
 
                   {/* Back Folder */}
                   <path
                     d="M 66 38 L 84 38 L 92 46 L 132 46 L 132 86 L 66 86 Z"
-                    stroke="#CBD0DC"
+                    className="stroke-[#CBD0DC] group-hover:stroke-[#3A3E4E] transition-colors duration-300"
                     strokeWidth="1.2"
                     fill="none"
                   />
                   {/* Middle Folder */}
                   <path
                     d="M 76 43 L 94 43 L 102 51 L 142 51 L 142 91 L 76 91 Z"
-                    stroke="#8E92A0"
+                    className="stroke-[#8E92A0] group-hover:stroke-[#666B7C] transition-colors duration-300"
                     strokeWidth="1.2"
                     fill="none"
                   />
@@ -432,12 +490,12 @@ export function HeroSection(): React.ReactElement {
                     d="M 86 48 L 104 48 L 112 56 L 152 56 L 152 96 L 86 96 Z"
                     stroke="#C83E1B"
                     strokeWidth="1.4"
-                    fill="#FFF8F6"
+                    className="fill-[#FFF8F6] group-hover:fill-[#1F1716] transition-colors duration-300"
                   />
                   {/* Code Symbol </ > */}
                   <path
                     d="M 112 70 L 106 76 L 112 82"
-                    stroke="#0A0A0C"
+                    className="stroke-[#0A0A0C] group-hover:stroke-[#FFFFFF] transition-colors duration-300"
                     strokeWidth="1.75"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -447,13 +505,13 @@ export function HeroSection(): React.ReactElement {
                     y1="67"
                     x2="117"
                     y2="85"
-                    stroke="#0A0A0C"
+                    className="stroke-[#0A0A0C] group-hover:stroke-[#FFFFFF] transition-colors duration-300"
                     strokeWidth="1.75"
                     strokeLinecap="round"
                   />
                   <path
                     d="M 126 70 L 132 76 L 126 82"
-                    stroke="#0A0A0C"
+                    className="stroke-[#0A0A0C] group-hover:stroke-[#FFFFFF] transition-colors duration-300"
                     strokeWidth="1.75"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -462,28 +520,30 @@ export function HeroSection(): React.ReactElement {
               </div>
 
               {/* Bottom Tag */}
-              <div className="pt-3 border-t border-[#F0F1F5] flex items-center gap-1.5 font-mono text-[10px] sm:text-[10.5px] uppercase tracking-[0.06em] text-[#5A5D6A]">
+              <div className="pt-3 border-t border-[#F0F1F5] group-hover:border-[#232631] flex items-center gap-1.5 font-mono text-[10px] sm:text-[10.5px] uppercase tracking-[0.06em] text-[#5A5D6A] group-hover:text-[#9FA3B0] transition-colors duration-300">
                 <span className="text-[#C83E1B] font-bold">/</span>
                 <span>YOUR CODE &bull; YOUR DATA &bull; YOUR IP</span>
               </div>
             </div>
 
-            {/* CARD 03: HUMAN-LED (OBSIDIAN DARK HERO CARD) */}
-            <div className="bg-[#12141A] border border-[#262832] rounded-[10px] p-5 sm:p-6 flex flex-col justify-between shadow-[0_4px_20px_rgba(0,0,0,0.25)] relative overflow-hidden transition-all hover:border-[#C83E1B]/60">
+            {/* CARD 03: HUMAN-LED */}
+            <div className="group relative bg-[#FFFFFF] hover:bg-[#0C0D10] border border-[#E2E2E8] hover:border-[#2D3039] rounded-[10px] p-5 sm:p-6 flex flex-col justify-between shadow-[0_2px_8px_rgba(10,10,12,0.03)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.35)] transition-all duration-300 ease-out hover:-translate-y-0.5 overflow-hidden">
               {/* Top-Right Orange Chamfer Notch */}
               <div
-                className="absolute top-0 right-0 w-5 h-5 overflow-hidden pointer-events-none"
+                className="absolute top-0 right-0 w-5 h-5 overflow-hidden pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 aria-hidden="true"
               >
                 <div className="absolute top-0 right-0 w-0 h-0 border-t-[16px] border-t-[#C83E1B] border-l-[16px] border-l-transparent" />
               </div>
 
               <div>
-                <span className="font-mono text-[13px] font-bold text-[#E0532C]">03</span>
-                <h3 className="font-sans text-[16px] font-extrabold tracking-[-0.02em] text-[#FFFFFF] uppercase mt-1 mb-1">
+                <span className="font-mono text-[13px] font-bold text-[#C83E1B] group-hover:text-[#E0532C] transition-colors duration-300">
+                  03
+                </span>
+                <h3 className="font-sans text-[16px] font-extrabold tracking-[-0.02em] text-[#0A0A0C] group-hover:text-[#FFFFFF] uppercase mt-1 mb-1 transition-colors duration-300">
                   HUMAN-LED
                 </h3>
-                <p className="font-sans text-[12.5px] leading-[1.45] text-[#9FA3B0]">
+                <p className="font-sans text-[12.5px] leading-[1.45] text-[#5A5D6A] group-hover:text-[#9FA3B0] transition-colors duration-300">
                   Automation with appropriate oversight.
                 </p>
               </div>
@@ -498,10 +558,30 @@ export function HeroSection(): React.ReactElement {
                   aria-hidden="true"
                 >
                   {/* Crop marks */}
-                  <path d="M 32 28 L 32 20 L 40 20" stroke="#3A3E4E" strokeWidth="1" fill="none" />
-                  <path d="M 160 20 L 168 20 L 168 28" stroke="#3A3E4E" strokeWidth="1" fill="none" />
-                  <path d="M 32 92 L 32 100 L 40 100" stroke="#3A3E4E" strokeWidth="1" fill="none" />
-                  <path d="M 160 100 L 168 100 L 168 92" stroke="#3A3E4E" strokeWidth="1" fill="none" />
+                  <path
+                    d="M 32 28 L 32 20 L 40 20"
+                    className="stroke-[#CBD0DC] group-hover:stroke-[#3A3E4E] transition-colors duration-300"
+                    strokeWidth="1"
+                    fill="none"
+                  />
+                  <path
+                    d="M 160 20 L 168 20 L 168 28"
+                    className="stroke-[#CBD0DC] group-hover:stroke-[#3A3E4E] transition-colors duration-300"
+                    strokeWidth="1"
+                    fill="none"
+                  />
+                  <path
+                    d="M 32 92 L 32 100 L 40 100"
+                    className="stroke-[#CBD0DC] group-hover:stroke-[#3A3E4E] transition-colors duration-300"
+                    strokeWidth="1"
+                    fill="none"
+                  />
+                  <path
+                    d="M 160 100 L 168 100 L 168 92"
+                    className="stroke-[#CBD0DC] group-hover:stroke-[#3A3E4E] transition-colors duration-300"
+                    strokeWidth="1"
+                    fill="none"
+                  />
 
                   {/* Outer Radar Target Circle */}
                   <circle
@@ -514,16 +594,51 @@ export function HeroSection(): React.ReactElement {
                   />
 
                   {/* Radar Crosshair ticks */}
-                  <line x1="100" y1="20" x2="100" y2="24" stroke="#5A5D6A" strokeWidth="1.2" />
-                  <line x1="100" y1="96" x2="100" y2="100" stroke="#5A5D6A" strokeWidth="1.2" />
-                  <line x1="60" y1="60" x2="64" y2="60" stroke="#5A5D6A" strokeWidth="1.2" />
-                  <line x1="136" y1="60" x2="140" y2="60" stroke="#5A5D6A" strokeWidth="1.2" />
+                  <line
+                    x1="100"
+                    y1="20"
+                    x2="100"
+                    y2="24"
+                    className="stroke-[#9FA3B0] group-hover:stroke-[#5A5D6A] transition-colors duration-300"
+                    strokeWidth="1.2"
+                  />
+                  <line
+                    x1="100"
+                    y1="96"
+                    x2="100"
+                    y2="100"
+                    className="stroke-[#9FA3B0] group-hover:stroke-[#5A5D6A] transition-colors duration-300"
+                    strokeWidth="1.2"
+                  />
+                  <line
+                    x1="60"
+                    y1="60"
+                    x2="64"
+                    y2="60"
+                    className="stroke-[#9FA3B0] group-hover:stroke-[#5A5D6A] transition-colors duration-300"
+                    strokeWidth="1.2"
+                  />
+                  <line
+                    x1="136"
+                    y1="60"
+                    x2="140"
+                    y2="60"
+                    className="stroke-[#9FA3B0] group-hover:stroke-[#5A5D6A] transition-colors duration-300"
+                    strokeWidth="1.2"
+                  />
 
                   {/* Human Avatar Profile */}
-                  <circle cx="100" cy="52" r="8" stroke="#FFFFFF" strokeWidth="1.5" fill="none" />
+                  <circle
+                    cx="100"
+                    cy="52"
+                    r="8"
+                    className="stroke-[#0A0A0C] group-hover:stroke-[#FFFFFF] transition-colors duration-300"
+                    strokeWidth="1.5"
+                    fill="none"
+                  />
                   <path
                     d="M 87 74 C 87 66 93 63 100 63 C 107 63 113 66 113 74"
-                    stroke="#FFFFFF"
+                    className="stroke-[#0A0A0C] group-hover:stroke-[#FFFFFF] transition-colors duration-300"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     fill="none"
@@ -538,20 +653,30 @@ export function HeroSection(): React.ReactElement {
               </div>
 
               {/* Bottom Tag */}
-              <div className="pt-3 border-t border-[#232631] flex items-center gap-1.5 font-mono text-[10px] sm:text-[10.5px] uppercase tracking-[0.06em] text-[#9FA3B0]">
+              <div className="pt-3 border-t border-[#F0F1F5] group-hover:border-[#232631] flex items-center gap-1.5 font-mono text-[10px] sm:text-[10.5px] uppercase tracking-[0.06em] text-[#5A5D6A] group-hover:text-[#9FA3B0] transition-colors duration-300">
                 <span className="text-[#C83E1B] font-bold">/</span>
                 <span>AUTOMATE &bull; AUGMENT &bull; OVERSIGHT</span>
               </div>
             </div>
 
             {/* CARD 04: BUILT TO EVOLVE */}
-            <div className="bg-[#FFFFFF] border border-[#E2E2E8] rounded-[10px] p-5 sm:p-6 flex flex-col justify-between shadow-[0_2px_8px_rgba(10,10,12,0.03)] hover:border-[#C83E1B]/40 transition-all">
+            <div className="group relative bg-[#FFFFFF] hover:bg-[#0C0D10] border border-[#E2E2E8] hover:border-[#2D3039] rounded-[10px] p-5 sm:p-6 flex flex-col justify-between shadow-[0_2px_8px_rgba(10,10,12,0.03)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.35)] transition-all duration-300 ease-out hover:-translate-y-0.5 overflow-hidden">
+              {/* Top-Right Orange Chamfer Notch */}
+              <div
+                className="absolute top-0 right-0 w-5 h-5 overflow-hidden pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                aria-hidden="true"
+              >
+                <div className="absolute top-0 right-0 w-0 h-0 border-t-[16px] border-t-[#C83E1B] border-l-[16px] border-l-transparent" />
+              </div>
+
               <div>
-                <span className="font-mono text-[13px] font-bold text-[#C83E1B]">04</span>
-                <h3 className="font-sans text-[16px] font-extrabold tracking-[-0.02em] text-[#0A0A0C] uppercase mt-1 mb-1">
+                <span className="font-mono text-[13px] font-bold text-[#C83E1B] transition-colors duration-300">
+                  04
+                </span>
+                <h3 className="font-sans text-[16px] font-extrabold tracking-[-0.02em] text-[#0A0A0C] group-hover:text-[#FFFFFF] uppercase mt-1 mb-1 transition-colors duration-300">
                   BUILT TO EVOLVE
                 </h3>
-                <p className="font-sans text-[12.5px] leading-[1.45] text-[#5A5D6A]">
+                <p className="font-sans text-[12.5px] leading-[1.45] text-[#5A5D6A] group-hover:text-[#9FA3B0] transition-colors duration-300">
                   Designed for iteration and growth.
                 </p>
               </div>
@@ -566,15 +691,35 @@ export function HeroSection(): React.ReactElement {
                   aria-hidden="true"
                 >
                   {/* Crop marks */}
-                  <path d="M 32 28 L 32 20 L 40 20" stroke="#CBD0DC" strokeWidth="1" fill="none" />
-                  <path d="M 160 20 L 168 20 L 168 28" stroke="#CBD0DC" strokeWidth="1" fill="none" />
-                  <path d="M 32 92 L 32 100 L 40 100" stroke="#CBD0DC" strokeWidth="1" fill="none" />
-                  <path d="M 160 100 L 168 100 L 168 92" stroke="#CBD0DC" strokeWidth="1" fill="none" />
+                  <path
+                    d="M 32 28 L 32 20 L 40 20"
+                    className="stroke-[#CBD0DC] group-hover:stroke-[#3A3E4E] transition-colors duration-300"
+                    strokeWidth="1"
+                    fill="none"
+                  />
+                  <path
+                    d="M 160 20 L 168 20 L 168 28"
+                    className="stroke-[#CBD0DC] group-hover:stroke-[#3A3E4E] transition-colors duration-300"
+                    strokeWidth="1"
+                    fill="none"
+                  />
+                  <path
+                    d="M 32 92 L 32 100 L 40 100"
+                    className="stroke-[#CBD0DC] group-hover:stroke-[#3A3E4E] transition-colors duration-300"
+                    strokeWidth="1"
+                    fill="none"
+                  />
+                  <path
+                    d="M 160 100 L 168 100 L 168 92"
+                    className="stroke-[#CBD0DC] group-hover:stroke-[#3A3E4E] transition-colors duration-300"
+                    strokeWidth="1"
+                    fill="none"
+                  />
 
                   {/* Back Pane */}
                   <polygon
                     points="68,40 98,28 98,84 68,96"
-                    stroke="#A0A5B5"
+                    className="stroke-[#A0A5B5] group-hover:stroke-[#4A4D57] transition-colors duration-300"
                     strokeWidth="1.2"
                     fill="none"
                   />
@@ -585,7 +730,7 @@ export function HeroSection(): React.ReactElement {
                     stroke="#C83E1B"
                     strokeWidth="1.4"
                     fill="#C83E1B"
-                    fillOpacity="0.25"
+                    className="fill-opacity-25 group-hover:fill-opacity-40 transition-all duration-300"
                   />
 
                   {/* Dynamic Growth Upward Arrow */}
@@ -608,7 +753,7 @@ export function HeroSection(): React.ReactElement {
               </div>
 
               {/* Bottom Tag */}
-              <div className="pt-3 border-t border-[#F0F1F5] flex items-center gap-1.5 font-mono text-[10px] sm:text-[10.5px] uppercase tracking-[0.06em] text-[#5A5D6A]">
+              <div className="pt-3 border-t border-[#F0F1F5] group-hover:border-[#232631] flex items-center gap-1.5 font-mono text-[10px] sm:text-[10.5px] uppercase tracking-[0.06em] text-[#5A5D6A] group-hover:text-[#9FA3B0] transition-colors duration-300">
                 <span className="text-[#C83E1B] font-bold">/</span>
                 <span>ITERATE &bull; SCALE &bull; ADAPT</span>
               </div>
