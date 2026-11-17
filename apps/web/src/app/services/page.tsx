@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { AgentSandbox } from '@/components/sections/AgentSandbox';
+import { TechStackMatrix } from '@/components/sections/TechStackMatrix';
 
 export const metadata: Metadata = {
   title: 'Engineering Capabilities & Services | WTFearB Systems Studio',
@@ -389,6 +390,9 @@ export default function ServicesPage(): React.ReactElement {
 
         {/* Interactive AI Governance Lab */}
         <AgentSandbox />
+
+        {/* Zero-Bloat Architectural Rigor / Production Tech Stack Matrix */}
+        <TechStackMatrix />
 
         {/* Global Bottom CTA */}
         <section className="py-16 md:py-20 border-t border-[var(--color-border-hairline)] bg-[var(--color-canvas-pure)]">

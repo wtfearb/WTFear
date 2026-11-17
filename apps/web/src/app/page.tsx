@@ -5,7 +5,6 @@ import { HeroSection } from '@/components/sections/HeroSection';
 import { PositioningSection } from '@/components/sections/PositioningSection';
 import { CapabilitiesGrid } from '@/components/sections/CapabilitiesGrid';
 import { BlueprintsSection } from '@/components/sections/BlueprintsSection';
-import { TechStackMatrix } from '@/components/sections/TechStackMatrix';
 import { ProcessSection } from '@/components/sections/ProcessSection';
 import { EngagementSection } from '@/components/sections/EngagementSection';
 import { ProjectsPreviewSection } from '@/components/sections/ProjectsPreviewSection';
@@ -35,10 +34,7 @@ export default async function HomePage(): Promise<React.ReactElement> {
         {/* Section 04: Engineering Blueprints */}
         <BlueprintsSection />
 
-        {/* Section 05: Technology Stack */}
-        <TechStackMatrix />
-
-        {/* Section 06: How We Work — From Architecture to Production */}
+        {/* Section 05: How We Work — From Architecture to Production */}
         <ProcessSection />
 
         {/* Section 08: Engagement Models & Scope Calculator */}
