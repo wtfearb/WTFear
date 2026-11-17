@@ -132,11 +132,11 @@ export function CapabilitiesGrid(): React.ReactElement {
           </div>
         </div>
 
-        {/* 2. MAIN CAPABILITY ATLAS GRID: FULL-HEIGHT LEFT OBSIDIAN SIDEBAR + 6-CARD GRID */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch relative">
-          {/* LEFT OBSIDIAN SIDEBAR: Full height matching right cards, eliminating white space */}
-          <div className="lg:col-span-4 h-full">
-            <aside className="h-full min-h-[750px] lg:min-h-[880px] flex flex-col justify-between bg-[#0C0D10] border border-[#1E212A] rounded-[6px] p-6 sm:p-7 text-[#FFFFFF] relative overflow-hidden shadow-[0_16px_40px_rgba(10,10,12,0.16)]">
+        {/* 2. MAIN CAPABILITY ATLAS GRID: STICKY LEFT OBSIDIAN SIDEBAR + 6-CARD GRID */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start relative">
+          {/* LEFT OBSIDIAN SIDEBAR: Pinned static/sticky until cards 1 to 6 scroll past */}
+          <div className="lg:col-span-4 lg:sticky lg:top-24 self-start">
+            <aside className="bg-[#0C0D10] border border-[#1E212A] rounded-[6px] p-6 sm:p-7 text-[#FFFFFF] relative overflow-hidden shadow-[0_16px_40px_rgba(10,10,12,0.16)]">
               {/* Background SVG Grid & Dot Matrix Texture */}
               <div className="absolute inset-0 pointer-events-none opacity-40 select-none overflow-hidden" aria-hidden="true">
                 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
