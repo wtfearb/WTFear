@@ -51,11 +51,11 @@ const FAQS: readonly FaqItem[] = [
 ];
 
 export function FaqSection(): React.ReactElement {
-  // Item [01] is expanded by default as shown in the approved reference
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  // Controlled index: reveals answer on hover/focus, collapses on mouse leave
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleItem = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
+    setOpenIndex((prev) => (prev === index ? null : index));
   };
 
   const jsonLd = {
@@ -104,10 +104,10 @@ export function FaqSection(): React.ReactElement {
             return (
               <div
                 key={faq.question}
+                onMouseEnter={() => setOpenIndex(index)}
+                onMouseLeave={() => setOpenIndex(null)}
                 className={`relative group transition-colors duration-250 ease-out ${
-                  isOpen
-                    ? 'bg-[#FDF6F2]'
-                    : 'bg-[#FFFFFF] hover:bg-[#FDF3ED]'
+                  isOpen ? 'bg-[#FDF6F2]' : 'bg-[#FFFFFF] hover:bg-[#FDF3ED]'
                 }`}
               >
                 {/* Vertical Accent Bar: 4px solid when open; 3px subtle highlight on collapsed hover */}
@@ -127,6 +127,8 @@ export function FaqSection(): React.ReactElement {
                   aria-expanded={isOpen}
                   aria-controls={`faq-answer-${index}`}
                   onClick={() => toggleItem(index)}
+                  onFocus={() => setOpenIndex(index)}
+                  onBlur={() => setOpenIndex(null)}
                   className="w-full text-left flex items-center justify-between gap-4 py-5 px-6 sm:px-7 cursor-pointer focus-visible:outline-2 focus-visible:outline-[#C83E1B] focus-visible:outline-offset-[-2px]"
                 >
                   <div className="flex items-start sm:items-center gap-3 min-w-0 pr-2">
