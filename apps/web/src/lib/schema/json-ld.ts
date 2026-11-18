@@ -99,3 +99,96 @@ export function generateBlueprintJsonLd(params: {
     keywords: params.stack.join(', '),
   };
 }
+
+export function generateServicesJsonLd(): Record<string, unknown> {
+  const baseUrl = SITE_URL;
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebPage',
+        '@id': `${baseUrl}/services#webpage`,
+        url: `${baseUrl}/services`,
+        name: 'Disciplines We Own & Deliver | WTFearB',
+        description:
+          'Software, AI and systems engineering shaped around real business problems. Disciplines: Governed AI, Custom Software, SaaS Portals, Distributed Systems, Workflow Automation, and Technical Strategy.',
+        isPartOf: {
+          '@id': `${baseUrl}/#website`,
+        },
+        breadcrumb: {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            {
+              '@type': 'ListItem',
+              position: 1,
+              name: 'Home',
+              item: `${baseUrl}/`,
+            },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: 'Services',
+              item: `${baseUrl}/services`,
+            },
+          ],
+        },
+      },
+      {
+        '@type': 'ItemList',
+        '@id': `${baseUrl}/services#disciplines`,
+        name: 'Engineering Disciplines We Own & Deliver',
+        itemListElement: [
+          {
+            '@type': 'Service',
+            position: 1,
+            name: 'Governed AI Engineering & RAG Systems',
+            url: `${baseUrl}/services#ai-engineering`,
+            description:
+              'AI agents, retrieval and knowledge workflows designed around useful business tasks, evidence and appropriate human oversight.',
+          },
+          {
+            '@type': 'Service',
+            position: 2,
+            name: 'Custom Software & Systems Engineering',
+            url: `${baseUrl}/services#custom-software`,
+            description:
+              'Purpose-built applications and internal systems shaped around the way teams actually work.',
+          },
+          {
+            '@type': 'Service',
+            position: 3,
+            name: 'SaaS & Enterprise B2B Portals',
+            url: `${baseUrl}/services#saas-b2b`,
+            description:
+              'Customer-facing products and portals with thoughtful access boundaries and maintainable foundations.',
+          },
+          {
+            '@type': 'Service',
+            position: 4,
+            name: 'Backend & Distributed Event Pipelines',
+            url: `${baseUrl}/services#backend-distributed`,
+            description:
+              'Backend services, event flows and integrations that keep connected applications working together.',
+          },
+          {
+            '@type': 'Service',
+            position: 5,
+            name: 'Workflow Automation & System Integrations',
+            url: `${baseUrl}/services#workflow-automation`,
+            description:
+              'Connect repetitive processes and reduce manual handoffs across the tools a business already uses.',
+          },
+          {
+            '@type': 'Service',
+            position: 6,
+            name: 'Architecture & Technical Consulting',
+            url: `${baseUrl}/services#architecture-consulting`,
+            description:
+              'Make informed technical decisions before committing to a build.',
+          },
+        ],
+      },
+    ],
+  };
+}

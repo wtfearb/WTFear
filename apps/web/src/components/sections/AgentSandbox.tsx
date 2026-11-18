@@ -248,7 +248,7 @@ export function AgentSandbox(): React.ReactElement {
               Trust is not a prompt. It is a system.
             </h2>
             <p className="font-sans text-[13px] sm:text-[14px] leading-relaxed text-[#5A5D6A] mt-2 max-w-2xl">
-              Explore how an AI workflow evaluates evidence, applies governance thresholds and decides when to act.
+              Explore how we design AI systems with guardrails, evaluation and human oversight.
             </p>
           </div>
 
