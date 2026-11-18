@@ -1,4 +1,9 @@
+export const dynamic = 'force-dynamic';
+
 import type { Metadata } from 'next';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
+import { ADMIN_COOKIE_NAME, verifyAdminToken } from '@/lib/auth/admin-auth';
 import {
   getTelemetryMetrics,
   getAuditLeads,
@@ -18,6 +23,14 @@ export const metadata: Metadata = {
 };
 
 export default async function AdminPage(): Promise<React.ReactElement> {
+  const cookieStore = await cookies();
+  const sessionToken = cookieStore.get(ADMIN_COOKIE_NAME)?.value;
+  const isAuthenticated = await verifyAdminToken(sessionToken);
+
+  if (!isAuthenticated) {
+    redirect('/admin/login');
+  }
+
   const [metrics, leads, projects, pricing, siteSettings] = await Promise.all([
     getTelemetryMetrics(),
     getAuditLeads(100),

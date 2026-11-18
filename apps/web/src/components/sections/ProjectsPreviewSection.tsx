@@ -210,9 +210,9 @@ export async function ProjectsPreviewSection(): Promise<React.ReactElement> {
 
                 {/* Four Connected Architectural Stages */}
                 <div className="relative z-10 my-auto py-4">
-                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-2">
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-2.5">
                     {/* Stage 01 */}
-                    <div className="flex-1 min-w-0 bg-[#16181E] border border-[#2C303C] rounded-[4px] p-3 text-left">
+                    <div className="flex-1 min-w-0 bg-[#16181E] border border-[#2C303C] rounded-[4px] p-2.5 sm:p-3 text-left">
                       <div className="flex items-center justify-between">
                         <span className="font-mono text-[10px] text-[#8C93A4]">01.</span>
                         <svg
@@ -228,10 +228,10 @@ export async function ProjectsPreviewSection(): Promise<React.ReactElement> {
                           <path d="M5 8h6M8 5l3 3-3 3" />
                         </svg>
                       </div>
-                      <div className="font-mono text-[12px] font-bold text-[#E8EAF0] mt-2 truncate">
+                      <div className="font-mono text-[11px] sm:text-[12px] font-bold text-[#E8EAF0] mt-2">
                         REQUEST
                       </div>
-                      <div className="font-mono text-[10px] uppercase tracking-[0.05em] text-[#8C93A4] mt-0.5 truncate">
+                      <div className="font-mono text-[9.5px] sm:text-[10px] uppercase leading-tight tracking-[0.01em] text-[#8C93A4] mt-0.5 whitespace-nowrap">
                         INGRESS
                       </div>
                     </div>
@@ -245,7 +245,7 @@ export async function ProjectsPreviewSection(): Promise<React.ReactElement> {
                     </div>
 
                     {/* Stage 02 */}
-                    <div className="flex-1 min-w-0 bg-[#16181E] border border-[#2C303C] rounded-[4px] p-3 text-left">
+                    <div className="flex-1 min-w-0 bg-[#16181E] border border-[#2C303C] rounded-[4px] p-2.5 sm:p-3 text-left">
                       <div className="flex items-center justify-between">
                         <span className="font-mono text-[10px] text-[#8C93A4]">02.</span>
                         <svg
@@ -262,10 +262,10 @@ export async function ProjectsPreviewSection(): Promise<React.ReactElement> {
                           <path d="M3 8v4c0 1.1 2.2 2 5 2s5-.9 5-2V8" />
                         </svg>
                       </div>
-                      <div className="font-mono text-[12px] font-bold text-[#E8EAF0] mt-2 truncate">
+                      <div className="font-mono text-[11px] sm:text-[12px] font-bold text-[#E8EAF0] mt-2">
                         RETRIEVE
                       </div>
-                      <div className="font-mono text-[10px] uppercase tracking-[0.05em] text-[#8C93A4] mt-0.5 truncate">
+                      <div className="font-mono text-[9.5px] sm:text-[10px] uppercase leading-tight tracking-[0.01em] text-[#8C93A4] mt-0.5 whitespace-nowrap">
                         HYBRID RANK
                       </div>
                     </div>
@@ -279,7 +279,7 @@ export async function ProjectsPreviewSection(): Promise<React.ReactElement> {
                     </div>
 
                     {/* Stage 03 (Highlighted in Signal Orange) */}
-                    <div className="flex-1 min-w-0 bg-[#221513] border border-[#D63F1F] rounded-[4px] p-3 text-left shadow-[0_0_20px_rgba(214,63,31,0.18)]">
+                    <div className="flex-1 min-w-0 bg-[#221513] border border-[#D63F1F] rounded-[4px] p-2.5 sm:p-3 text-left shadow-[0_0_20px_rgba(214,63,31,0.18)]">
                       <div className="flex items-center justify-between">
                         <span className="font-mono text-[10px] font-bold text-[#D63F1F]">03.</span>
                         <svg
@@ -295,10 +295,10 @@ export async function ProjectsPreviewSection(): Promise<React.ReactElement> {
                           <path d="M6 8l1.5 1.5L10.5 6" />
                         </svg>
                       </div>
-                      <div className="font-mono text-[12px] font-bold text-[#FFFFFF] mt-2 truncate">
+                      <div className="font-mono text-[11px] sm:text-[12px] font-bold text-[#FFFFFF] mt-2">
                         VALIDATE
                       </div>
-                      <div className="font-mono text-[10px] uppercase tracking-[0.05em] text-[#F29B88] mt-0.5 truncate">
+                      <div className="font-mono text-[9.5px] sm:text-[10px] uppercase leading-tight tracking-[0.01em] text-[#F29B88] mt-0.5 whitespace-nowrap">
                         SCHEMA / SCORE
                       </div>
                     </div>
@@ -312,7 +312,7 @@ export async function ProjectsPreviewSection(): Promise<React.ReactElement> {
                     </div>
 
                     {/* Stage 04 */}
-                    <div className="flex-1 min-w-0 bg-[#16181E] border border-[#2C303C] rounded-[4px] p-3 text-left">
+                    <div className="flex-1 min-w-0 bg-[#16181E] border border-[#2C303C] rounded-[4px] p-2.5 sm:p-3 text-left">
                       <div className="flex items-center justify-between">
                         <span className="font-mono text-[10px] text-[#8C93A4]">04.</span>
                         <svg
@@ -330,10 +330,10 @@ export async function ProjectsPreviewSection(): Promise<React.ReactElement> {
                           <path d="M4 6v4M6 4h4" />
                         </svg>
                       </div>
-                      <div className="font-mono text-[12px] font-bold text-[#E8EAF0] mt-2 truncate">
+                      <div className="font-mono text-[11px] sm:text-[12px] font-bold text-[#E8EAF0] mt-2">
                         ROUTE
                       </div>
-                      <div className="font-mono text-[10px] uppercase tracking-[0.05em] text-[#8C93A4] mt-0.5 truncate">
+                      <div className="font-mono text-[9.5px] sm:text-[10px] uppercase leading-tight tracking-[0.01em] text-[#8C93A4] mt-0.5 whitespace-nowrap">
                         HUMAN / AUTO
                       </div>
                     </div>

@@ -1,6 +1,5 @@
 import { Suspense } from 'react';
 import type { Metadata } from 'next';
-import { isCustomPasswordConfigured } from '@/lib/auth/admin-auth';
 import { AdminLoginForm } from './AdminLoginForm';
 
 export const metadata: Metadata = {
@@ -13,8 +12,6 @@ export const metadata: Metadata = {
 };
 
 export default function AdminLoginPage(): React.ReactElement {
-  const isCustomSet = isCustomPasswordConfigured();
-
   return (
     <div className="min-h-screen bg-[#0C0D10] text-[#E2E2E8] flex flex-col justify-center items-center px-4 selection:bg-[#C83E1B] selection:text-white">
       <div className="w-full max-w-md border border-[#272A34] bg-[#14161B] p-8 shadow-2xl">
@@ -38,18 +35,6 @@ export default function AdminLoginPage(): React.ReactElement {
             Enter the studio master secret to access live visitor telemetry, audit leads CRM, project CMS, and calculator pricing controllers.
           </p>
         </div>
-
-        {!isCustomSet && (
-          <div className="mt-4 p-3 border border-amber-600/40 bg-amber-950/20 text-amber-300 font-mono text-xs leading-relaxed">
-            <div className="font-bold uppercase tracking-wider mb-1 flex items-center gap-1.5">
-              <span>⚠</span> Dev / Preview Default Active
-            </div>
-            <span>
-              <code className="text-white bg-black/50 px-1 py-0.5 font-bold">ADMIN_PASSWORD</code> is unset in environment. Use fallback default:{' '}
-              <strong className="text-amber-200 underline">wtfear-admin-2026</strong>. Lock this down by setting <code className="text-white">ADMIN_PASSWORD</code> in your Vercel Project Settings.
-            </span>
-          </div>
-        )}
 
         <div className="mt-6">
           <Suspense fallback={<div className="font-mono text-xs text-[#717482]">Loading login portal...</div>}>

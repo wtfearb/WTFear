@@ -1196,8 +1196,8 @@ export function BlueprintsSection(): React.ReactElement {
 
           {/* 3B & 4: MAIN WORKBENCH BODY (LEFT RAIL + RIGHT CANVAS) */}
           <div className="flex flex-col lg:flex-row items-stretch">
-            {/* LEFT INFORMATION RAIL (lg:w-[320px] shrink-0) */}
-            <div className="w-full lg:w-[320px] bg-[#111318] border-b lg:border-b-0 lg:border-r border-[#1E212A] p-5 sm:p-6 flex flex-col justify-between shrink-0">
+            {/* LEFT INFORMATION RAIL (lg:w-[340px] shrink-0) */}
+            <div className="w-full lg:w-[340px] bg-[#111318] border-b lg:border-b-0 lg:border-r border-[#1E212A] p-5 sm:p-6 flex flex-col justify-between shrink-0">
               <div>
                 <h3 className="font-sans font-bold text-[18px] sm:text-[19px] text-[#FFFFFF] leading-snug">
                   {activeBlueprint.title}
@@ -1373,7 +1373,7 @@ export function BlueprintsSection(): React.ReactElement {
                         className="font-mono text-[11.5px] font-bold text-[#0A0A0C] hover:text-[#C83E1B] transition-colors inline-flex items-center gap-1"
                       >
                         <span>EXPLORE</span>
-                        <span>&nearr;</span>
+                        <span>↗</span>
                       </button>
                     </div>
                   </div>

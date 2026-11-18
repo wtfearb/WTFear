@@ -310,7 +310,7 @@ export function CapabilitiesGrid(): React.ReactElement {
               <div className="mt-8 pt-4 border-t border-[#1E212A] relative z-10 flex flex-col gap-1.5">
                 <div className="flex items-center justify-between font-mono text-[10px] text-[#5A5D6A]">
                   <span>// ARCHITECTURAL SCOPE</span>
-                  <span className="text-[#C83E1B] font-bold">100% IP HANDOVER</span>
+                  <span className="text-[#C83E1B] font-bold">END-TO-END DELIVERY</span>
                 </div>
                 <div className="font-mono text-[11px] leading-relaxed text-[#9FA3B0]">
                   Grounded systems engineering with transparent architecture and zero vendor lock-in.

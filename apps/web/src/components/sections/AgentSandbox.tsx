@@ -326,8 +326,11 @@ export function AgentSandbox(): React.ReactElement {
               {/* Stage 2: Retrieve */}
               <div className="flex items-center gap-2">
                 {scenario.id === 'prompt-injection-override' ? (
-                  <span className="w-5 h-5 rounded-full bg-[#341818] border border-[#EF4444] flex items-center justify-center text-[#EF4444] text-[10px] font-bold">
-                    ✕
+                  <span className="w-5 h-5 rounded-full bg-[#341818] border border-[#EF4444] flex items-center justify-center text-[#EF4444]" aria-hidden="true">
+                    <svg className="w-2.5 h-2.5" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                      <line x1="3" y1="3" x2="11" y2="11" />
+                      <line x1="11" y1="3" x2="3" y2="11" />
+                    </svg>
                   </span>
                 ) : (
                   <span className="w-5 h-5 rounded-full bg-[#1A3324] border border-[#35B66A] flex items-center justify-center text-[#35B66A] text-[10px] font-bold">
@@ -345,8 +348,11 @@ export function AgentSandbox(): React.ReactElement {
               {/* Stage 3: Govern */}
               <div className="flex items-center gap-2">
                 {evaluation.status === 'BLOCKED_POLICY_GATE' ? (
-                  <span className="w-5 h-5 rounded-full bg-[#341818] border border-[#EF4444] flex items-center justify-center text-[#EF4444] text-[10px] font-bold">
-                    ✕
+                  <span className="w-5 h-5 rounded-full bg-[#341818] border border-[#EF4444] flex items-center justify-center text-[#EF4444]" aria-hidden="true">
+                    <svg className="w-2.5 h-2.5" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                      <line x1="3" y1="3" x2="11" y2="11" />
+                      <line x1="11" y1="3" x2="3" y2="11" />
+                    </svg>
                   </span>
                 ) : evaluation.status === 'ESCALATE_TO_HUMAN' ? (
                   <span className="w-5 h-5 rounded-full bg-[#3A2A14] border border-[#F59E0B] flex items-center justify-center text-[#F59E0B] text-[10px] font-bold">
@@ -375,7 +381,10 @@ export function AgentSandbox(): React.ReactElement {
               <div>
                 {evaluation.status === 'BLOCKED_POLICY_GATE' ? (
                   <div className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-[#341818] border border-[#EF4444]/60 rounded-full font-mono text-xs font-bold text-[#EF4444]">
-                    <span>✕</span>
+                    <svg className="w-3.5 h-3.5" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true">
+                      <line x1="3" y1="3" x2="11" y2="11" />
+                      <line x1="11" y1="3" x2="3" y2="11" />
+                    </svg>
                     <span>Blocked</span>
                   </div>
                 ) : evaluation.status === 'ESCALATE_TO_HUMAN' ? (
@@ -591,8 +600,11 @@ export function AgentSandbox(): React.ReactElement {
                         </span>
                       )}
                       {evaluation.status === 'BLOCKED_POLICY_GATE' && (
-                        <span className="w-4 h-4 rounded-full bg-[#EF4444] text-white flex items-center justify-center text-[9px]">
-                          ✕
+                        <span className="w-4 h-4 rounded-full bg-[#EF4444] text-white flex items-center justify-center" aria-hidden="true">
+                          <svg className="w-2.5 h-2.5" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                            <line x1="3" y1="3" x2="11" y2="11" />
+                            <line x1="11" y1="3" x2="3" y2="11" />
+                          </svg>
                         </span>
                       )}
                       <span>{evaluation.status}</span>

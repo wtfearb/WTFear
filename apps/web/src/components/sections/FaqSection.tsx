@@ -51,12 +51,8 @@ const FAQS: readonly FaqItem[] = [
 ];
 
 export function FaqSection(): React.ReactElement {
-  // Controlled index: reveals answer on hover/focus, collapses on mouse leave
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  const toggleItem = (index: number) => {
-    setOpenIndex((prev) => (prev === index ? null : index));
-  };
+  // First item ([01], index 0) is expanded by default on initial render
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -104,21 +100,19 @@ export function FaqSection(): React.ReactElement {
             return (
               <div
                 key={faq.question}
-                onMouseEnter={() => setOpenIndex(index)}
-                onMouseLeave={() => setOpenIndex(null)}
-                className={`relative group transition-colors duration-250 ease-out ${
-                  isOpen ? 'bg-[#FDF6F2]' : 'bg-[#FFFFFF] hover:bg-[#FDF3ED]'
-                }`}
+                className={
+                  isOpen
+                    ? 'relative bg-[#FDF6F2] transition-colors duration-200'
+                    : 'group relative bg-[#FFFFFF] hover:bg-[#FDF3ED] transition-colors duration-200 before:content-[\'\'] before:absolute before:left-0 before:top-0 before:bottom-0 before:w-[3px] before:bg-[#C83E1B] before:opacity-0 hover:before:opacity-60 before:transition-opacity'
+                }
               >
-                {/* Vertical Accent Bar: 4px solid when open; 3px subtle highlight on collapsed hover */}
-                <div
-                  aria-hidden="true"
-                  className={`absolute left-0 top-0 bottom-0 z-10 transition-all duration-200 ease-out pointer-events-none ${
-                    isOpen
-                      ? 'w-[4px] bg-[#C83E1B] opacity-100'
-                      : 'w-[3px] bg-[#C83E1B] opacity-0 group-hover:opacity-60'
-                  }`}
-                />
+                {/* When open: full-height 4px Signal Orange left accent bar */}
+                {isOpen && (
+                  <span
+                    className="absolute left-0 top-0 bottom-0 w-[4px] bg-[#C83E1B]"
+                    aria-hidden="true"
+                  />
+                )}
 
                 {/* Top Question Row Button */}
                 <button
@@ -126,10 +120,8 @@ export function FaqSection(): React.ReactElement {
                   id={`faq-question-${index}`}
                   aria-expanded={isOpen}
                   aria-controls={`faq-answer-${index}`}
-                  onClick={() => toggleItem(index)}
-                  onFocus={() => setOpenIndex(index)}
-                  onBlur={() => setOpenIndex(null)}
-                  className="w-full text-left flex items-center justify-between gap-4 py-5 px-6 sm:px-7 cursor-pointer focus-visible:outline-2 focus-visible:outline-[#C83E1B] focus-visible:outline-offset-[-2px]"
+                  onClick={() => setOpenIndex(isOpen ? null : index)}
+                  className="w-full text-left flex items-center justify-between gap-4 px-6 sm:px-7 py-5 cursor-pointer select-none focus-visible:outline-2 focus-visible:outline-[#C83E1B]"
                 >
                   <div className="flex items-start sm:items-center gap-3 min-w-0 pr-2">
                     <span className="font-mono text-[13.5px] sm:text-[14px] font-bold text-[#C83E1B] w-11 shrink-0 select-none">
@@ -147,17 +139,9 @@ export function FaqSection(): React.ReactElement {
                   {/* Toggle Icon: Minus sign when open; Plus sign with 90deg rotate + scale on collapsed hover */}
                   <div className="w-5 h-5 flex items-center justify-center shrink-0">
                     {isOpen ? (
-                      <svg
-                        className="w-4 h-4 text-[#C83E1B] transition-transform duration-300 ease-out"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        aria-hidden="true"
-                      >
-                        <line x1="3" y1="8" x2="13" y2="8" />
-                      </svg>
+                      <span className="font-mono text-[18px] font-bold text-[#C83E1B] select-none leading-none" aria-hidden="true">
+                        &minus;
+                      </span>
                     ) : (
                       <svg
                         className="w-4 h-4 text-[#C83E1B] transition-transform duration-200 ease-out group-hover:rotate-90 group-hover:scale-110"
@@ -184,13 +168,9 @@ export function FaqSection(): React.ReactElement {
                     isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
                   }`}
                 >
-                  <div className="overflow-hidden">
-                    <div className="px-6 sm:px-7 pb-6 pt-0.5">
-                      <div className="pl-11 pr-4 sm:pr-12">
-                        <p className="font-sans text-[14px] sm:text-[14.5px] leading-[1.65] text-[#3F414A] max-w-4xl">
-                          {faq.answer}
-                        </p>
-                      </div>
+                  <div className="min-h-0 overflow-hidden">
+                    <div className="px-6 sm:px-7 pb-6 pt-0 pl-[68px] sm:pl-[72px] pr-6 sm:pr-14 font-sans text-[14px] sm:text-[14.5px] leading-[1.65] text-[#3F414A] max-w-4xl">
+                      {faq.answer}
                     </div>
                   </div>
                 </div>
