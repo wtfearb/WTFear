@@ -4,6 +4,7 @@ import './globals.css';
 import { generateRootJsonLd } from '@/lib/schema/json-ld';
 import { AuditModalProvider } from '@/components/modals/AuditModalProvider';
 import { TelemetryTracker } from '@/components/TelemetryTracker';
+import { SITE_URL } from '@/lib/site-config';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -18,7 +19,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://wtfear.agency'),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: 'WTFearB — Product & AI Engineering Studio | Make "What If" Work.',
     template: '%s | WTFearB Engineering Studio',
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
   description:
     'WTFearB is an elite systems engineering studio that builds and deploys governed AI agents, Next.js 15 web applications, and distributed event pipelines in deterministic 2-week sprints with 100% client GitHub IP ownership.',
   applicationName: 'WTFearB',
-  authors: [{ name: 'WTFearB Engineering Pod', url: 'https://wtfear.agency' }],
+  authors: [{ name: 'WTFearB Engineering Pod', url: SITE_URL }],
   keywords: [
     'WTFearB',
     'Make What If Work',
@@ -39,19 +40,19 @@ export const metadata: Metadata = {
     'rapid 2-week engineering sprint',
   ],
   alternates: {
-    canonical: 'https://wtfear.agency',
+    canonical: '/',
   },
   openGraph: {
     title: 'WTFearB — Product & AI Engineering Studio | Make "What If" Work.',
     description:
       'Ship governed AI agents and production software in weekly sprints. 100% GitHub IP ownership from commit #1.',
-    url: 'https://wtfear.agency',
+    url: SITE_URL,
     siteName: 'WTFearB',
     locale: 'en_US',
     type: 'website',
     images: [
       {
-        url: 'https://wtfear.agency/api/og',
+        url: '/api/og',
         width: 1200,
         height: 630,
         alt: 'WTFearB Engineering Studio',
@@ -63,7 +64,7 @@ export const metadata: Metadata = {
     title: 'WTFearB — Product & AI Engineering Studio | Make "What If" Work.',
     description:
       'Ship governed AI agents and production software in weekly sprints. 100% GitHub IP ownership from commit #1.',
-    images: ['https://wtfear.agency/api/og'],
+    images: ['/api/og'],
   },
   robots: {
     index: true,

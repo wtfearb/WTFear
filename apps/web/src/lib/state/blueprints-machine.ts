@@ -48,7 +48,7 @@ export const BLUEPRINT_CATALOG: readonly BlueprintItem[] = [
       {
         stepIndex: '02',
         title: 'Hybrid Reciprocal Rank Fusion Retrieval',
-        specification: 'PostgreSQL 16 combines dense pgvector HNSW cosine similarity (<=>) with full-text BM25 ts_rank_cd in a single indexed query.',
+        specification: 'PostgreSQL 16 combines dense pgvector HNSW cosine similarity (<=>) with ParadeDB BM25 (pg_search) / Lexical FTS (ts_rank_cd) RRF in a single indexed query.',
         latencyTarget: '< 45ms',
       },
       {

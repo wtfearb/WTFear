@@ -8,13 +8,13 @@ export const metadata: Metadata = {
   description:
     'In-depth principal engineering playbooks: eliminating RAG hallucinations with Pydantic v2 and PostgreSQL 16 RLS + pgvector HNSW hybrid search.',
   alternates: {
-    canonical: 'https://wtfear.agency/playbooks',
+    canonical: '/playbooks',
   },
   openGraph: {
     title: 'Engineering Playbooks & Technical Guides — WTFearB',
     description:
       'Step-by-step engineering tutorials, SQL queries, and Python code for production AI systems and databases.',
-    url: 'https://wtfear.agency/playbooks',
+    url: '/playbooks',
     siteName: 'WTFearB Systems Studio',
     type: 'website',
   },
@@ -138,10 +138,10 @@ export default function PlaybooksIndexPage(): React.ReactElement {
             </p>
             <div className="mt-6">
               <Link
-                href="/audit"
+                href="/contact?intent=audit"
                 className="inline-flex items-center justify-center px-6 py-3 bg-[var(--color-accent-signal)] text-white font-mono text-xs uppercase tracking-wider font-semibold hover:brightness-110 transition-all"
               >
-                <span>Book 15-Min Architecture Audit</span>
+                <span>Discuss Architecture &amp; Scope</span>
                 <span className="ml-2">&rarr;</span>
               </Link>
             </div>

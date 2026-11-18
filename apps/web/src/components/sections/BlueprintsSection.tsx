@@ -1139,7 +1139,9 @@ export function BlueprintsSection(): React.ReactElement {
                   key={tab.id}
                   type="button"
                   role="tab"
+                  id={`tab-${tab.id}`}
                   aria-selected={isActive}
+                  aria-controls="blueprint-workbench-panel"
                   onClick={() => handleSelectBlueprint(tab.id)}
                   className={`px-4 py-1.5 text-xs font-mono font-medium rounded-[3px] transition-all duration-200 ${
                     isActive
@@ -1157,7 +1159,12 @@ export function BlueprintsSection(): React.ReactElement {
         {/* =========================================================================
             REGION B: MAIN ARCHITECTURE WORKBENCH (FULL-WIDTH DARK WORKSPACE)
            ========================================================================= */}
-        <div className="w-full bg-[#0C0D10] border border-[#1E212A] rounded-[8px] overflow-hidden shadow-[0_24px_50px_rgba(10,10,12,0.18)]">
+        <div
+          id="blueprint-workbench-panel"
+          role="tabpanel"
+          aria-labelledby={`tab-${state.selectedCategory}`}
+          className="w-full bg-[#0C0D10] border border-[#1E212A] rounded-[8px] overflow-hidden shadow-[0_24px_50px_rgba(10,10,12,0.18)]"
+        >
           {/* 3A. WORKBENCH TOP HEADER BAR */}
           <div className="flex items-center justify-between px-5 sm:px-6 py-3 border-b border-[#1E212A] bg-[#0E1015]">
             {/* Left: Orange icon + Identifier */}

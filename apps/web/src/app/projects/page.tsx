@@ -9,13 +9,13 @@ export const metadata: Metadata = {
   description:
     'Production case studies and systems monographs delivered by WTFearB: Governed AI agents, high-concurrency SaaS portals, and distributed event pipelines.',
   alternates: {
-    canonical: 'https://wtfear.agency/projects',
+    canonical: '/projects',
   },
   openGraph: {
     title: 'Engineering Portfolio & Production Case Studies — WTFearB',
     description:
       'Explore 10 production system monographs with real architectures, code contracts, and measured outcomes.',
-    url: 'https://wtfear.agency/projects',
+    url: '/projects',
     siteName: 'WTFearB Systems Studio',
     type: 'website',
   },
@@ -75,7 +75,7 @@ export default async function ProjectsIndexPage(): Promise<React.ReactElement> {
                 </p>
                 <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
                   <Link
-                    href="/audit"
+                    href="/contact?intent=audit"
                     className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-2.5 bg-[var(--color-accent-signal)] text-white font-mono text-xs uppercase tracking-wider font-semibold hover:brightness-110"
                   >
                     <span>Request Confidential Architecture Walkthrough</span>
@@ -182,10 +182,10 @@ export default async function ProjectsIndexPage(): Promise<React.ReactElement> {
             </p>
             <div className="mt-6">
               <Link
-                href="/audit"
+                href="/contact?intent=audit"
                 className="inline-flex items-center justify-center px-6 py-3 bg-[var(--color-accent-signal)] text-white font-mono text-xs uppercase tracking-wider font-semibold hover:brightness-110 transition-all"
               >
-                <span>Book 15-Min Architecture Audit</span>
+                <span>Discuss Architecture &amp; Scope</span>
                 <span className="ml-2" aria-hidden="true">&rarr;</span>
               </Link>
             </div>

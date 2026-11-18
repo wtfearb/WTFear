@@ -5,6 +5,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { BLUEPRINT_CATALOG, type BlueprintId } from '@/lib/state/blueprints-machine';
 import { generateBlueprintJsonLd } from '@/lib/schema/json-ld';
+import { SITE_URL } from '@/lib/site-config';
 
 export function generateStaticParams(): { slug: BlueprintId }[] {
   return BLUEPRINT_CATALOG.map((bp) => ({ slug: bp.id }));
@@ -19,8 +20,8 @@ export async function generateMetadata({
   const blueprint = BLUEPRINT_CATALOG.find((b) => b.id === slug);
   if (!blueprint) return {};
 
-  const canonicalUrl = `https://wtfear.agency/blueprints/${blueprint.id}`;
-  const ogImageUrl = `https://wtfear.agency/api/og?title=${encodeURIComponent(
+  const canonicalUrl = `${SITE_URL}/blueprints/${blueprint.id}`;
+  const ogImageUrl = `${SITE_URL}/api/og?title=${encodeURIComponent(
     blueprint.title
   )}&badge=${encodeURIComponent(blueprint.badge)}&duration=${encodeURIComponent(
     blueprint.durationLabel
@@ -70,10 +71,38 @@ export default async function BlueprintPage({
     stack: blueprint.stack,
   });
 
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: `${SITE_URL}/`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Blueprints',
+        item: `${SITE_URL}/blueprints`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: blueprint.title,
+        item: `${SITE_URL}/blueprints/${blueprint.id}`,
+      },
+    ],
+  };
+
   return (
     <div className="flex min-h-screen flex-col bg-[var(--color-canvas)] text-[var(--color-ink-primary)]">
       <script type="application/ld+json">
         {JSON.stringify(jsonLd)}
+      </script>
+      <script type="application/ld+json">
+        {JSON.stringify(breadcrumbJsonLd)}
       </script>
       <Header />
 
@@ -83,22 +112,10 @@ export default async function BlueprintPage({
           <nav className="mb-6 font-mono text-xs text-[var(--color-ink-muted)]" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-[var(--color-ink-primary)]">Home</Link>
             <span className="mx-2">/</span>
-            <Link href="/#blueprints" className="hover:text-[var(--color-ink-primary)]">Blueprints</Link>
+            <Link href="/blueprints" className="hover:text-[var(--color-ink-primary)]">Blueprints</Link>
             <span className="mx-2">/</span>
             <span className="text-[var(--color-ink-primary)] font-bold">{blueprint.id}</span>
           </nav>
-
-          {/* Direct Definition Lead (Hidden visually, preserved in DOM for AI answer engines) */}
-          <div className="sr-only">
-            <dl className="font-mono text-xs leading-relaxed text-[var(--color-ink-secondary)]">
-              <dt className="inline font-bold text-[var(--color-ink-primary)]">
-                <dfn>{blueprint.title}</dfn>:
-              </dt>{' '}
-              <dd className="inline">
-                A production-verified {blueprint.durationLabel.toLowerCase()} architecture blueprint by WTFearB shipping {blueprint.summary.toLowerCase()}
-              </dd>
-            </dl>
-          </div>
 
           <div className="flex items-center gap-3 font-mono text-xs text-[var(--color-accent-signal)] font-bold uppercase tracking-wider mb-2">
             <span>{blueprint.badge}</span>

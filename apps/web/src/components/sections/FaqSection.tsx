@@ -76,7 +76,7 @@ export function FaqSection(): React.ReactElement {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* 1. SECTION HEADER */}
         <div className="mb-10">
-          <div className="font-mono text-[11px] font-bold uppercase tracking-[0.08em] text-[#C83E1B] mb-3">
+          <div className="font-mono text-[11px] font-bold uppercase tracking-[0.08em] text-[#C83E1B] mb-3 inline-block transition-colors duration-200 hover:text-[#0A0A0C]">
             FREQUENTLY ASKED QUESTIONS
           </div>
           <h2
@@ -103,61 +103,65 @@ export function FaqSection(): React.ReactElement {
                 className={
                   isOpen
                     ? 'relative bg-[#FDF6F2] transition-colors duration-200'
-                    : 'group relative bg-[#FFFFFF] hover:bg-[#FDF3ED] transition-colors duration-200 before:content-[\'\'] before:absolute before:left-0 before:top-0 before:bottom-0 before:w-[3px] before:bg-[#C83E1B] before:opacity-0 hover:before:opacity-60 before:transition-opacity'
+                    : 'group relative bg-[#FFFFFF] hover:bg-[#FDF3ED] transition-colors duration-200'
                 }
               >
-                {/* When open: full-height 4px Signal Orange left accent bar */}
-                {isOpen && (
-                  <span
-                    className="absolute left-0 top-0 bottom-0 w-[4px] bg-[#C83E1B]"
-                    aria-hidden="true"
-                  />
-                )}
+                {/* Left Accent Bar: 4px solid when open; 3px subtle highlight on hover when collapsed */}
+                <span
+                  className={`absolute left-0 top-0 bottom-0 pointer-events-none transition-all duration-200 ease-out ${
+                    isOpen
+                      ? 'w-[4px] bg-[#C83E1B] opacity-100'
+                      : 'w-[3px] bg-[#C83E1B] opacity-0 group-hover:opacity-100'
+                  }`}
+                  aria-hidden="true"
+                />
 
-                {/* Top Question Row Button */}
-                <button
-                  type="button"
-                  id={`faq-question-${index}`}
-                  aria-expanded={isOpen}
-                  aria-controls={`faq-answer-${index}`}
-                  onClick={() => setOpenIndex(isOpen ? null : index)}
-                  className="w-full text-left flex items-center justify-between gap-4 px-6 sm:px-7 py-5 cursor-pointer select-none focus-visible:outline-2 focus-visible:outline-[#C83E1B]"
-                >
-                  <div className="flex items-start sm:items-center gap-3 min-w-0 pr-2">
-                    <span className="font-mono text-[13.5px] sm:text-[14px] font-bold text-[#C83E1B] w-11 shrink-0 select-none">
-                      {numberBadge}
-                    </span>
-                    <span
-                      className={`font-mono text-[14px] sm:text-[15px] font-bold text-[#0A0A0C] tracking-[-0.01em] transition-transform duration-200 ease-out ${
-                        !isOpen ? 'group-hover:translate-x-[2px]' : ''
-                      }`}
-                    >
-                      {faq.question}
-                    </span>
-                  </div>
-
-                  {/* Toggle Icon: Minus sign when open; Plus sign with 90deg rotate + scale on collapsed hover */}
-                  <div className="w-5 h-5 flex items-center justify-center shrink-0">
-                    {isOpen ? (
-                      <span className="font-mono text-[18px] font-bold text-[#C83E1B] select-none leading-none" aria-hidden="true">
-                        &minus;
+                {/* Semantic H3 Heading for Screen Readers & Document Outlines */}
+                <h3 className="m-0 font-normal">
+                  <button
+                    type="button"
+                    id={`faq-question-${index}`}
+                    aria-expanded={isOpen}
+                    aria-controls={`faq-answer-${index}`}
+                    onClick={() => setOpenIndex(isOpen ? null : index)}
+                    className="w-full text-left flex items-center justify-between gap-4 px-6 sm:px-7 py-5 cursor-pointer select-none focus-visible:outline-2 focus-visible:outline-[#C83E1B]"
+                  >
+                    <div className="flex items-start sm:items-center gap-3 min-w-0 pr-2">
+                      <span className="font-mono text-[13.5px] sm:text-[14px] font-bold text-[#C83E1B] w-11 shrink-0 select-none">
+                        {numberBadge}
                       </span>
-                    ) : (
-                      <svg
-                        className="w-4 h-4 text-[#C83E1B] transition-transform duration-200 ease-out group-hover:rotate-90 group-hover:scale-110"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        aria-hidden="true"
+                      <span
+                        className={`font-mono text-[14px] sm:text-[15px] font-bold text-[#0A0A0C] tracking-[-0.01em] transition-all duration-200 ease-out ${
+                          !isOpen ? 'group-hover:translate-x-[2px] group-hover:text-[#C83E1B]' : ''
+                        }`}
                       >
-                        <line x1="8" y1="3" x2="8" y2="13" />
-                        <line x1="3" y1="8" x2="13" y2="8" />
-                      </svg>
-                    )}
-                  </div>
-                </button>
+                        {faq.question}
+                      </span>
+                    </div>
+
+                    {/* Toggle Icon: Minus sign when open; Plus sign with 90deg rotate + scale on collapsed hover */}
+                    <div className="w-5 h-5 flex items-center justify-center shrink-0">
+                      {isOpen ? (
+                        <span className="font-mono text-[18px] font-bold text-[#C83E1B] select-none leading-none" aria-hidden="true">
+                          &minus;
+                        </span>
+                      ) : (
+                        <svg
+                          className="w-4 h-4 text-[#C83E1B] transition-transform duration-200 ease-out group-hover:rotate-90 group-hover:scale-110"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          aria-hidden="true"
+                        >
+                          <line x1="8" y1="3" x2="8" y2="13" />
+                          <line x1="3" y1="8" x2="13" y2="8" />
+                        </svg>
+                      )}
+                    </div>
+                  </button>
+                </h3>
 
                 {/* Smooth 60fps GPU Accordion Height Transition */}
                 <div

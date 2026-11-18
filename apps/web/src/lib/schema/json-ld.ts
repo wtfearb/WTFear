@@ -3,6 +3,8 @@
  * @version 3.0.0
  */
 
+import { SITE_URL } from '@/lib/site-config';
+
 export interface OrganizationJsonLd {
   readonly '@type': 'Organization';
   readonly '@id': string;
@@ -19,7 +21,7 @@ export interface OrganizationJsonLd {
 }
 
 export function generateRootJsonLd(): Record<string, unknown> {
-  const baseUrl = 'https://wtfear.agency';
+  const baseUrl = SITE_URL;
 
   return {
     '@context': 'https://schema.org',
@@ -57,7 +59,7 @@ export function generateRootJsonLd(): Record<string, unknown> {
           '@id': `${baseUrl}/#organization`,
         },
         description:
-          'Design and implementation of hallucination-proof AI agents with pgvector HNSW + BM25 RRF, Pydantic v2 validation gates, and 50-case CI evaluation harnesses.',
+          'Design and implementation of hallucination-proof AI agents with pgvector HNSW + ParadeDB BM25 (pg_search) / Lexical FTS (ts_rank_cd) RRF, Pydantic v2 validation gates, and 50-case CI evaluation harnesses.',
       },
       {
         '@type': 'Service',
@@ -80,7 +82,7 @@ export function generateBlueprintJsonLd(params: {
   readonly summary: string;
   readonly stack: readonly string[];
 }): Record<string, unknown> {
-  const baseUrl = 'https://wtfear.agency';
+  const baseUrl = SITE_URL;
   return {
     '@context': 'https://schema.org',
     '@type': 'TechArticle',

@@ -8,13 +8,13 @@ export const metadata: Metadata = {
   description:
     'Architectural and cost comparisons: WTFearB embedded senior pods vs traditional agencies, full-time hiring, and no-code tools.',
   alternates: {
-    canonical: 'https://wtfear.agency/compare',
+    canonical: '/compare',
   },
   openGraph: {
     title: 'Engineering Comparisons & Operational Tradeoffs — WTFearB',
     description:
       'Evaluate engineering tradeoffs: Delivery cadence, AI hallucination risk, IP ownership, and burn rate.',
-    url: 'https://wtfear.agency/compare',
+    url: '/compare',
     siteName: 'WTFearB Systems Studio',
     type: 'website',
   },
@@ -134,10 +134,10 @@ export default function CompareIndexPage(): React.ReactElement {
             </p>
             <div className="mt-6">
               <Link
-                href="/audit"
+                href="/contact?intent=audit"
                 className="inline-flex items-center justify-center px-6 py-3 bg-[var(--color-accent-signal)] text-white font-mono text-xs uppercase tracking-wider font-semibold hover:brightness-110 transition-all"
               >
-                <span>Book 15-Min Architecture Audit</span>
+                <span>Discuss Architecture &amp; Scope</span>
                 <span className="ml-2">&rarr;</span>
               </Link>
             </div>

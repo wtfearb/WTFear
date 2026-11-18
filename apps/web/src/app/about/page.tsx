@@ -8,13 +8,13 @@ export const metadata: Metadata = {
   description:
     'WTFearB is an embedded senior systems studio. Learn our engineering principles: governed AI, mathematical verification, 100% client GitHub IP ownership, and zero marketing fluff.',
   alternates: {
-    canonical: 'https://wtfear.agency/about',
+    canonical: '/about',
   },
   openGraph: {
     title: 'About WTFearB — Systems Engineering Philosophy',
     description:
       'We turn speculative "What If" into deterministic production software in weekly sprints with 100% client GitHub IP ownership.',
-    url: 'https://wtfear.agency/about',
+    url: '/about',
     siteName: 'WTFearB Systems Studio',
     type: 'website',
   },
@@ -25,7 +25,7 @@ const PRINCIPLES = [
     number: '01',
     title: 'Governed AI Over Uncontrolled Prompting',
     subtitle: 'Zero hallucinations through mathematical verification',
-    body: 'We do not build flimsy wrapper applications or rely on hopeful prompt engineering. Every AI agent we deploy operates within strict Pydantic v2 schemas, verified pgvector HNSW + BM25 hybrid retrieval, and automated CI-blocking 50-case golden evaluation suites enforcing 100% citation precision.',
+    body: 'We do not build flimsy wrapper applications or rely on hopeful prompt engineering. Every AI agent we deploy operates within strict Pydantic v2 schemas, verified pgvector HNSW + ParadeDB BM25 (pg_search) / Lexical FTS (ts_rank_cd) RRF, and automated CI-blocking 50-case golden evaluation suites enforcing 100% citation precision.',
   },
   {
     number: '02',
@@ -159,10 +159,10 @@ export default function AboutPage(): React.ReactElement {
             </p>
             <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
-                href="/audit"
+                href="/contact?intent=audit"
                 className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-[var(--color-accent-signal)] text-white font-mono text-xs uppercase tracking-wider font-semibold hover:brightness-110 transition-all"
               >
-                <span>Book 15-Min Architecture Audit</span>
+                <span>Discuss Architecture &amp; Scope</span>
                 <span className="ml-2">&rarr;</span>
               </Link>
               <Link

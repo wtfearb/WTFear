@@ -10,13 +10,13 @@ export const metadata: Metadata = {
   description:
     'Comprehensive breakdown of WTFearB systems engineering capabilities: Governed AI agents, Next.js 15 web applications, distributed backend spines, and deterministic 2-week sprints.',
   alternates: {
-    canonical: 'https://wtfear.agency/services',
+    canonical: '/services',
   },
   openGraph: {
     title: 'Engineering Capabilities & Services — WTFearB',
     description:
       'We architect, build, and ship governed AI agents, high-performance web platforms, and distributed event backends with 100% client GitHub IP ownership.',
-    url: 'https://wtfear.agency/services',
+    url: '/services',
     siteName: 'WTFearB Systems Studio',
     type: 'website',
   },
@@ -46,7 +46,7 @@ const SERVICES_CATALOG: readonly ServiceDetail[] = [
     problemStatement:
       'Uncontrolled LLMs hallucinating critical data, executing unauthorized actions, or leaking multi-tenant context in production workflows, creating unacceptable SLA and legal liabilities.',
     technicalSolution:
-      'We build governed agent runtimes backed by single-query hybrid search (PostgreSQL 16 pgvector HNSW + BM25 ts_rank_cd), strict Pydantic v2 schema validators, automated confidence thresholds, and CI-blocking 50-case golden evaluation suites.',
+      'We build governed agent runtimes backed by single-query hybrid search (PostgreSQL 16 pgvector HNSW + ParadeDB BM25 (pg_search) / Lexical FTS (ts_rank_cd) RRF), strict Pydantic v2 schema validators, automated confidence thresholds, and CI-blocking 50-case golden evaluation suites.',
     architecturePattern:
       'Ingress Webhook -> HMAC Signature Validation -> Pydantic Schema Gate -> pgvector HNSW + BM25 RRF -> Guardrail Scorer (Confidence >= 0.82) -> Egress Citation Validator -> Human Escalation Fallback',
     deliverables: [
@@ -377,10 +377,10 @@ export default function ServicesPage(): React.ReactElement {
                 </div>
 
                 <Link
-                  href="/audit"
+                  href="/contact?intent=audit"
                   className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-[var(--color-accent-signal)] text-white text-xs font-mono font-semibold uppercase tracking-wider hover:brightness-110 transition-all shrink-0"
                 >
-                  <span>Book Architecture Audit</span>
+                  <span>Discuss Architecture &amp; Scope</span>
                   <span aria-hidden="true">&rarr;</span>
                 </Link>
               </div>
@@ -408,10 +408,10 @@ export default function ServicesPage(): React.ReactElement {
             </p>
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
-                href="/audit"
+                href="/contact?intent=audit"
                 className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-[var(--color-accent-signal)] text-white font-mono text-xs uppercase tracking-wider font-semibold hover:brightness-110 transition-all shadow-sm"
               >
-                <span>Book 15-Min Architecture Audit</span>
+                <span>Discuss Architecture &amp; Scope</span>
                 <span className="ml-2" aria-hidden="true">&rarr;</span>
               </Link>
               <Link

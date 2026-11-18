@@ -9,13 +9,13 @@ export const metadata: Metadata = {
   description:
     'Exhaustive architectural blueprints, component topologies, latency targets, and CI verification gates for governed AI agents, multi-tenant SaaS, and distributed event backends.',
   alternates: {
-    canonical: 'https://wtfear.agency/blueprints',
+    canonical: '/blueprints',
   },
   openGraph: {
     title: 'Production Blueprints Catalog — WTFearB',
     description:
       'Inspect production-ready architectural monographs: data topologies, verification gates, and code contracts.',
-    url: 'https://wtfear.agency/blueprints',
+    url: '/blueprints',
     siteName: 'WTFearB Systems Studio',
     type: 'website',
   },
@@ -130,10 +130,10 @@ export default function BlueprintsIndexPage(): React.ReactElement {
             </p>
             <div className="mt-6">
               <Link
-                href="/audit"
+                href="/contact?intent=audit"
                 className="inline-flex items-center justify-center px-6 py-3 bg-[var(--color-accent-signal)] text-white font-mono text-xs uppercase tracking-wider font-semibold hover:brightness-110 transition-all"
               >
-                <span>Book 15-Min Architecture Audit</span>
+                <span>Discuss Architecture &amp; Scope</span>
                 <span className="ml-2" aria-hidden="true">&rarr;</span>
               </Link>
             </div>

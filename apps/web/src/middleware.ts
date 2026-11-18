@@ -3,8 +3,19 @@ import type { NextRequest } from 'next/server';
 import { ADMIN_COOKIE_NAME, verifyAdminToken } from '@/lib/auth/admin-auth';
 
 export async function middleware(request: NextRequest): Promise<NextResponse> {
-  const isProduction = process.env.NODE_ENV === 'production';
   const pathname = request.nextUrl.pathname;
+
+  // Passthrough untouched for machine-readable AEO/SEO feeds
+  if (
+    pathname === '/llms.txt' ||
+    pathname === '/llms-full.txt' ||
+    pathname === '/sitemap.xml' ||
+    pathname === '/robots.txt'
+  ) {
+    return NextResponse.next();
+  }
+
+  const isProduction = process.env.NODE_ENV === 'production';
 
   // Gate Admin Routes & APIs
   if (pathname.startsWith('/admin') && pathname !== '/admin/login') {
@@ -44,7 +55,7 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
     default-src 'self';
     script-src ${scriptSources};
     style-src 'self' 'unsafe-inline';
-    img-src 'self' blob: data: https://wtfear.agency https://*.vercel.app;
+    img-src 'self' blob: data: https://wtfear.agency https://*.vercel.app https://wt-fear-lemon.vercel.app;
     font-src 'self' data:;
     object-src 'none';
     base-uri 'self';

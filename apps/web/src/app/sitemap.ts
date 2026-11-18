@@ -1,9 +1,10 @@
 import type { MetadataRoute } from 'next';
 import { BLUEPRINT_CATALOG } from '@/lib/state/blueprints-machine';
 import { SEED_PORTFOLIO_PROJECTS } from '@/lib/seed-data';
+import { SITE_URL } from '@/lib/site-config';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://wtfear.agency';
+  const baseUrl = SITE_URL;
   const lastModified = new Date('2026-11-16T00:00:00.000Z');
 
   const coreRoutes: MetadataRoute.Sitemap = [

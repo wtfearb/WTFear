@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { SITE_URL } from '@/lib/site-config';
 
 interface PlaybookData {
   readonly slug: string;
@@ -55,10 +56,10 @@ def verify_autonomous_citations(self) -> Self:
   'postgres-rls-pgvector-hybrid-search': {
     slug: 'postgres-rls-pgvector-hybrid-search',
     title: 'Playbook: PostgreSQL 16 RLS + pgvector HNSW Hybrid BM25 Search',
-    metaDescription: 'Complete tutorial and SQL reference for combining dense vector cosine similarity with full-text ts_rank_cd in PostgreSQL 16 with Row-Level Security.',
+    metaDescription: 'Complete tutorial and SQL reference for pgvector HNSW + ParadeDB BM25 (pg_search) / Lexical FTS (ts_rank_cd) RRF in PostgreSQL 16 with Row-Level Security.',
     summary: 'Architecting single-query multi-tenant hybrid search without external vector database dependencies or synchronization drift.',
     targetLatency: 'p95 query latency < 45ms across 1M chunks',
-    definitionLead: 'PostgreSQL 16 Hybrid Search combines pgvector HNSW cosine distance with BM25 tsvector GIN ranking via Reciprocal Rank Fusion (RRF) inside a single transaction secured by Row-Level Security (RLS).',
+    definitionLead: 'PostgreSQL 16 Hybrid Search combines pgvector HNSW cosine distance with ParadeDB BM25 (pg_search) / Lexical FTS (ts_rank_cd) RRF inside a single transaction secured by Row-Level Security (RLS).',
     sections: [
       {
         heading: '1. Why Co-Locating Vectors in PostgreSQL Prevents State Drift',
@@ -102,12 +103,12 @@ export async function generateMetadata({
     title: playbook.title,
     description: playbook.metaDescription,
     alternates: {
-      canonical: `https://wtfear.agency/playbooks/${slug}`,
+      canonical: `${SITE_URL}/playbooks/${slug}`,
     },
     openGraph: {
       title: playbook.title,
       description: playbook.metaDescription,
-      url: `https://wtfear.agency/playbooks/${slug}`,
+      url: `${SITE_URL}/playbooks/${slug}`,
       siteName: 'wtfear — Product & AI Engineering Studio',
       type: 'article',
     },
@@ -126,8 +127,21 @@ export default async function PlaybookPage({
     notFound();
   }
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    headline: playbook.title,
+    description: playbook.definitionLead,
+    abstract: playbook.metaDescription,
+    url: `${SITE_URL}/playbooks/${slug}`,
+  };
+
   return (
     <div className="flex min-h-screen flex-col bg-[var(--color-canvas)] text-[var(--color-ink-primary)]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Header />
 
       <main className="flex-1 py-12 md:py-20">
@@ -135,20 +149,10 @@ export default async function PlaybookPage({
           <nav className="mb-6 font-mono text-xs text-[var(--color-ink-muted)]" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-[var(--color-ink-primary)]">Home</Link>
             <span className="mx-2">/</span>
-            <span>Playbooks</span>
+            <Link href="/playbooks" className="hover:text-[var(--color-ink-primary)]">Playbooks</Link>
             <span className="mx-2">/</span>
             <span className="text-[var(--color-ink-primary)] font-bold">{playbook.slug}</span>
           </nav>
-
-          {/* Direct Definition Lead (Hidden visually, preserved in DOM for AI answer engines) */}
-          <div className="sr-only">
-            <dl className="font-mono text-xs leading-relaxed text-[var(--color-ink-secondary)]">
-              <dt className="inline font-bold text-[var(--color-ink-primary)]">
-                <dfn>{playbook.title}</dfn>:
-              </dt>{' '}
-              <dd className="inline">{playbook.definitionLead}</dd>
-            </dl>
-          </div>
 
           <div className="font-mono text-xs uppercase tracking-wider text-[var(--color-accent-signal)] font-bold mb-2">
             ENGINEERING PLAYBOOK // {playbook.targetLatency}

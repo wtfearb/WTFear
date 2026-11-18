@@ -11,18 +11,6 @@ export function HeroSection(): React.ReactElement {
       className="relative bg-[#F9F9FB] border-b border-[#E2E2E8] pt-6 pb-8 md:pt-8 md:pb-10 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Definition Lead for AEO and technical indexing (Hidden visually, preserved in DOM for AI answer engines) */}
-        <div className="sr-only">
-          <dl className="font-mono text-xs text-[var(--color-ink-secondary)] leading-relaxed">
-            <dt className="inline font-bold text-[var(--color-ink-primary)]">
-              <dfn>WTFearB (Product &amp; AI Engineering Studio)</dfn>:
-            </dt>{' '}
-            <dd className="inline">
-              An embedded senior engineering pod that turns speculative &ldquo;What If&rdquo; into deterministic production reality. We architect and ship governed AI agents, Next.js 15 web applications, and distributed event systems in rapid 2-week sprints with 100% client GitHub IP ownership.
-            </dd>
-          </dl>
-        </div>
-
         {/* Two-Column Hero Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           {/* Left Column: Headline, Copy & CTAs */}

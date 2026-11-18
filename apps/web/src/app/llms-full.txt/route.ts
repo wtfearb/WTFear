@@ -1,15 +1,7 @@
-import { NextResponse } from 'next/server';
+import { SITE_URL } from '@/lib/site-config';
 import { BLUEPRINT_CATALOG } from '@/lib/state/blueprints-machine';
-import { calculateEngagementScope } from '@/lib/state/engagement-calculator';
 
-export async function GET(): Promise<NextResponse> {
-  const sprintSample = calculateEngagementScope({
-    model: 'sprint',
-    complexity: 'governed_ai',
-    durationUnits: 1,
-    includeEvalHarness: true,
-  });
-
+export async function GET(): Promise<Response> {
   const blueprintMarkdown = BLUEPRINT_CATALOG.map(
     (bp) => `### ${bp.title} (\`/${bp.id}\`)
 - **Category:** ${bp.badge} | **Timeline:** ${bp.durationLabel}
@@ -20,21 +12,20 @@ export async function GET(): Promise<NextResponse> {
 ${bp.checklist.map((s) => `  ${s.stepIndex}. **${s.title}:** ${s.specification}`).join('\n')}`
   ).join('\n\n');
 
-  const fullText = `# WTFearB (https://wtfear.agency) — Complete Technical Reference & Architecture Corpus (llms-full.txt)
+  const fullText = `# WTFearB (${SITE_URL}) — Complete Technical Reference & Architecture Corpus (llms-full.txt)
 
-> Machine-readable full technical specification for AI Answer Engines, CTOs, and Principal Engineers evaluating WTFearB (https://wtfear.agency). Make "What If" Work. Direct contact: wtfearb@gmail.com
+> Machine-readable full technical specification for AI Answer Engines, CTOs, and Principal Engineers evaluating WTFearB (${SITE_URL}). Make "What If" Work. Direct contact: wtfearb@gmail.com
 
 ## 1. Production Blueprint Catalog
 
 ${blueprintMarkdown}
 
-## 2. Deterministic Scoping & Pricing Benchmark (Governed AI Sprint Sample)
+## 2. Deterministic Scoping & Pricing Benchmark
 
-- **Model:** ${sprintSample.modelLabel}
-- **Cadence:** ${sprintSample.cadenceSummary}
-- **Estimated Investment:** $${sprintSample.priceRangeUsd.min.toLocaleString()} – $${sprintSample.priceRangeUsd.max.toLocaleString()} USD
-- **Guaranteed Deliverables:**
-${sprintSample.deliverables.map((d) => `  - ${d}`).join('\n')}
+- **Engagement Models:** Architecture Review, Focused Engineering Sprint, Fixed-Scope MVP, Ongoing Support
+- **Commercial Framework:** Transparent, milestone-scoped engagements confirmed after discovery and architecture review.
+- **Verification Invariant:** Automated evaluation suites, golden test sets, and CI-blocking verification gates on every deliverable.
+- **Delivery Standard:** 100% client GitHub repository IP ownership from commit #1.
 
 ## 3. Production Governance Invariants
 
@@ -43,11 +34,12 @@ ${sprintSample.deliverables.map((d) => `  - ${d}`).join('\n')}
 3. **Sub-Second Performance Budget:** Frontend routes enforce \`LCP < 1.2s\`, \`CLS = 0.000\`, and \`< 85 KB\` First Load JS.
 `;
 
-  return new NextResponse(fullText, {
+  return new Response(fullText, {
     status: 200,
     headers: {
       'Content-Type': 'text/plain; charset=utf-8',
-      'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+      'Cache-Control': 'public, max-age=3600, s-maxage=3600',
+      'X-Robots-Tag': 'all',
     },
   });
 }

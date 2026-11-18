@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next';
+import { SITE_URL } from '@/lib/site-config';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -31,7 +32,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/admin', '/api/admin', '/internal/'],
       },
     ],
-    sitemap: 'https://wtfear.agency/sitemap.xml',
-    host: 'https://wtfear.agency',
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL,
   };
 }

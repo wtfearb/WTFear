@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { SITE_URL } from '@/lib/site-config';
 
 interface ComparisonData {
   readonly slug: string;
@@ -49,7 +50,7 @@ const COMPARISONS: Record<string, ComparisonData> = {
       },
       {
         dimension: 'Pricing Model',
-        wtfearApproach: 'Fixed scope ($6,500 – $8,500 USD per 2-week sprint) with guaranteed deliverables.',
+        wtfearApproach: 'Transparent, milestone-scoped engagements confirmed after discovery and architecture review.',
         alternativeApproach: 'Open-ended hourly time & materials ($150-$250/hr) with scope creep incentives.',
       },
     ],
@@ -60,7 +61,7 @@ const COMPARISONS: Record<string, ComparisonData> = {
     metaDescription: 'Cost, time-to-production, and risk comparison between hiring full-time AI engineers vs engaging a dedicated WTFearB engineering pod.',
     subtitle: 'How to bypass the 4-month hiring lag and ship production AI agents this sprint.',
     comparisonTarget: 'In-House Full-Time Hiring',
-    leadDefinition: 'A WTFearB Dedicated Engineering Pod provides immediate day-1 senior execution at $18,000–$26,000/month, eliminating the $65,000 recruiting fee and 120-day recruiting lag of hiring senior AI systems engineers.',
+    leadDefinition: 'A WTFearB Dedicated Engineering Pod provides immediate day-1 senior execution with transparent, milestone-scoped engagements confirmed after discovery and architecture review, eliminating recruiting overhead and multi-month hiring delays.',
     tableRows: [
       {
         dimension: 'Time to First Production Commit',
@@ -74,7 +75,7 @@ const COMPARISONS: Record<string, ComparisonData> = {
       },
       {
         dimension: 'All-In Monthly Burn',
-        wtfearApproach: '$18,000 – $26,000 / month flat retainer for a 2-engineer senior pod.',
+        wtfearApproach: 'Transparent, milestone-scoped engagements confirmed after discovery and architecture review.',
         alternativeApproach: '$45,000+ / month for equivalent 2 senior US/EU engineers (salary + equity + healthcare + payroll tax).',
       },
       {
@@ -143,12 +144,12 @@ export async function generateMetadata({
     title: `${comp.title} | WTFearB`,
     description: comp.metaDescription,
     alternates: {
-      canonical: `https://wtfear.agency/compare/${slug}`,
+      canonical: `${SITE_URL}/compare/${slug}`,
     },
     openGraph: {
       title: comp.title,
       description: comp.metaDescription,
-      url: `https://wtfear.agency/compare/${slug}`,
+      url: `${SITE_URL}/compare/${slug}`,
       siteName: 'WTFearB Systems Studio',
       type: 'article',
     },
@@ -167,8 +168,21 @@ export default async function CompareDetailPage({
     notFound();
   }
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    headline: comp.title,
+    description: comp.leadDefinition,
+    abstract: comp.metaDescription,
+    url: `${SITE_URL}/compare/${slug}`,
+  };
+
   return (
     <div className="flex min-h-screen flex-col bg-[var(--color-canvas)] text-[var(--color-ink-primary)]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Header />
 
       <main className="flex-1 py-12 md:py-20">
@@ -180,16 +194,6 @@ export default async function CompareDetailPage({
             <span className="mx-2">/</span>
             <span className="text-[var(--color-ink-primary)] font-bold">{comp.slug}</span>
           </nav>
-
-          {/* Direct Definition Lead (Hidden visually, preserved in DOM for AI answer engines) */}
-          <div className="sr-only">
-            <dl className="font-mono text-xs leading-relaxed text-[var(--color-ink-secondary)]">
-              <dt className="inline font-bold text-[var(--color-ink-primary)]">
-                <dfn>{comp.title}</dfn>:
-              </dt>{' '}
-              <dd className="inline">{comp.leadDefinition}</dd>
-            </dl>
-          </div>
 
           <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[var(--color-ink-primary)] max-w-4xl">
             {comp.title}
@@ -242,10 +246,10 @@ export default async function CompareDetailPage({
               </p>
             </div>
             <Link
-              href="/audit"
+              href="/contact?intent=audit"
               className="inline-flex items-center justify-center bg-[var(--color-accent-signal)] text-white px-6 py-3 font-mono text-xs font-semibold hover:brightness-110 transition-colors"
             >
-              BOOK ARCHITECTURE AUDIT &rarr;
+              <span>DISCUSS ARCHITECTURE &amp; SCOPE &rarr;</span>
             </Link>
           </div>
         </div>

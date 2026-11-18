@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { getPortfolioProjects, getPortfolioProjectBySlug } from '@/lib/db';
+import { SITE_URL } from '@/lib/site-config';
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const projects = await getPortfolioProjects(false);
@@ -19,7 +20,7 @@ export async function generateMetadata({
   const project = await getPortfolioProjectBySlug(slug);
   if (!project) return {};
 
-  const canonicalUrl = `https://wtfear.agency/projects/${project.slug}`;
+  const canonicalUrl = `${SITE_URL}/projects/${project.slug}`;
 
   return {
     title: `${project.title} — Systems Monograph | WTFearB`,
@@ -248,7 +249,7 @@ export default async function ProjectDetailPage({
 
               <div className="mt-8 pt-6 border-t border-[var(--color-border-hairline)]">
                 <Link
-                  href="/audit"
+                  href="/contact?intent=audit"
                   className="w-full inline-flex items-center justify-center px-4 py-2.5 bg-[var(--color-accent-signal)] text-white font-mono text-xs uppercase tracking-wider font-semibold hover:brightness-110 transition-all text-center"
                 >
                   <span>Build This System</span>
@@ -270,10 +271,10 @@ export default async function ProjectDetailPage({
             </p>
             <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
-                href="/audit"
+                href="/contact?intent=audit"
                 className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-[var(--color-accent-signal)] text-white font-mono text-xs uppercase tracking-wider font-semibold hover:brightness-110 transition-all"
               >
-                <span>Book 15-Min Architecture Audit</span>
+                <span>Discuss Architecture &amp; Scope</span>
                 <span className="ml-2">&rarr;</span>
               </Link>
               <Link
