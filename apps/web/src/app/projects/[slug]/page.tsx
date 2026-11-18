@@ -1,14 +1,23 @@
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { getPortfolioProjects, getPortfolioProjectBySlug } from '@/lib/db';
 import { SITE_URL } from '@/lib/site-config';
 
+const LEGACY_SLUG_MAP: Record<string, string> = {
+  'sentinel-rag-triage': 'vega-docs',
+  'nexus-b2b-tenant-portal': 'polaris-erp',
+  'chronos-event-ingestion-spine': 'sirius-iq',
+  'veritas-contract-intelligence': 'vega-docs',
+};
+
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const projects = await getPortfolioProjects(false);
-  return projects.map((p) => ({ slug: p.slug }));
+  const baseSlugs = projects.map((p) => ({ slug: p.slug }));
+  const legacySlugs = Object.keys(LEGACY_SLUG_MAP).map((slug) => ({ slug }));
+  return [...baseSlugs, ...legacySlugs];
 }
 
 export async function generateMetadata({
@@ -17,7 +26,8 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const project = await getPortfolioProjectBySlug(slug);
+  const targetSlug = LEGACY_SLUG_MAP[slug] || slug;
+  const project = await getPortfolioProjectBySlug(targetSlug);
   if (!project) return {};
 
   const canonicalUrl = `${SITE_URL}/projects/${project.slug}`;
@@ -56,6 +66,12 @@ export default async function ProjectDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+
+  // Handle graceful redirect for legacy slugs
+  if (LEGACY_SLUG_MAP[slug]) {
+    redirect(`/projects/${LEGACY_SLUG_MAP[slug]}`);
+  }
+
   const project = await getPortfolioProjectBySlug(slug);
 
   if (!project) {
@@ -94,7 +110,7 @@ export default async function ProjectDetailPage({
               <div className="max-w-3xl">
                 <div className="flex items-center gap-3">
                   <span className="font-mono text-xs font-bold text-[var(--color-accent-signal)] px-2 py-0.5 border border-[var(--color-border-hairline)] bg-[var(--color-canvas)]">
-                    CASE STUDY [{String(project.indexNumber).padStart(2, '0')}]
+                    PLATFORM [{String(project.indexNumber).padStart(2, '0')}]
                   </span>
                   <span className="font-mono text-xs uppercase tracking-wider text-[var(--color-ink-muted)]">
                     {project.industry} &bull; {project.category}
@@ -106,12 +122,39 @@ export default async function ProjectDetailPage({
                 <p className="mt-4 text-base sm:text-lg text-[var(--color-ink-secondary)] leading-relaxed">
                   {project.summary}
                 </p>
+
+                {/* Primary Action Buttons */}
+                <div className="flex flex-wrap items-center gap-3.5 mt-6 pt-2">
+                  {project.liveUrl && project.liveUrl.startsWith('http') && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#C83E1B] hover:bg-[#A83214] text-white font-mono text-xs font-bold uppercase tracking-wider rounded-[3px] transition-colors shadow-xs"
+                    >
+                      <span>Launch Live Deployment</span>
+                      <span aria-hidden="true">&rarr;</span>
+                    </a>
+                  )}
+
+                  {project.repoUrl && (
+                    <a
+                      href={project.repoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2.5 border border-[#101114] text-[#101114] hover:bg-[#101114] hover:text-white font-mono text-xs font-bold uppercase tracking-wider rounded-[3px] transition-colors"
+                    >
+                      <span>View GitHub Repository</span>
+                      <span aria-hidden="true">&rarr;</span>
+                    </a>
+                  )}
+                </div>
               </div>
 
               <div className="shrink-0 p-4 border border-[var(--color-border-hairline)] bg-[var(--color-canvas)] font-mono text-xs space-y-1">
-                <div className="text-[var(--color-ink-muted)]">IP OWNERSHIP: <strong className="text-[var(--color-ink-primary)]">100% CLIENT GITHUB</strong></div>
-                <div className="text-[var(--color-ink-muted)]">DELIVERY CADENCE: <strong className="text-[var(--color-ink-primary)]">2-WEEK SPRINT</strong></div>
-                <div className="text-[var(--color-ink-muted)]">TEAM: <strong className="text-[var(--color-ink-primary)]">2 PRINCIPAL ENGINEERS</strong></div>
+                <div className="text-[var(--color-ink-muted)]">SYSTEM: <strong className="text-[var(--color-ink-primary)]">FLAGSHIP PLATFORM</strong></div>
+                <div className="text-[var(--color-ink-muted)]">ARCHITECTURE: <strong className="text-[var(--color-ink-primary)]">HIGH-CONCURRENCY</strong></div>
+                <div className="text-[var(--color-ink-muted)]">AUDIT: <strong className="text-[var(--color-ink-primary)]">HARDENED SPEC</strong></div>
               </div>
             </div>
           </div>
@@ -267,7 +310,7 @@ export default async function ProjectDetailPage({
               Have an Architecture Challenge Like This?
             </h2>
             <p className="mt-3 text-sm sm:text-base text-[var(--color-ink-secondary)] max-w-xl mx-auto">
-              Book a 15-Minute Architecture Audit with our embedded senior pod. We evaluate your data topology and guarantee execution in a 2-week sprint.
+              Book an Architecture Audit with our embedded senior pod. We evaluate your data topology and guarantee execution with clear milestones.
             </p>
             <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link

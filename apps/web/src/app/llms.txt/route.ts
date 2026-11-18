@@ -14,6 +14,19 @@ export async function GET(): Promise<Response> {
 - [Engineering Capabilities Monograph](${SITE_URL}/services): Full breakdown of 6 core disciplines, architecture patterns, and production deliverables.
 - [Production Case Studies](${SITE_URL}/projects): 10 systems engineering monographs with real architectures, code contracts, and measured outcomes.
 
+## Flagship Software & AI Platforms
+
+1. [PolarisERP](${SITE_URL}/projects/polaris-erp): Autonomous Enterprise CRM & ERP Framework. Live: https://polaris-erp-wheat.vercel.app/ | Repo: https://github.com/wtfear/PolarisERP
+2. [NexusVoice](${SITE_URL}/projects/nexus-voice): Sovereign Real-Time Voice AI Platform. Repo: https://github.com/wtfear/NexusVoice
+3. [VegaDocs](${SITE_URL}/projects/vega-docs): Air-Gapped Document Intelligence & Multi-Model RAG. Live: https://vegadocs.vercel.app/ | Repo: https://github.com/wtfear/VegaDocs
+4. [NexusAudit](${SITE_URL}/projects/nexus-audit): Autonomous Web Auditor & Technical Intelligence Engine. Live: https://nexusaudit.vercel.app/ | Repo: https://github.com/wtfear/NexusAudit
+5. [CapellaBI](${SITE_URL}/projects/capella-bi): In-Browser DuckDB-WASM Analytics. Live: https://capellabi.vercel.app/ | Repo: https://github.com/wtfear/CapellaBI
+6. [NexusPersona](${SITE_URL}/projects/nexus-persona): Autonomous Multi-Agent Persona & Simulation Engine. Repo: https://github.com/wtfear/NexusPersona
+7. [CastorChat](${SITE_URL}/projects/castor-chat): Omnichannel WhatsApp Support Automation Desk. Live: https://castor-chat.vercel.app/ | Repo: https://github.com/wtfear/CastorChat
+8. [SiriusIQ](${SITE_URL}/projects/sirius-iq): Cognitive Agent Decision Fabric & Algorithmic Task Runtime. Live: https://sirius-iq.vercel.app/ | Repo: https://github.com/wtfear/SiriusIQ
+9. [AltairCommerce](${SITE_URL}/projects/altair-commerce): Headless Digital Commerce & Multi-Vendor Marketplace. Live: https://altair-commerce.vercel.app/ | Repo: https://github.com/wtfear/AltairCommerce
+10. [AntaresERP](${SITE_URL}/projects/antares-erp): Autonomous Retail POS & Multi-Warehouse Operations Engine. Live: https://antares-erp.vercel.app/ | Repo: https://github.com/wtfear/AntaresERP
+
 ## Transparent Engagement Models & Pricing
 
 - **Architecture Audit & Review:** Direct technical bottleneck diagnosis with a Principal Systems Engineer (zero sales reps). Start a conversation at ${SITE_URL}/contact?intent=audit

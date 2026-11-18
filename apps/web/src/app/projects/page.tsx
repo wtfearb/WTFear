@@ -1,198 +1,107 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
-import { getPortfolioProjects, getSiteSettings } from '@/lib/db';
+import { ProjectsHero } from '@/components/projects/ProjectsHero';
+import { PolarisFeaturedCard } from '@/components/projects/PolarisFeaturedCard';
+import { SpecialistPlatformsGrid } from '@/components/projects/SpecialistPlatformsGrid';
+import { ProjectsIndexTable } from '@/components/projects/ProjectsIndexTable';
+import { ProjectsCtaSection } from '@/components/projects/ProjectsCtaSection';
+import { SITE_URL } from '@/lib/site-config';
+import { SEED_PORTFOLIO_PROJECTS } from '@/lib/seed-data';
 
 export const metadata: Metadata = {
-  title: 'Engineering Portfolio & Case Studies | WTFearB Systems Studio',
+  title: 'Selected Engineering Work & Flagship Platforms | WTFearB',
   description:
-    'Production case studies and systems monographs delivered by WTFearB: Governed AI agents, high-concurrency SaaS portals, and distributed event pipelines.',
+    'Explore the sovereign platforms, live deployments, and architectural decisions behind WTFearB’s 10 flagship software and AI systems.',
   alternates: {
     canonical: '/projects',
   },
   openGraph: {
-    title: 'Engineering Portfolio & Production Case Studies — WTFearB',
+    title: 'Selected Engineering Work & Flagship Platforms — WTFearB',
     description:
-      'Explore 10 production system monographs with real architectures, code contracts, and measured outcomes.',
+      'Explore 10 production platforms with real architectures, live deployments, and sovereign code contracts.',
     url: '/projects',
     siteName: 'WTFearB Systems Studio',
     type: 'website',
   },
 };
 
-export default async function ProjectsIndexPage(): Promise<React.ReactElement> {
-  const [projects, siteSettings] = await Promise.all([
-    getPortfolioProjects(true),
-    getSiteSettings(),
-  ]);
-
-  const isEmpty = siteSettings.portfolioDisplayMode === 'coming_soon_empty_state';
+export default function ProjectsIndexPage(): React.ReactElement {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'CollectionPage',
+        '@id': `${SITE_URL}/projects#webpage`,
+        url: `${SITE_URL}/projects`,
+        name: 'Selected Engineering Work & Flagship Platforms | WTFearB',
+        description:
+          'Explore the sovereign platforms, live deployments, and architectural decisions behind WTFearB’s 10 flagship software and AI systems.',
+        breadcrumb: {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            {
+              '@type': 'ListItem',
+              position: 1,
+              name: 'Home',
+              item: `${SITE_URL}/`,
+            },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: 'Projects',
+              item: `${SITE_URL}/projects`,
+            },
+          ],
+        },
+      },
+      {
+        '@type': 'ItemList',
+        '@id': `${SITE_URL}/projects#flagships`,
+        name: 'WTFearB 10 Real Flagship Platforms',
+        numberOfItems: SEED_PORTFOLIO_PROJECTS.length,
+        itemListElement: SEED_PORTFOLIO_PROJECTS.map((proj, idx) => ({
+          '@type': 'SoftwareApplication',
+          position: idx + 1,
+          name: proj.title,
+          url: `${SITE_URL}/projects/${proj.slug}`,
+          applicationCategory: proj.category,
+          operatingSystem: 'Cloud / Web / Distributed',
+          description: proj.summary,
+        })),
+      },
+    ],
+  };
 
   return (
-    <div className="min-h-screen bg-[var(--color-canvas)] text-[var(--color-ink-primary)] selection:bg-[var(--color-accent-signal)] selection:text-white flex flex-col">
+    <div className="min-h-screen bg-[#FFFFFF] text-[#0A0A0C] selection:bg-[#C83E1B] selection:text-white flex flex-col scroll-smooth">
+      {/* Schema.org Linked Graph JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      {/* Header */}
       <Header />
 
       <main className="flex-1">
-        {/* Editorial Header */}
-        <section className="py-12 md:py-16 border-b border-[var(--color-border-hairline)] bg-[var(--color-canvas-pure)]">
-          <div className="mx-auto max-w-[var(--max-w-editorial)] px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center gap-2 font-mono text-xs text-[var(--color-ink-muted)] mb-4">
-              <Link href="/" className="hover:text-[var(--color-ink-primary)] underline decoration-[var(--color-border-hairline)]">
-                Home
-              </Link>
-              <span>/</span>
-              <span className="text-[var(--color-accent-signal)] font-semibold">Projects</span>
-            </div>
+        {/* REGION 01 — EDITORIAL HERO & METADATA STRIP */}
+        <ProjectsHero />
 
-            <div className="max-w-3xl">
-              <span className="font-mono text-xs uppercase tracking-widest text-[var(--color-accent-signal)] font-semibold">
-                Case Studies &bull; Systems Monographs
-              </span>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[var(--color-ink-primary)] mt-3">
-                Production Engineering Case Studies.
-              </h1>
-              <p className="mt-4 text-base sm:text-lg text-[var(--color-ink-secondary)] leading-relaxed">
-                Representative systems architectures, technical specifications, and measured production outcomes delivered by our embedded senior engineering pods.
-              </p>
-            </div>
-          </div>
-        </section>
+        {/* REGION 02 — 01 / FEATURED PROJECT (PolarisERP) */}
+        <PolarisFeaturedCard />
 
-        {/* Content Section */}
-        <section className="py-12 md:py-20">
-          <div className="mx-auto max-w-[var(--max-w-editorial)] px-4 sm:px-6 lg:px-8">
-            {isEmpty ? (
-              <div className="border border-[var(--color-border-hairline)] bg-[var(--color-canvas-pure)] p-8 sm:p-12 text-center max-w-2xl mx-auto">
-                <span className="font-mono text-xs uppercase tracking-widest text-[var(--color-accent-signal)] font-semibold">
-                  Client Confidentiality &bull; NDA Protection
-                </span>
-                <h2 className="text-2xl font-bold text-[var(--color-ink-primary)] mt-3">
-                  Production Case Studies Under Direct Preparation
-                </h2>
-                <p className="mt-4 text-sm text-[var(--color-ink-secondary)] leading-relaxed">
-                  We respect our clients&apos; proprietary intellectual property. Sanitised architecture monographs, latency benchmarks, and verified code patterns are currently being prepared for public release.
-                </p>
-                <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <Link
-                    href="/contact?intent=audit"
-                    className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-2.5 bg-[var(--color-accent-signal)] text-white font-mono text-xs uppercase tracking-wider font-semibold hover:brightness-110"
-                  >
-                    <span>Request Confidential Architecture Walkthrough</span>
-                    <span className="ml-2">&rarr;</span>
-                  </Link>
-                  <Link
-                    href="/blueprints"
-                    className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-2.5 border border-[var(--color-border-hairline)] text-xs font-mono uppercase tracking-wider font-semibold hover:bg-[var(--color-canvas)]"
-                  >
-                    View Open Blueprints
-                  </Link>
-                </div>
-              </div>
-            ) : (
-              <div className="space-y-8">
-                <div className="flex items-center justify-between pb-4 border-b border-[var(--color-border-hairline)]">
-                  <span className="font-mono text-xs text-[var(--color-ink-muted)]">
-                    Showing <strong className="text-[var(--color-ink-primary)]">{projects.length}</strong> Production Case Studies
-                  </span>
-                  <span className="font-mono text-xs text-[var(--color-accent-signal)]">
-                    100% Client GitHub Ownership
-                  </span>
-                </div>
+        {/* REGION 03 — 02 / SOVEREIGN AI & SPECIALIST PLATFORMS (Ranks 02–07) */}
+        <SpecialistPlatformsGrid />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {projects.map((project) => {
-                    const stack = Array.isArray(project.stackTags)
-                      ? (project.stackTags as string[])
-                      : [];
+        {/* REGION 04 — 03 / PROJECT INDEX: REVENUE ENGINES & WORKFLOW FABRICS (Ranks 08–10) */}
+        <ProjectsIndexTable />
 
-                    return (
-                      <article
-                        key={project.id}
-                        className="flex flex-col border border-[var(--color-border-hairline)] bg-[var(--color-canvas-pure)] p-6 sm:p-8 hover:border-[var(--color-ink-primary)] transition-all group"
-                      >
-                        <div className="flex items-center justify-between gap-4 pb-4 border-b border-[var(--color-border-hairline)]">
-                          <div className="flex items-center gap-2">
-                            <span className="font-mono text-xs font-bold text-[var(--color-accent-signal)]">
-                              [{String(project.indexNumber).padStart(2, '0')}]
-                            </span>
-                            <span className="font-mono text-xs text-[var(--color-ink-muted)] uppercase tracking-wider">
-                              {project.industry}
-                            </span>
-                          </div>
-                          <span className="font-mono text-[11px] px-2 py-0.5 border border-[var(--color-border-hairline)] bg-[var(--color-canvas)] text-[var(--color-ink-secondary)]">
-                            {project.category}
-                          </span>
-                        </div>
-
-                        <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[var(--color-ink-primary)] mt-4 group-hover:text-[var(--color-accent-signal)] transition-colors">
-                          <Link href={`/projects/${project.slug}`}>{project.title}</Link>
-                        </h2>
-
-                        <p className="mt-3 text-sm text-[var(--color-ink-secondary)] leading-relaxed flex-1">
-                          {project.summary}
-                        </p>
-
-                        <div className="mt-6 pt-4 border-t border-[var(--color-border-hairline)]">
-                          <div className="text-xs font-mono text-emerald-800 bg-emerald-50/50 p-2.5 border border-emerald-200/60 mb-4">
-                            <span className="font-bold text-emerald-950">Outcome:</span> {project.outcomesSummary}
-                          </div>
-
-                          <div className="flex flex-wrap gap-1.5">
-                            {stack.map((t) => (
-                              <span
-                                key={t}
-                                className="font-mono text-[11px] px-2 py-0.5 border border-[var(--color-border-hairline)] bg-[var(--color-canvas)] text-[var(--color-ink-secondary)]"
-                              >
-                                {t}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-
-                        <div className="mt-6 pt-4 border-t border-[var(--color-border-hairline)] flex items-center justify-between">
-                          <span className="font-mono text-xs text-[var(--color-ink-muted)]">
-                            Architecture Monograph
-                          </span>
-                          <Link
-                            href={`/projects/${project.slug}`}
-                            className="inline-flex items-center gap-1 font-mono text-xs font-semibold uppercase tracking-wider text-[var(--color-accent-signal)] group-hover:underline"
-                          >
-                            <span>Read Monograph</span>
-                            <span aria-hidden="true">&rarr;</span>
-                          </Link>
-                        </div>
-                      </article>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </div>
-        </section>
-
-        {/* Global Bottom CTA */}
-        <section className="py-16 border-t border-[var(--color-border-hairline)] bg-[var(--color-canvas-pure)]">
-          <div className="mx-auto max-w-[var(--max-w-editorial)] px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[var(--color-ink-primary)]">
-              Ready to Ship Your System in a 2-Week Sprint?
-            </h2>
-            <p className="mt-3 text-sm sm:text-base text-[var(--color-ink-secondary)] max-w-xl mx-auto">
-              We eliminate technical ambiguity with concrete architecture, fixed scope, and guaranteed deliverables.
-            </p>
-            <div className="mt-6">
-              <Link
-                href="/contact?intent=audit"
-                className="inline-flex items-center justify-center px-6 py-3 bg-[var(--color-accent-signal)] text-white font-mono text-xs uppercase tracking-wider font-semibold hover:brightness-110 transition-all"
-              >
-                <span>Discuss Architecture &amp; Scope</span>
-                <span className="ml-2" aria-hidden="true">&rarr;</span>
-              </Link>
-            </div>
-          </div>
-        </section>
+        {/* REGION 05 — EDITORIAL FINAL CTA */}
+        <ProjectsCtaSection />
       </main>
 
+      {/* Shared Dark Obsidian Footer */}
       <Footer />
     </div>
   );

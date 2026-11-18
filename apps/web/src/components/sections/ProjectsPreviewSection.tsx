@@ -14,27 +14,27 @@ interface ProjectIndexRow {
 const COMPACT_PROJECT_INDEX: readonly ProjectIndexRow[] = [
   {
     number: '02',
-    category: 'HIGH-PERFORMANCE WEB APPLICATIONS',
-    title: 'Nexus Multi-Tenant B2B Workspaces & Entitlements',
-    capabilities: 'Tenant boundaries · Role-based access · Workspace permissions',
-    stack: 'Next.js 15 / React 19 / PostgreSQL 16',
-    href: '/projects/nexus-b2b-tenant-portal',
+    category: 'CONVERSATIONAL VOICE AI',
+    title: 'NexusVoice — Sovereign Real-Time Conversational Voice AI Platform',
+    capabilities: 'Streaming audio VAD · Direct WebRTC & SIP · Zero per-minute markups',
+    stack: 'Python 3.12 / FastAPI / WebRTC',
+    href: '/projects/nexus-voice',
   },
   {
     number: '03',
-    category: 'DISTRIBUTED SYSTEMS & QUEUES',
-    title: 'Chronos Event Ingestion & Replay Spine',
-    capabilities: 'Event ingestion · Retry strategy · Dead-letter replay',
-    stack: 'Python / Redis Streams / Cloudflare Workers',
-    href: '/projects/chronos-event-ingestion-spine',
+    category: 'DOCUMENT RAG & INTELLIGENCE',
+    title: 'VegaDocs — Air-Gapped Document Intelligence & Multi-Model RAG',
+    capabilities: 'Isolated vector memory · Deterministic citations · Clause analysis',
+    stack: 'Next.js 15 / pgvector / ParadeDB BM25',
+    href: '/projects/vega-docs',
   },
   {
     number: '04',
-    category: 'DOCUMENT INTELLIGENCE / LEGAL WORKFLOWS',
-    title: 'Veritas Contract & Clause Analyzer',
-    capabilities: 'Document extraction · Clause structuring · Review assistance',
-    stack: 'Python / FastAPI / PostgreSQL',
-    href: '/projects/veritas-contract-intelligence',
+    category: 'TECHNICAL SECURITY & WEB AUDIT',
+    title: 'NexusAudit — Autonomous Web Auditor & Technical Intelligence Engine',
+    capabilities: 'Multi-layer security audit · CWV bottlenecks · Remediation patches',
+    stack: 'Next.js 15 / Edge Inspector / Playwright',
+    href: '/projects/nexus-audit',
   },
 ];
 
@@ -111,7 +111,7 @@ export async function ProjectsPreviewSection(): Promise<React.ReactElement> {
           </div>
         ) : (
           <>
-            {/* REGION B: FEATURED PROJECT: SENTINEL (Two-Column Horizontal Container) */}
+            {/* REGION B: FEATURED PROJECT: POLARIS ERP (Two-Column Horizontal Container) */}
             <div className="bg-[#FFFFFF] border border-[#E0E2E7] rounded-[6px] p-6 sm:p-8 lg:p-10 mb-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch shadow-[0_2px_8px_rgba(16,17,20,0.03)]">
               {/* LEFT COLUMN: PROJECT INFORMATION */}
               <div className="lg:col-span-6 flex flex-col justify-between">
@@ -119,20 +119,21 @@ export async function ProjectsPreviewSection(): Promise<React.ReactElement> {
                   {/* Top Classification Row */}
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
                     <span className="font-mono text-[11px] font-bold uppercase tracking-[0.06em] text-[#D63F1F]">
-                      01 / GOVERNED AI &amp; AUTONOMOUS AGENTS
+                      01 / ENTERPRISE OPERATIONS &amp; CRM
                     </span>
                     <span className="px-2.5 py-1 bg-[#F7F7F9] border border-[#E0E2E7] rounded-[3px] font-mono text-[10px] font-semibold uppercase tracking-[0.05em] text-[#596171]">
-                      DEVOPS &amp; CLOUD INFRASTRUCTURE
+                      CFO / COO (MID-MARKET ENTERPRISES)
                     </span>
                   </div>
 
                   {/* Project Title & Description */}
                   <h3 className="font-sans text-[24px] sm:text-[28px] font-extrabold tracking-[-0.025em] text-[#101114] leading-[1.15] mb-3">
-                    Sentinel Autonomous RAG Support Triage
+                    PolarisERP — Autonomous Enterprise CRM &amp; ERP
                   </h3>
                   <p className="font-sans text-[14.5px] leading-[1.6] text-[#596171] mb-6">
-                    A support-triage workflow using hybrid retrieval, structured validation and
-                    evaluation gates.
+                    An AI-native enterprise resource planning and CRM framework engineered to replace
+                    rigid legacy ERP stacks with autonomous invoice reconciliation, real-time working
+                    capital forecasting, and unified operations.
                   </p>
 
                   {/* Engineering Focus List */}
@@ -143,15 +144,15 @@ export async function ProjectsPreviewSection(): Promise<React.ReactElement> {
                     <ul className="space-y-2">
                       <li className="flex items-center gap-2.5 font-sans text-[13.5px] text-[#101114] font-medium">
                         <span className="w-1.5 h-1.5 rounded-[1px] bg-[#D63F1F] shrink-0" />
-                        <span>Hybrid pgvector + BM25 retrieval</span>
+                        <span>Autonomous invoice &amp; ledger reconciliation</span>
                       </li>
                       <li className="flex items-center gap-2.5 font-sans text-[13.5px] text-[#101114] font-medium">
                         <span className="w-1.5 h-1.5 rounded-[1px] bg-[#D63F1F] shrink-0" />
-                        <span>Schema validation and confidence checks</span>
+                        <span>Real-time working capital &amp; treasury forecasting</span>
                       </li>
                       <li className="flex items-center gap-2.5 font-sans text-[13.5px] text-[#101114] font-medium">
                         <span className="w-1.5 h-1.5 rounded-[1px] bg-[#D63F1F] shrink-0" />
-                        <span>CI-backed evaluation workflow</span>
+                        <span>Unified CRM, inventory &amp; operations without plugin sprawl</span>
                       </li>
                     </ul>
                   </div>
@@ -160,7 +161,7 @@ export async function ProjectsPreviewSection(): Promise<React.ReactElement> {
                 {/* Technology Tags & CTA */}
                 <div className="pt-5 mt-auto border-t border-[#E0E2E7] flex flex-wrap items-center justify-between gap-4">
                   <div className="flex flex-wrap gap-2">
-                    {['Python 3.12', 'FastAPI', 'PostgreSQL'].map((tech) => (
+                    {['Next.js 15', 'PostgreSQL 16', 'Drizzle ORM', 'TypeScript 5.7'].map((tech) => (
                       <span
                         key={tech}
                         className="px-2.5 py-1 bg-[#F7F7F9] border border-[#E0E2E7] rounded-[3px] font-mono text-[11px] font-medium text-[#596171]"
@@ -171,7 +172,7 @@ export async function ProjectsPreviewSection(): Promise<React.ReactElement> {
                   </div>
 
                   <Link
-                    href="/projects/sentinel-rag-triage"
+                    href="/projects/polaris-erp"
                     className="font-mono text-[12px] font-bold uppercase tracking-[0.06em] text-[#D63F1F] hover:text-[#101114] inline-flex items-center gap-1.5 transition-colors group/cta"
                   >
                     <span>EXPLORE CASE STUDY</span>
@@ -229,10 +230,10 @@ export async function ProjectsPreviewSection(): Promise<React.ReactElement> {
                         </svg>
                       </div>
                       <div className="font-mono text-[11px] sm:text-[12px] font-bold text-[#E8EAF0] mt-2">
-                        REQUEST
+                        INGRESS
                       </div>
                       <div className="font-mono text-[9.5px] sm:text-[10px] uppercase leading-tight tracking-[0.01em] text-[#8C93A4] mt-0.5 whitespace-nowrap">
-                        INGRESS
+                        INVOICES
                       </div>
                     </div>
 
@@ -263,10 +264,10 @@ export async function ProjectsPreviewSection(): Promise<React.ReactElement> {
                         </svg>
                       </div>
                       <div className="font-mono text-[11px] sm:text-[12px] font-bold text-[#E8EAF0] mt-2">
-                        RETRIEVE
+                        MATCH
                       </div>
                       <div className="font-mono text-[9.5px] sm:text-[10px] uppercase leading-tight tracking-[0.01em] text-[#8C93A4] mt-0.5 whitespace-nowrap">
-                        HYBRID RANK
+                        LEDGER
                       </div>
                     </div>
 
@@ -296,10 +297,10 @@ export async function ProjectsPreviewSection(): Promise<React.ReactElement> {
                         </svg>
                       </div>
                       <div className="font-mono text-[11px] sm:text-[12px] font-bold text-[#FFFFFF] mt-2">
-                        VALIDATE
+                        FORECAST
                       </div>
                       <div className="font-mono text-[9.5px] sm:text-[10px] uppercase leading-tight tracking-[0.01em] text-[#F29B88] mt-0.5 whitespace-nowrap">
-                        SCHEMA / SCORE
+                        CAPITAL
                       </div>
                     </div>
 
@@ -331,10 +332,10 @@ export async function ProjectsPreviewSection(): Promise<React.ReactElement> {
                         </svg>
                       </div>
                       <div className="font-mono text-[11px] sm:text-[12px] font-bold text-[#E8EAF0] mt-2">
-                        ROUTE
+                        COMMIT
                       </div>
                       <div className="font-mono text-[9.5px] sm:text-[10px] uppercase leading-tight tracking-[0.01em] text-[#8C93A4] mt-0.5 whitespace-nowrap">
-                        HUMAN / AUTO
+                        ERP STATE
                       </div>
                     </div>
                   </div>
@@ -342,7 +343,7 @@ export async function ProjectsPreviewSection(): Promise<React.ReactElement> {
 
                 {/* Bottom Three Architectural Principles */}
                 <div className="pt-4 mt-6 border-t border-[#23262F] flex flex-wrap items-center justify-between gap-3 relative z-10">
-                  {['Grounded context', 'Structured checks', 'Controlled routing'].map(
+                  {['Double-entry ledger', 'Real-time treasury', 'Autonomous reconciliation'].map(
                     (principle) => (
                       <div
                         key={principle}
