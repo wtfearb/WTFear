@@ -4,10 +4,12 @@ import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ContactFormClient } from '@/components/forms/ContactFormClient';
+import { CopyEmailButton } from '@/components/forms/CopyEmailButton';
 
 export const metadata: Metadata = {
-  title: 'Contact & Project Inquiry | WTFearB',
-  description: 'Start a technical conversation or scope an engineering engagement with WTFearB.',
+  title: 'Contact & Engineering Inquiries | WTFearB',
+  description:
+    'Start a direct technical conversation with principal product and AI engineers. Share your architecture, workflow constraints, or product scope with zero sales intermediaries.',
   alternates: {
     canonical: '/contact',
   },
@@ -19,6 +21,7 @@ interface ContactPageProps {
     complexity?: string;
     validation?: string;
     intent?: string;
+    track?: string;
   }>;
 }
 
@@ -28,110 +31,271 @@ export default async function ContactPage({
   const params = await searchParams;
 
   return (
-    <div className="min-h-screen bg-[var(--color-canvas)] text-[var(--color-ink-primary)] selection:bg-[var(--color-accent-signal)] selection:text-white flex flex-col">
+    <div className="min-h-screen bg-[#F9F9FB] text-[#0A0A0C] selection:bg-[#C83E1B] selection:text-white flex flex-col">
       <Header />
 
       <main className="flex-1">
-        {/* Editorial Header */}
-        <section className="py-12 md:py-16 border-b border-[var(--color-border-hairline)] bg-[var(--color-canvas-pure)]">
-          <div className="mx-auto max-w-[var(--max-w-editorial)] px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center gap-2 font-mono text-xs text-[var(--color-ink-muted)] mb-4">
-              <Link
-                href="/"
-                className="hover:text-[var(--color-ink-primary)] underline decoration-[var(--color-border-hairline)]"
-              >
-                Home
-              </Link>
-              <span>/</span>
-              <span className="text-[var(--color-accent-signal)] font-semibold">Contact</span>
-            </div>
+        {/* =========================================================================
+            PART 1: ASYMMETRIC SPLIT HERO
+           ========================================================================= */}
+        <section className="bg-[#F9F9FB] border-b border-[#E2E2E8]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              {/* Left Column (7 cols): Editorial Title & Subtitle */}
+              <div className="lg:col-span-7">
+                {/* Breadcrumb */}
+                <div className="font-mono text-[12px] mb-4 flex items-center">
+                  <Link href="/" className="text-[#5A5D6A] hover:text-[#0A0A0C] transition-colors">
+                    Home
+                  </Link>
+                  <span className="text-[#9FA3B0] mx-1.5">/</span>
+                  <span className="text-[#C83E1B] font-semibold">Contact</span>
+                </div>
 
-            <div className="max-w-3xl">
-              <span className="font-mono text-xs uppercase tracking-widest text-[var(--color-accent-signal)] font-semibold">
-                Direct Engineering Inquiries &bull; Zero Gatekeepers
-              </span>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[var(--color-ink-primary)] mt-3">
-                Contact WTFearB.
-              </h1>
-              <p className="mt-4 text-base sm:text-lg text-[var(--color-ink-secondary)] leading-relaxed">
-                Connect directly with our senior engineering team. Whether you need a 2-week rapid
-                sprint, a custom system monograph, or technical due diligence, your message reaches
-                principal engineers directly.
-              </p>
+                {/* Eyebrow */}
+                <div className="font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-[#C83E1B] flex items-center gap-2 mb-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C83E1B] inline-block" aria-hidden="true" />
+                  <span>DIRECT ENGINEERING INQUIRIES</span>
+                </div>
+
+                {/* Headline */}
+                <h1 className="font-sans font-extrabold text-[#0A0A0C] text-[36px] sm:text-[44px] lg:text-[48px] leading-[1.08] tracking-[-0.03em] mb-4">
+                  Start a Technical Conversation.
+                </h1>
+
+                {/* Subheadline */}
+                <p className="font-sans text-[15.5px] sm:text-[16.5px] leading-[1.6] text-[#3F414A] max-w-xl">
+                  Engage directly with principal product and AI engineers. Share your system architecture, workflow bottleneck, or product scope—no sales intermediaries.
+                </p>
+              </div>
+
+              {/* Right Column (5 cols): Intake Routing Protocol Schematic */}
+              <div className="lg:col-span-5">
+                <div className="relative p-5 sm:p-6 bg-[#FAFBFD] border border-[#E2E2E8] bg-[linear-gradient(to_right,#E2E2E8_1px,transparent_1px),linear-gradient(to_bottom,#E2E2E8_1px,transparent_1px)] bg-[size:20px_20px]">
+                  {/* Four Crisp Corner Viewfinder Brackets */}
+                  <span
+                    className="absolute -top-[1px] -left-[1px] w-[14px] h-[14px] border-t-[1.5px] border-l-[1.5px] border-[#5A5D6A]"
+                    aria-hidden="true"
+                  />
+                  <span
+                    className="absolute -top-[1px] -right-[1px] w-[14px] h-[14px] border-t-[1.5px] border-r-[1.5px] border-[#5A5D6A]"
+                    aria-hidden="true"
+                  />
+                  <span
+                    className="absolute -bottom-[1px] -left-[1px] w-[14px] h-[14px] border-b-[1.5px] border-l-[1.5px] border-[#5A5D6A]"
+                    aria-hidden="true"
+                  />
+                  <span
+                    className="absolute -bottom-[1px] -right-[1px] w-[14px] h-[14px] border-b-[1.5px] border-r-[1.5px] border-[#5A5D6A]"
+                    aria-hidden="true"
+                  />
+
+                  {/* Header */}
+                  <div className="font-mono text-[11px] font-bold uppercase tracking-[0.08em] text-[#3F414A] mb-4">
+                    // INTAKE ROUTING PROTOCOL
+                  </div>
+
+                  {/* Three Horizontal Step Nodes */}
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
+                    {/* Node 1 */}
+                    <div className="flex-1 bg-[#FFFFFF] border border-[#E2E2E8] rounded-[2px] p-3 shadow-2xs">
+                      <div className="inline-flex items-center gap-1.5 font-mono text-[11px] font-bold text-[#C83E1B]">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#C83E1B]" />
+                        <span>01</span>
+                      </div>
+                      <div className="font-mono text-[11px] font-bold uppercase leading-tight text-[#0A0A0C] mt-1">
+                        TECHNICAL
+                        <br />
+                        BRIEF
+                      </div>
+                    </div>
+
+                    {/* Arrow 1 -> 2 */}
+                    <div className="shrink-0 flex justify-center text-[#3F414A]" aria-hidden="true">
+                      <svg
+                        className="w-4 h-4 transform sm:rotate-0 rotate-90"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                      >
+                        <path
+                          d="M3 8H13M13 8L9 4M13 8L9 12"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
+
+                    {/* Node 2 */}
+                    <div className="flex-1 bg-[#FFFFFF] border border-[#E2E2E8] rounded-[2px] p-3 shadow-2xs">
+                      <div className="font-mono text-[11px] font-bold text-[#5A5D6A]">
+                        02
+                      </div>
+                      <div className="font-mono text-[11px] font-bold uppercase leading-tight text-[#0A0A0C] mt-1">
+                        ARCHITECTURE
+                        <br />
+                        REVIEW
+                      </div>
+                    </div>
+
+                    {/* Arrow 2 -> 3 */}
+                    <div className="shrink-0 flex justify-center text-[#3F414A]" aria-hidden="true">
+                      <svg
+                        className="w-4 h-4 transform sm:rotate-0 rotate-90"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                      >
+                        <path
+                          d="M3 8H13M13 8L9 4M13 8L9 12"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
+
+                    {/* Node 3 */}
+                    <div className="flex-1 bg-[#FFFFFF] border border-[#E2E2E8] rounded-[2px] p-3 shadow-2xs">
+                      <div className="font-mono text-[11px] font-bold text-[#5A5D6A]">
+                        03
+                      </div>
+                      <div className="font-mono text-[11px] font-bold uppercase leading-tight text-[#0A0A0C] mt-1">
+                        SCOPED
+                        <br />
+                        PROPOSAL
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Contact Content Grid */}
-        <section className="py-12 md:py-20">
-          <div className="mx-auto max-w-[var(--max-w-editorial)] px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-              {/* Form Column - Synchronous SSR with Zero Suspense Fallback */}
-              <div className="lg:col-span-7 border border-[var(--color-border-hairline)] bg-[var(--color-canvas-pure)] p-6 sm:p-10 shadow-xs">
+        {/* =========================================================================
+            PART 2: TWO-COLUMN INTAKE WORKSPACE
+           ========================================================================= */}
+        <section className="py-12 lg:py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              {/* Left Column (7 cols): Client Form Card (Synchronous SSR) */}
+              <div className="lg:col-span-7 bg-[#FFFFFF] border border-[#E2E2E8] rounded-[4px] p-6 sm:p-9 shadow-xs">
                 <ContactFormClient
                   initialEngagement={params.engagement}
                   initialComplexity={params.complexity}
                   initialValidation={params.validation}
                   initialIntent={params.intent}
+                  initialTrack={params.track}
                 />
               </div>
 
-              {/* Direct Info Column */}
-              <div className="lg:col-span-5 space-y-6">
-                <div className="border border-[var(--color-border-hairline)] bg-[var(--color-canvas-pure)] p-6 sm:p-8">
-                  <span className="font-mono text-xs uppercase tracking-widest text-[var(--color-ink-muted)] font-semibold block mb-2">
-                    Studio Communications
+              {/* Right Column (5 cols): Discovery Protocol + Direct Channels */}
+              <div className="lg:col-span-5 flex flex-col gap-6">
+                {/* 1. Top Panel: Obsidian Discovery Protocol */}
+                <div className="bg-[#0C0D10] border-t-2 border-t-[#C83E1B] rounded-[2px] p-6 sm:p-8 text-[#FFFFFF]">
+                  <span className="font-mono text-[11px] font-bold uppercase tracking-[0.08em] text-[#C83E1B] block mb-1.5">
+                    02 // DISCOVERY PROTOCOL
                   </span>
-                  <h3 className="text-lg font-bold text-[var(--color-ink-primary)] mb-4">
-                    Direct Email &amp; Response SLA
-                  </h3>
-                  <div className="space-y-4 text-sm text-[var(--color-ink-secondary)]">
-                    <div>
-                      <span className="font-mono text-xs text-[var(--color-ink-muted)] block">
-                        PRIMARY INBOX
-                      </span>
-                      <a
-                        href="mailto:wtfearb@gmail.com"
-                        className="font-mono text-sm font-bold text-[var(--color-accent-signal)] hover:underline"
-                      >
-                        wtfearb@gmail.com
-                      </a>
-                    </div>
-                    <div>
-                      <span className="font-mono text-xs text-[var(--color-ink-muted)] block">
-                        RESPONSE SLA
-                      </span>
-                      <p className="font-mono text-xs text-[var(--color-ink-primary)] mt-0.5">
-                        &lt; 4 hours during business days (EST / UTC)
+                  <h2 className="font-sans text-[24px] sm:text-[26px] font-extrabold tracking-[-0.02em] text-[#FFFFFF] mb-4">
+                    What Happens Next
+                  </h2>
+
+                  <div className="divide-y divide-[#242731] border-t border-[#242731]">
+                    {/* Step 01 */}
+                    <div className="py-5 grid grid-cols-1 sm:grid-cols-[155px_1fr] gap-3 sm:gap-4 items-start">
+                      <div className="font-mono text-[11px] text-[#898E99]">
+                        01 /{' '}
+                        <span className="font-sans text-[13.5px] font-semibold text-[#FFFFFF] block sm:inline ml-1 sm:ml-0">
+                          Architecture Evaluation
+                        </span>
+                      </div>
+                      <p className="font-sans text-[12.5px] leading-[1.55] text-[#A1A5B2]">
+                        Principal engineers review your problem statement, data boundaries, and technical feasibility.
                       </p>
                     </div>
-                    <div>
-                      <span className="font-mono text-xs text-[var(--color-ink-muted)] block">
-                        STRUCTURE
-                      </span>
-                      <p className="font-mono text-xs text-[var(--color-ink-primary)] mt-0.5">
-                        Embedded Senior Engineering Pod (Zero junior delegation)
+
+                    {/* Step 02 */}
+                    <div className="py-5 grid grid-cols-1 sm:grid-cols-[155px_1fr] gap-3 sm:gap-4 items-start">
+                      <div className="font-mono text-[11px] text-[#898E99]">
+                        02 /{' '}
+                        <span className="font-sans text-[13.5px] font-semibold text-[#FFFFFF] block sm:inline ml-1 sm:ml-0">
+                          Technical Scoping Session
+                        </span>
+                      </div>
+                      <p className="font-sans text-[12.5px] leading-[1.55] text-[#A1A5B2]">
+                        Focused working session to align on system topology, integration points, and build vs. blueprint fit.
+                      </p>
+                    </div>
+
+                    {/* Step 03 */}
+                    <div className="py-5 grid grid-cols-1 sm:grid-cols-[155px_1fr] gap-3 sm:gap-4 items-start">
+                      <div className="font-mono text-[11px] text-[#898E99]">
+                        03 /{' '}
+                        <span className="font-sans text-[13.5px] font-semibold text-[#FFFFFF] block sm:inline ml-1 sm:ml-0">
+                          Written Monograph &amp; Roadmap
+                        </span>
+                      </div>
+                      <p className="font-sans text-[12.5px] leading-[1.55] text-[#A1A5B2]">
+                        Receive a structured architecture breakdown, milestone plan, and transparent engagement scope.
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <div className="border border-[var(--color-border-hairline)] bg-[var(--color-canvas-pure)] p-6 sm:p-8 font-mono text-xs space-y-3">
-                  <div className="text-[var(--color-accent-signal)] font-semibold uppercase tracking-wider">
-                    // Prefer A Direct Architecture Call?
-                  </div>
-                  <p className="text-[var(--color-ink-secondary)] leading-relaxed">
-                    Skip email back-and-forth and book a focused 15-minute technical audit directly
-                    with our systems engineers.
-                  </p>
-                  <div className="pt-2">
-                    <Link
-                      href="/contact?intent=audit"
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--color-ink-primary)] hover:text-[var(--color-accent-signal)] underline"
-                    >
-                      <span>Discuss Architecture &amp; Scope</span>
-                      <span aria-hidden="true">&rarr;</span>
-                    </Link>
+                {/* 2. Bottom Panel: Direct Channels */}
+                <div className="bg-[#FFFFFF] border border-[#E2E2E8] rounded-[4px] p-6 sm:p-8 shadow-xs">
+                  <span className="font-mono text-[11px] font-bold uppercase tracking-[0.08em] text-[#5A5D6A] block mb-3">
+                    03 // DIRECT CHANNELS
+                  </span>
+
+                  <div className="divide-y divide-[#E2E2E8] border-t border-[#E2E2E8]">
+                    {/* Row 1: Direct Email */}
+                    <div className="py-4 grid grid-cols-1 sm:grid-cols-[160px_1fr] gap-2 sm:gap-3 items-center">
+                      <span className="font-mono text-[11px] font-semibold text-[#5A5D6A]">
+                        DIRECT ELECTRONIC MAIL
+                      </span>
+                      <div className="flex items-center gap-3">
+                        <a
+                          href="mailto:wtfearb@gmail.com"
+                          className="font-sans text-[14px] font-bold text-[#0A0A0C] border-b border-[#C83E1B] pb-0.5 hover:text-[#C83E1B] transition-colors"
+                        >
+                          wtfearb@gmail.com
+                        </a>
+                        <CopyEmailButton email="wtfearb@gmail.com" />
+                      </div>
+                    </div>
+
+                    {/* Row 2: Studio Network */}
+                    <div className="py-4 grid grid-cols-1 sm:grid-cols-[160px_1fr] gap-2 sm:gap-3 items-center">
+                      <span className="font-mono text-[11px] font-semibold text-[#5A5D6A]">
+                        STUDIO NETWORK
+                      </span>
+                      <div>
+                        <a
+                          href="https://www.linkedin.com/company/wtfearb/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-sans text-[14px] font-bold text-[#0A0A0C] border-b border-[#C83E1B] pb-0.5 inline-flex items-center gap-1 hover:text-[#C83E1B] transition-colors"
+                        >
+                          <span>WTFearB on LinkedIn</span>
+                          <span className="text-[#C83E1B]">&nearr;</span>
+                        </a>
+                      </div>
+                    </div>
+
+                    {/* Row 3: Engagement Models */}
+                    <div className="py-4 grid grid-cols-1 sm:grid-cols-[160px_1fr] gap-2 sm:gap-3 items-center">
+                      <span className="font-mono text-[11px] font-semibold text-[#5A5D6A]">
+                        ENGAGEMENT MODELS
+                      </span>
+                      <div>
+                        <span className="font-sans text-[12.5px] leading-[1.5] text-[#3F414A]">
+                          Fixed-Scope Builds &bull; Embedded Architecture Pods &bull; Blueprint Audits
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

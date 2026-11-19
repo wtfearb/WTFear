@@ -109,7 +109,7 @@ export function ProjectsIndexTable(): React.ReactElement {
                   href={row.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#C83E1B] font-bold hover:underline"
+                  className="text-[#C83E1B] font-bold hover:underline whitespace-nowrap shrink-0"
                 >
                   Live App ↗
                 </a>
@@ -118,13 +118,13 @@ export function ProjectsIndexTable(): React.ReactElement {
                   href={row.repoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#5A5D6A] hover:text-[#0A0A0C] transition-colors"
+                  className="text-[#5A5D6A] hover:text-[#0A0A0C] transition-colors whitespace-nowrap shrink-0"
                 >
                   GitHub ↗
                 </a>
                 <Link
                   href={`/projects/${row.slug}`}
-                  className="p-1 hover:text-[#C83E1B] transition-colors"
+                  className="p-1 hover:text-[#C83E1B] transition-colors whitespace-nowrap shrink-0"
                   aria-label={`View profile for ${row.code}`}
                 >
                   &rarr;

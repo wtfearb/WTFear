@@ -296,7 +296,7 @@ export function AgentSandbox(): React.ReactElement {
                       setSelectedId(item.id);
                       trackClientEvent('sandbox_change', `Scenario: ${item.label}`, { scenarioId: item.id });
                     }}
-                    className={`px-3 py-1.5 text-xs font-mono font-medium rounded-[4px] whitespace-nowrap transition-all duration-200 ${
+                    className={`px-3 py-1.5 text-xs font-mono font-medium rounded-[4px] whitespace-nowrap transition-all duration-200 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#C83E1B] cursor-pointer ${
                       isActive
                         ? 'border border-[#C83E1B] bg-[#1E1715] text-[#FFFFFF]'
                         : 'border border-transparent text-[#A0A4AD] hover:text-[#FFFFFF]'
