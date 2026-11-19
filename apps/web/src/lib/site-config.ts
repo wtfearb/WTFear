@@ -1,1 +1,1 @@
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://wt-fear-lemon.vercel.app').replace(/\/$/, '');
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.wtfearb.tech').replace(/\/$/, '');
