@@ -6,18 +6,18 @@ import { Footer } from '@/components/layout/Footer';
 import { generateAboutJsonLd } from '@/lib/schema/json-ld';
 
 export const metadata: Metadata = {
-  title: 'About WTFearB | Systems Engineering Philosophy & Operating Architecture',
+  title: 'About WTFearB — Eliminating Operational Fear Through Governed AI',
   description:
-    'WTFearB is a principal-led Product and AI Engineering Studio built for teams solving complex operational and technical problems—without agency bloat or fragile AI wrappers.',
+    'Learn how WTFearB combines frontier AI engineering and systems rigor to build governed AI agents, custom ERPs, and maintainable software—Make What If Work.',
   alternates: {
     canonical: '/about',
   },
   openGraph: {
-    title: 'About WTFearB — Make "What If" Work',
+    title: 'About WTFearB — Eliminating Operational Fear Through Governed AI',
     description:
-      'WTFearB is a principal-led Product and AI Engineering Studio built for teams solving complex operational and technical problems.',
+      'Learn how WTFearB combines frontier AI engineering and systems rigor to build governed AI agents, custom ERPs, and maintainable software—Make What If Work.',
     url: '/about',
-    siteName: 'WTFearB Systems Studio',
+    siteName: 'WTFearB',
     type: 'website',
   },
 };

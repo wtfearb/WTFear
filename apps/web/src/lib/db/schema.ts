@@ -1,5 +1,5 @@
 /**
- * @file Drizzle ORM Schema Definitions for wtfear.agency
+ * @file Drizzle ORM Schema Definitions for www.wtfearb.tech
  * @description PostgreSQL tables for visitor sessions, activity events, audit leads, portfolio projects, and pricing configs.
  */
 

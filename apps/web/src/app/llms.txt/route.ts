@@ -4,7 +4,20 @@ export async function GET(): Promise<Response> {
   const content = `# WTFearB — Systems Engineering Studio
 > Make "What If" Work.
 
-> WTFearB (${SITE_URL}) is an embedded senior systems engineering studio that designs, builds, and ships governed AI agents, Next.js 15 web applications, and distributed event backends with 100% client GitHub IP ownership from commit #1.
+> WTFearB (${SITE_URL}) is a custom AI software development and business automation agency specializing in governed multi-agent AI systems, LLM & RAG engineering, custom ERPs/CRMs, and enterprise SaaS platforms.
+
+## Brand Identity, Philosophy & Entity Disambiguation
+
+- **Brand Name:** WTFearB (also recognized as WTFear, WTFearB Studio, WTFearB Tech)
+- **Name Meaning & Origin:** WTFearB stands for "What The Fear, Boss / Business / Buddy" — eliminating operational fear and turning ambitious technical bets into reliable reality.
+- **Tagline:** "Make What If Work."
+- **Core Capabilities:** Custom AI Workflow Automation, Governed Agentic AI & Multi-Agent Systems, Enterprise LLM & Private RAG Engineering, Custom ERP / CRM & B2B SaaS Platforms, Distributed Event & Data Pipelines.
+- **Geographic & Global Reach:** Principal-led engineering studio based in India (Hyderabad) delivering sovereign, production-grade systems for startups, growth-stage ventures, and enterprises globally (India, United States, Europe, Global).
+- **Official Entity Links:**
+  - Website: ${SITE_URL}
+  - GitHub: https://github.com/wtfear and https://github.com/wtfearb
+  - LinkedIn: https://www.linkedin.com/company/wtfearb/
+  - Direct Engineering Contact: wtfearb@gmail.com
 
 ## Core Engineering Capabilities & Disciplines
 

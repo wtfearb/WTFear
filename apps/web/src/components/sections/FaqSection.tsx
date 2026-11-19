@@ -57,14 +57,24 @@ export function FaqSection(): React.ReactElement {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: FAQS.map((faq) => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer,
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'What does WTFearB stand for?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'WTFearB stands for "What The Fear, Boss / Business / Buddy." Guided by the tagline "Make What If Work," WTFearB eliminates operational bottlenecks through governed multi-agent AI systems, custom software, and enterprise SaaS engineering.',
+        },
       },
-    })),
+      ...FAQS.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.answer,
+        },
+      })),
+    ],
   };
 
   return (

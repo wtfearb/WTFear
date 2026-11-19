@@ -42,7 +42,7 @@ export async function generateMetadata({
       title: `${project.title} — Production Case Study`,
       description: project.summary,
       url: canonicalUrl,
-      siteName: 'WTFearB Systems Studio',
+      siteName: 'WTFearB',
       type: 'article',
     },
     twitter: {

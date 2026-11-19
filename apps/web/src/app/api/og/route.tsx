@@ -27,7 +27,7 @@ export async function GET(req: NextRequest): Promise<ImageResponse> {
           <span style={{ color: '#C83E1B', fontSize: 22, letterSpacing: '0.12em', fontWeight: 700 }}>
             {badge}
           </span>
-          <span style={{ color: '#9CA3AF', fontSize: 20 }}>wtfear.agency</span>
+          <span style={{ color: '#9CA3AF', fontSize: 20 }}>www.wtfearb.tech</span>
         </div>
         <div style={{ fontSize: 56, fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.03em', maxWidth: '980px' }}>
           {title}

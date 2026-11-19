@@ -21,31 +21,36 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'WTFearB — Product & AI Engineering Studio | Make "What If" Work.',
-    template: '%s | WTFearB Engineering Studio',
+    default: 'WTFearB — Custom AI Software Development & Business Automation Agency',
+    template: '%s | WTFearB',
   },
   description:
-    'WTFearB is an elite systems engineering studio that builds and deploys governed AI agents, Next.js 15 web applications, and distributed event pipelines in deterministic 2-week sprints with 100% client GitHub IP ownership.',
+    'WTFearB engineers governed multi-agent AI systems, custom RAG pipelines, enterprise ERPs/CRMs, and full-stack SaaS platforms. Make What If Work with principal-led AI & software engineering.',
   applicationName: 'WTFearB',
   authors: [{ name: 'WTFearB Engineering Pod', url: SITE_URL }],
   keywords: [
     'WTFearB',
+    'WTFearB agency',
+    'WTFearB tech',
     'Make What If Work',
-    'AI engineering studio',
-    'governed AI agents',
-    'Next.js 15 App Router agency',
-    'FastAPI pgvector engineering',
-    'production RAG without hallucinations',
-    'Reciprocal Rank Fusion BM25',
-    'rapid 2-week engineering sprint',
+    'custom AI workflow automation agency',
+    'agentic AI development agency',
+    'multi-agent system development',
+    'LLM engineering agency',
+    'custom RAG system for enterprise',
+    'custom ERP development agency',
+    'AI-powered CRM development',
+    'full-stack SaaS development studio',
+    'AI automation agency India',
+    'custom software development agency Hyderabad',
   ],
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'WTFearB — Product & AI Engineering Studio | Make "What If" Work.',
+    title: 'WTFearB — Make What If Work | Custom AI & Software Engineering Studio',
     description:
-      'Ship governed AI agents and production software in weekly sprints. 100% GitHub IP ownership from commit #1.',
+      'WTFearB engineers governed multi-agent AI systems, custom RAG pipelines, enterprise ERPs/CRMs, and full-stack SaaS platforms. Make What If Work with principal-led AI & software engineering.',
     url: SITE_URL,
     siteName: 'WTFearB',
     locale: 'en_US',
@@ -61,9 +66,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'WTFearB — Product & AI Engineering Studio | Make "What If" Work.',
+    title: 'WTFearB — Make What If Work | Custom AI & Software Engineering Studio',
     description:
-      'Ship governed AI agents and production software in weekly sprints. 100% GitHub IP ownership from commit #1.',
+      'WTFearB engineers governed multi-agent AI systems, custom RAG pipelines, enterprise ERPs/CRMs, and full-stack SaaS platforms. Make What If Work with principal-led AI & software engineering.',
     images: ['/api/og'],
   },
   robots: {

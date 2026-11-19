@@ -1,6 +1,6 @@
 /**
- * @file Linked @graph Schema.org JSON-LD Generator for wtfear.agency
- * @version 3.0.0
+ * @file Linked @graph Schema.org JSON-LD Generator for www.wtfearb.tech
+ * @version 3.1.0
  */
 
 import { SITE_URL } from '@/lib/site-config';
@@ -9,10 +9,13 @@ export interface OrganizationJsonLd {
   readonly '@type': 'Organization';
   readonly '@id': string;
   readonly name: string;
+  readonly alternateName: readonly string[];
   readonly url: string;
   readonly logo: string;
+  readonly slogan?: string;
   readonly description: string;
-  readonly foundingDate: string;
+  readonly sameAs: readonly string[];
+  readonly areaServed: readonly string[];
   readonly contactPoint: {
     readonly '@type': 'ContactPoint';
     readonly email: string;
@@ -30,11 +33,24 @@ export function generateRootJsonLd(): Record<string, unknown> {
         '@type': 'Organization',
         '@id': `${baseUrl}/#organization`,
         name: 'WTFearB',
-        alternateName: 'WTFearB Product & AI Engineering Studio',
+        alternateName: [
+          'WTFear',
+          'WTFearB Studio',
+          'WTFearB Tech',
+          'What The Fear Boss',
+          'What The Fear Business',
+        ],
         url: baseUrl,
-        logo: `${baseUrl}/icon.png`,
+        logo: `${baseUrl}/WTFB-light-512x512.png`,
+        slogan: 'Make What If Work.',
         description:
-          'WTFearB is a senior product and AI engineering studio that makes "What If" work, shipping governed AI agents, Next.js 15 web applications, and distributed event backends with 100% client GitHub IP ownership.',
+          'WTFearB is a custom AI software development and business automation agency specializing in governed multi-agent AI systems, LLM & RAG engineering, custom ERPs/CRMs, and enterprise SaaS platforms.',
+        sameAs: [
+          'https://github.com/wtfear',
+          'https://github.com/wtfearb',
+          'https://www.linkedin.com/company/wtfearb/',
+        ],
+        areaServed: ['Global', 'India', 'Hyderabad', 'United States', 'Europe'],
         contactPoint: {
           '@type': 'ContactPoint',
           email: 'wtfearb@gmail.com',
@@ -234,17 +250,57 @@ export function generateAboutJsonLd(): Record<string, unknown> {
         '@type': 'Organization',
         '@id': `${baseUrl}/#organization`,
         name: 'WTFearB',
-        alternateName: 'WTFearB Product & AI Engineering Studio',
+        alternateName: [
+          'WTFear',
+          'WTFearB Studio',
+          'WTFearB Tech',
+          'What The Fear Boss',
+          'What The Fear Business',
+        ],
         url: baseUrl,
-        logo: `${baseUrl}/icon.png`,
+        logo: `${baseUrl}/WTFB-light-512x512.png`,
+        slogan: 'Make What If Work.',
         description:
-          'WTFearB is a principal-led Product and AI Engineering Studio built for teams solving complex operational and technical problems—without agency bloat or fragile AI wrappers.',
+          'WTFearB is a custom AI software development and business automation agency specializing in governed multi-agent AI systems, LLM & RAG engineering, custom ERPs/CRMs, and enterprise SaaS platforms.',
+        sameAs: [
+          'https://github.com/wtfear',
+          'https://github.com/wtfearb',
+          'https://www.linkedin.com/company/wtfearb/',
+        ],
+        areaServed: ['Global', 'India', 'Hyderabad', 'United States', 'Europe'],
         contactPoint: {
           '@type': 'ContactPoint',
           email: 'wtfearb@gmail.com',
           contactType: 'technical sales & architecture audit',
         },
       },
+    ],
+  };
+}
+
+export function generateFaqJsonLd(
+  items: readonly { readonly question: string; readonly answer: string }[]
+): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'What does WTFearB stand for?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'WTFearB stands for "What The Fear, Boss / Business / Buddy." Guided by the tagline "Make What If Work," WTFearB eliminates operational bottlenecks through governed multi-agent AI systems, custom software, and enterprise SaaS engineering.',
+        },
+      },
+      ...items.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer,
+        },
+      })),
     ],
   };
 }

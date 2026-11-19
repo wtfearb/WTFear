@@ -1,5 +1,5 @@
 /**
- * @file Deterministic Seed Data & Default Content for wtfear.agency (V4.0)
+ * @file Deterministic Seed Data & Default Content for www.wtfearb.tech (V4.0)
  * @description In-memory fallback and database seed for portfolio projects, pricing configs, and site settings.
  */
 

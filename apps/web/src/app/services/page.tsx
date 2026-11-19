@@ -8,18 +8,18 @@ import { ServicesGovernanceWorkbench } from '@/components/services/ServicesGover
 import { generateServicesJsonLd } from '@/lib/schema/json-ld';
 
 export const metadata: Metadata = {
-  title: 'Engineering Capabilities & Disciplines | WTFearB Systems Studio',
+  title: 'AI Workflow Automation, Agentic AI & Custom SaaS Engineering Services',
   description:
-    'End-to-end systems engineering—from governed AI pipelines and custom software to distributed backends and enterprise B2B platforms.',
+    'Custom AI workflow automation, multi-agent RAG systems, enterprise LLM engineering, B2B SaaS portals, and distributed backend pipelines engineered by WTFearB.',
   alternates: {
     canonical: '/services',
   },
   openGraph: {
-    title: 'Disciplines We Own & Deliver — WTFearB Systems Studio',
+    title: 'AI Workflow Automation, Agentic AI & Custom SaaS Engineering Services | WTFearB',
     description:
-      'End-to-end systems engineering—from governed AI pipelines and custom software to distributed backends and enterprise B2B platforms.',
+      'Custom AI workflow automation, multi-agent RAG systems, enterprise LLM engineering, B2B SaaS portals, and distributed backend pipelines engineered by WTFearB.',
     url: '/services',
-    siteName: 'WTFearB Systems Studio',
+    siteName: 'WTFearB',
     type: 'website',
   },
 };

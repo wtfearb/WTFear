@@ -60,7 +60,7 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
     default-src 'self';
     script-src ${scriptSources};
     style-src 'self' 'unsafe-inline';
-    img-src 'self' blob: data: https://wtfear.agency https://*.vercel.app https://wt-fear-lemon.vercel.app;
+    img-src 'self' blob: data: https://www.wtfearb.tech https://wtfearb.tech https://*.vercel.app;
     font-src 'self' data:;
     object-src 'none';
     base-uri 'self';

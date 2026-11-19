@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('wtfear.agency Critical Interactive State Machines & Routing', () => {
+test.describe('WTFearB Critical Interactive State Machines & Routing', () => {
   test('1. Blueprint filter & drawer enforces state invariant when switching categories', async ({ page }) => {
     await page.goto('/');
     await page.getByRole('button', { name: /Inspect Governed Support & Ops Triage Agent/i }).click();
@@ -40,11 +40,11 @@ test.describe('wtfear.agency Critical Interactive State Machines & Routing', () 
   test('4. /llms.txt and /llms-full.txt return machine-readable Markdown with 200 status', async ({ request }) => {
     const res = await request.get('/llms.txt');
     expect(res.status()).toBe(200);
-    expect(await res.text()).toContain('# wtfear — Product & AI Engineering Studio');
+    expect(await res.text()).toContain('# WTFearB — Systems Engineering Studio');
 
     const resFull = await request.get('/llms-full.txt');
     expect(resFull.status()).toBe(200);
-    expect(await resFull.text()).toContain('# wtfear.agency — Complete Technical Reference & Architecture Corpus');
+    expect(await resFull.text()).toContain('Complete Technical Reference & Architecture Corpus (llms-full.txt)');
   });
 
   test('5. Programmatic SSR Blueprint and Comparison routes load with correct canonical headers', async ({ page }) => {

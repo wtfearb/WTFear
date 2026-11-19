@@ -39,7 +39,7 @@ export async function generateMetadata({
       title: `${blueprint.title} — Production Architecture Blueprint`,
       description: blueprint.problemStatement,
       url: canonicalUrl,
-      siteName: 'wtfear — Product & AI Engineering Studio',
+      siteName: 'WTFearB',
       type: 'article',
       images: [{ url: ogImageUrl, width: 1200, height: 630, alt: blueprint.title }],
     },

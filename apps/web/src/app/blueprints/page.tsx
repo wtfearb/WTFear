@@ -5,18 +5,18 @@ import { Footer } from '@/components/layout/Footer';
 import { BLUEPRINT_CATALOG } from '@/lib/state/blueprints-machine';
 
 export const metadata: Metadata = {
-  title: 'Production Blueprints Catalog | WTFearB Systems Studio',
+  title: 'Production AI & Distributed Systems Engineering Blueprints',
   description:
-    'Exhaustive architectural blueprints, component topologies, latency targets, and CI verification gates for governed AI agents, multi-tenant SaaS, and distributed event backends.',
+    'Reference architectures for governed RAG triage agents, multi-tenant PostgreSQL RLS SaaS portals, and event-driven distributed integration spines.',
   alternates: {
     canonical: '/blueprints',
   },
   openGraph: {
-    title: 'Production Blueprints Catalog — WTFearB',
+    title: 'Production AI & Distributed Systems Engineering Blueprints | WTFearB',
     description:
-      'Inspect production-ready architectural monographs: data topologies, verification gates, and code contracts.',
+      'Reference architectures for governed RAG triage agents, multi-tenant PostgreSQL RLS SaaS portals, and event-driven distributed integration spines.',
     url: '/blueprints',
-    siteName: 'WTFearB Systems Studio',
+    siteName: 'WTFearB',
     type: 'website',
   },
 };

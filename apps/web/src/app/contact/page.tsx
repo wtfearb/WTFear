@@ -7,11 +7,19 @@ import { ContactFormClient } from '@/components/forms/ContactFormClient';
 import { CopyEmailButton } from '@/components/forms/CopyEmailButton';
 
 export const metadata: Metadata = {
-  title: 'Contact & Engineering Inquiries | WTFearB',
+  title: 'Start a Technical Conversation — Contact WTFearB Engineers',
   description:
-    'Start a direct technical conversation with principal product and AI engineers. Share your architecture, workflow constraints, or product scope with zero sales intermediaries.',
+    'Engage directly with WTFearB principal product and AI engineers to scope custom AI automation, RAG systems, or enterprise SaaS platforms.',
   alternates: {
     canonical: '/contact',
+  },
+  openGraph: {
+    title: 'Start a Technical Conversation — Contact WTFearB Engineers | WTFearB',
+    description:
+      'Engage directly with WTFearB principal product and AI engineers to scope custom AI automation, RAG systems, or enterprise SaaS platforms.',
+    url: '/contact',
+    siteName: 'WTFearB',
+    type: 'website',
   },
 };
 

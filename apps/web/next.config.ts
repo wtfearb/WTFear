@@ -12,7 +12,11 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'wtfear.agency',
+        hostname: 'www.wtfearb.tech',
+      },
+      {
+        protocol: 'https',
+        hostname: 'wtfearb.tech',
       },
     ],
   },

@@ -10,18 +10,18 @@ import { SITE_URL } from '@/lib/site-config';
 import { SEED_PORTFOLIO_PROJECTS } from '@/lib/seed-data';
 
 export const metadata: Metadata = {
-  title: 'Selected Engineering Work & Flagship Platforms | WTFearB',
+  title: 'Flagship AI, ERP, Voice & SaaS Engineering Case Studies',
   description:
-    'Explore the sovereign platforms, live deployments, and architectural decisions behind WTFearB’s 10 flagship software and AI systems.',
+    'Explore WTFearB’s 10 flagship platforms including PolarisERP, NexusVoice, VegaDocs, NexusAudit, and CapellaBI—engineered with live deployments and sovereign architectures.',
   alternates: {
     canonical: '/projects',
   },
   openGraph: {
-    title: 'Selected Engineering Work & Flagship Platforms — WTFearB',
+    title: 'Flagship AI, ERP, Voice & SaaS Engineering Case Studies | WTFearB',
     description:
-      'Explore 10 production platforms with real architectures, live deployments, and sovereign code contracts.',
+      'Explore WTFearB’s 10 flagship platforms including PolarisERP, NexusVoice, VegaDocs, NexusAudit, and CapellaBI—engineered with live deployments and sovereign architectures.',
     url: '/projects',
-    siteName: 'WTFearB Systems Studio',
+    siteName: 'WTFearB',
     type: 'website',
   },
 };
@@ -34,9 +34,9 @@ export default function ProjectsIndexPage(): React.ReactElement {
         '@type': 'CollectionPage',
         '@id': `${SITE_URL}/projects#webpage`,
         url: `${SITE_URL}/projects`,
-        name: 'Selected Engineering Work & Flagship Platforms | WTFearB',
+        name: 'Flagship AI, ERP, Voice & SaaS Engineering Case Studies | WTFearB',
         description:
-          'Explore the sovereign platforms, live deployments, and architectural decisions behind WTFearB’s 10 flagship software and AI systems.',
+          'Explore WTFearB’s 10 flagship platforms including PolarisERP, NexusVoice, VegaDocs, NexusAudit, and CapellaBI—engineered with live deployments and sovereign architectures.',
         breadcrumb: {
           '@type': 'BreadcrumbList',
           itemListElement: [
