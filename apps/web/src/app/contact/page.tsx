@@ -280,7 +280,7 @@ export default async function ContactPage({
                           className="font-sans text-[14px] font-bold text-[#0A0A0C] border-b border-[#C83E1B] pb-0.5 inline-flex items-center gap-1 hover:text-[#C83E1B] transition-colors"
                         >
                           <span>WTFearB on LinkedIn</span>
-                          <span className="text-[#C83E1B]">&nearr;</span>
+                          <span className="text-[#C83E1B]">↗</span>
                         </a>
                       </div>
                     </div>

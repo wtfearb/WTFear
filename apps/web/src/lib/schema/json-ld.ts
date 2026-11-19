@@ -192,3 +192,59 @@ export function generateServicesJsonLd(): Record<string, unknown> {
     ],
   };
 }
+
+export function generateAboutJsonLd(): Record<string, unknown> {
+  const baseUrl = SITE_URL;
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'AboutPage',
+        '@id': `${baseUrl}/about#webpage`,
+        url: `${baseUrl}/about`,
+        name: 'About WTFearB — Studio Monograph & Operating Architecture',
+        description:
+          'WTFearB is a principal-led Product and AI Engineering Studio built for teams solving complex operational and technical problems—without agency bloat or fragile AI wrappers.',
+        isPartOf: {
+          '@id': `${baseUrl}/#website`,
+        },
+        breadcrumb: {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            {
+              '@type': 'ListItem',
+              position: 1,
+              name: 'Home',
+              item: baseUrl,
+            },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: 'About',
+              item: `${baseUrl}/about`,
+            },
+          ],
+        },
+        about: {
+          '@id': `${baseUrl}/#organization`,
+        },
+      },
+      {
+        '@type': 'Organization',
+        '@id': `${baseUrl}/#organization`,
+        name: 'WTFearB',
+        alternateName: 'WTFearB Product & AI Engineering Studio',
+        url: baseUrl,
+        logo: `${baseUrl}/icon.png`,
+        description:
+          'WTFearB is a principal-led Product and AI Engineering Studio built for teams solving complex operational and technical problems—without agency bloat or fragile AI wrappers.',
+        contactPoint: {
+          '@type': 'ContactPoint',
+          email: 'wtfearb@gmail.com',
+          contactType: 'technical sales & architecture audit',
+        },
+      },
+    ],
+  };
+}
