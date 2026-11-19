@@ -31,10 +31,11 @@ export function Footer(): React.ReactElement {
           <div className="lg:col-span-6 lg:pr-12">
             {/* Brand Lockup Row */}
             <div className="flex flex-wrap items-center gap-3 mb-5">
-              <span className="w-4 h-4 bg-[#C83E1B] inline-block shrink-0" aria-hidden="true" />
-              <span className="font-sans font-extrabold text-[20px] tracking-[-0.025em] text-[#FFFFFF]">
-                WTFearB
-              </span>
+              <img
+                src="/brand/wtfearb-wordmark-dark.svg"
+                alt="WTFearB"
+                className="h-6 sm:h-7 w-auto block"
+              />
               <span className="h-4 w-px bg-[#343740] mx-1" aria-hidden="true" />
               <span className="font-sans text-[14px] text-[#B7BBC4]">
                 Make “What If” Work.

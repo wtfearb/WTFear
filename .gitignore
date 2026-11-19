@@ -63,3 +63,6 @@ playwright/.cache/
 .DS_Store
 Thumbs.db
 .github/
+
+# Local Assets & Design Sources
+WTFearB_Logo_Refinements/

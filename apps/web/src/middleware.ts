@@ -5,12 +5,17 @@ import { ADMIN_COOKIE_NAME, verifyAdminToken } from '@/lib/auth/admin-auth';
 export async function middleware(request: NextRequest): Promise<NextResponse> {
   const pathname = request.nextUrl.pathname;
 
-  // Passthrough untouched for machine-readable AEO/SEO feeds
+  // Passthrough untouched for machine-readable AEO/SEO feeds, verification, and brand assets
   if (
     pathname === '/llms.txt' ||
     pathname === '/llms-full.txt' ||
     pathname === '/sitemap.xml' ||
-    pathname === '/robots.txt'
+    pathname === '/robots.txt' ||
+    pathname === '/google50e3a155afa929e3.html' ||
+    pathname === '/site.webmanifest' ||
+    pathname === '/favicon.ico' ||
+    pathname === '/favicon-dark.ico' ||
+    pathname.startsWith('/brand/')
   ) {
     return NextResponse.next();
   }

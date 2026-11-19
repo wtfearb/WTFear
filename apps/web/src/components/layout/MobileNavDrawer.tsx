@@ -56,12 +56,13 @@ export function MobileNavDrawer({
       >
         <div className="space-y-6">
           <div className="flex items-center justify-between border-b border-[var(--color-border-hairline)] pb-4">
-            <div className="flex items-center gap-2.5">
-              <span className="h-3.5 w-3.5 bg-[#C83E1B]" aria-hidden="true" />
-              <span className="font-sans font-black text-lg tracking-tight text-[#0A0A0C]">
-                WTFearB
-              </span>
-            </div>
+            <Link href="/" onClick={onClose} className="flex items-center">
+              <img
+                src="/brand/wtfearb-wordmark-light.svg"
+                alt="WTFearB"
+                className="h-6 w-auto block"
+              />
+            </Link>
             <button
               ref={closeBtnRef}
               type="button"

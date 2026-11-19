@@ -38,19 +38,14 @@ export function Header(): React.ReactElement {
           {/* Left Brand Lockup - Prominent Logo */}
           <Link
             href="/"
-            className="flex items-center gap-3 shrink-0 group py-1"
+            className="flex items-center shrink-0 group py-1"
             aria-label="WTFearB Home"
           >
-            {/* Precision Brand Mark */}
-            <span
-              className="w-4 h-4 sm:w-4.5 sm:h-4.5 bg-[#C83E1B] shrink-0 transition-transform duration-200 group-hover:scale-105"
-              aria-hidden="true"
+            <img
+              src="/brand/wtfearb-wordmark-light.svg"
+              alt="WTFearB"
+              className="h-7 sm:h-8 w-auto block transition-opacity group-hover:opacity-90"
             />
-            
-            {/* Wordmark Logo */}
-            <span className="font-sans font-black text-[21px] sm:text-[23px] tracking-[-0.03em] text-[#0A0A0C] transition-colors group-hover:text-[#C83E1B]">
-              WTFearB
-            </span>
           </Link>
 
           {/* Center Navigation with Active Orange Bottom Bar */}
