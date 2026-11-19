@@ -157,7 +157,7 @@ export function ProjectsIndexTable(): React.ReactElement {
                 Architecture Audit &amp; Technical Discovery
               </h4>
               <p className="font-sans text-[13px] text-[#5A5D6A] leading-relaxed mb-4">
-                Fast-turnaround assessment of bottlenecks, security postures, and retrieval architectures (`NexusAudit` inspection mode).
+                Fast-turnaround assessment of bottlenecks, security postures, and retrieval architectures (NexusAudit inspection mode).
               </p>
               <div className="font-mono text-[10.5px] text-[#717684]">
                 TIMELINE: 3–5 DAYS · ACTIONABLE REPORT
@@ -173,7 +173,7 @@ export function ProjectsIndexTable(): React.ReactElement {
                 Sovereign AI &amp; Operational Automations
               </h4>
               <p className="font-sans text-[13px] text-[#5A5D6A] leading-relaxed mb-4">
-                Deploy focused high-leverage workflows (`VegaDocs` RAG, `CastorChat` desk, or `CapellaBI` client-side OLAP).
+                Deploy focused high-leverage workflows (VegaDocs RAG, CastorChat desk, or CapellaBI client-side OLAP).
               </p>
               <div className="font-mono text-[10.5px] text-[#717684]">
                 TIMELINE: 2–3 WEEKS · PRODUCTION MVP
@@ -189,7 +189,7 @@ export function ProjectsIndexTable(): React.ReactElement {
                 Autonomous ERP &amp; Event Backbones
               </h4>
               <p className="font-sans text-[13px] text-[#5A5D6A] leading-relaxed mb-4">
-                Full-scale enterprise operational spines (`PolarisERP`, `AntaresERP`, or `SiriusIQ` cognitive decision engines).
+                Full-scale enterprise operational spines (PolarisERP, AntaresERP, or SiriusIQ cognitive decision engines).
               </p>
               <div className="font-mono text-[10.5px] text-[#C83E1B] font-semibold">
                 TIMELINE: MILESTONE-SCOPED ARCHITECTURE
