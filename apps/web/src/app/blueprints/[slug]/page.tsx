@@ -27,17 +27,18 @@ export async function generateMetadata({
     blueprint.durationLabel
   )}`;
 
+  const cleanSummary =
+    blueprint.summary.length > 150 ? `${blueprint.summary.slice(0, 147)}...` : blueprint.summary;
+
   return {
-    title: `${blueprint.title} (${blueprint.durationLabel})`,
-    description: `${blueprint.summary} Built with ${blueprint.stack.join(
-      ', '
-    )}. Verified via ${blueprint.verificationGate}.`,
+    title: blueprint.title,
+    description: cleanSummary,
     alternates: {
       canonical: canonicalUrl,
     },
     openGraph: {
-      title: `${blueprint.title} — Production Architecture Blueprint`,
-      description: blueprint.problemStatement,
+      title: blueprint.title,
+      description: cleanSummary,
       url: canonicalUrl,
       siteName: 'WTFearB',
       type: 'article',
@@ -46,7 +47,7 @@ export async function generateMetadata({
     twitter: {
       card: 'summary_large_image',
       title: blueprint.title,
-      description: blueprint.summary,
+      description: cleanSummary,
       images: [ogImageUrl],
     },
   };

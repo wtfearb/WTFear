@@ -21,11 +21,11 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'WTFearB — Custom AI Software Development & Business Automation Agency',
+    default: 'WTFearB — Custom AI Software & Automation Agency',
     template: '%s | WTFearB',
   },
   description:
-    'WTFearB engineers governed multi-agent AI systems, custom RAG pipelines, enterprise ERPs/CRMs, and full-stack SaaS platforms. Make What If Work with principal-led AI & software engineering.',
+    'WTFearB engineers governed multi-agent AI systems, custom RAG pipelines, enterprise ERPs, and B2B SaaS platforms. Make What If Work with senior rigor.',
   applicationName: 'WTFearB',
   authors: [{ name: 'WTFearB Engineering Pod', url: SITE_URL }],
   keywords: [
@@ -48,9 +48,9 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: 'WTFearB — Make What If Work | Custom AI & Software Engineering Studio',
+    title: 'WTFearB — Custom AI Software & Automation Agency',
     description:
-      'WTFearB engineers governed multi-agent AI systems, custom RAG pipelines, enterprise ERPs/CRMs, and full-stack SaaS platforms. Make What If Work with principal-led AI & software engineering.',
+      'WTFearB engineers governed multi-agent AI systems, custom RAG pipelines, enterprise ERPs, and B2B SaaS platforms. Make What If Work with senior rigor.',
     url: SITE_URL,
     siteName: 'WTFearB',
     locale: 'en_US',
@@ -66,9 +66,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'WTFearB — Make What If Work | Custom AI & Software Engineering Studio',
+    title: 'WTFearB — Custom AI Software & Automation Agency',
     description:
-      'WTFearB engineers governed multi-agent AI systems, custom RAG pipelines, enterprise ERPs/CRMs, and full-stack SaaS platforms. Make What If Work with principal-led AI & software engineering.',
+      'WTFearB engineers governed multi-agent AI systems, custom RAG pipelines, enterprise ERPs, and B2B SaaS platforms. Make What If Work with senior rigor.',
     images: ['/api/og'],
   },
   robots: {

@@ -17,8 +17,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/audit`, lastModified, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${baseUrl}/compare`, lastModified, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${baseUrl}/playbooks`, lastModified, changeFrequency: 'weekly', priority: 0.9 },
-    { url: `${baseUrl}/llms.txt`, lastModified, changeFrequency: 'weekly', priority: 0.9 },
-    { url: `${baseUrl}/llms-full.txt`, lastModified, changeFrequency: 'weekly', priority: 0.9 },
   ];
 
   const comparisonRoutes: MetadataRoute.Sitemap = [

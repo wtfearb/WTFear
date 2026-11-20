@@ -59,7 +59,11 @@ playwright/.cache/
 
 # Environment & OS
 .env
-.env*.local
+.env.local
+.env.*.local
+*.env*
+apps/web/.env*
+apps/web/.env.local
 .DS_Store
 Thumbs.db
 .github/

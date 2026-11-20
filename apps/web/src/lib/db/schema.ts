@@ -40,7 +40,7 @@ export const activityEvents = pgTable('activity_events', {
   path: text('path').notNull(),
   targetLabel: text('target_label'),
   payloadJson: jsonb('payload_json'),
-  createdAt: timestamp('createdAt', { withTimezone: true }).notNull().defaultNow(),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 });
 
 // 3. Audit Leads Table

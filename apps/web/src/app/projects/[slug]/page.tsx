@@ -13,6 +13,19 @@ const LEGACY_SLUG_MAP: Record<string, string> = {
   'veritas-contract-intelligence': 'vega-docs',
 };
 
+const SHORT_TITLES: Record<string, string> = {
+  'polaris-erp': 'PolarisERP — Autonomous CRM & ERP',
+  'nexus-voice': 'NexusVoice — Sovereign Voice AI',
+  'vega-docs': 'VegaDocs — Private Document RAG',
+  'nexus-audit': 'NexusAudit — Autonomous Web Auditor',
+  'capella-bi': 'CapellaBI — DuckDB-WASM Analytics',
+  'nexus-persona': 'NexusPersona — Multi-Agent Simulation',
+  'castor-chat': 'CastorChat — WhatsApp Support Desk',
+  'sirius-iq': 'SiriusIQ — Agent Decision Fabric',
+  'altair-commerce': 'AltairCommerce — Headless Commerce',
+  'antares-erp': 'AntaresERP — Retail POS & Warehouse',
+};
+
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const projects = await getPortfolioProjects(false);
   const baseSlugs = projects.map((p) => ({ slug: p.slug }));
@@ -31,24 +44,26 @@ export async function generateMetadata({
   if (!project) return {};
 
   const canonicalUrl = `${SITE_URL}/projects/${project.slug}`;
+  const shortTitle = SHORT_TITLES[project.slug] || `${project.title} — Systems Monograph`;
+  const cleanSummary = project.summary.length > 150 ? `${project.summary.slice(0, 147)}...` : project.summary;
 
   return {
-    title: `${project.title} — Systems Monograph | WTFearB`,
-    description: `${project.summary} Delivered with ${project.category} architecture. Outcomes: ${project.outcomesSummary}`,
+    title: shortTitle,
+    description: cleanSummary,
     alternates: {
       canonical: canonicalUrl,
     },
     openGraph: {
-      title: `${project.title} — Production Case Study`,
-      description: project.summary,
+      title: shortTitle,
+      description: cleanSummary,
       url: canonicalUrl,
       siteName: 'WTFearB',
       type: 'article',
     },
     twitter: {
       card: 'summary_large_image',
-      title: project.title,
-      description: project.summary,
+      title: shortTitle,
+      description: cleanSummary,
     },
   };
 }

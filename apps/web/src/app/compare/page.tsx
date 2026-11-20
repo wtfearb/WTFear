@@ -4,19 +4,25 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
-  title: 'Engineering Comparisons & Operational Tradeoffs | WTFearB',
+  title: 'Engineering Comparisons & Tradeoffs',
   description:
     'Architectural and cost comparisons: WTFearB embedded senior pods vs traditional agencies, full-time hiring, and no-code tools.',
   alternates: {
     canonical: '/compare',
   },
   openGraph: {
-    title: 'Engineering Comparisons & Operational Tradeoffs — WTFearB',
+    title: 'Engineering Comparisons & Tradeoffs',
     description:
-      'Evaluate engineering tradeoffs: Delivery cadence, AI hallucination risk, IP ownership, and burn rate.',
+      'Architectural and cost comparisons: WTFearB embedded senior pods vs traditional agencies, full-time hiring, and no-code tools.',
     url: '/compare',
-    siteName: 'WTFearB Systems Studio',
+    siteName: 'WTFearB',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Engineering Comparisons & Tradeoffs',
+    description:
+      'Architectural and cost comparisons: WTFearB embedded senior pods vs traditional agencies, full-time hiring, and no-code tools.',
   },
 };
 

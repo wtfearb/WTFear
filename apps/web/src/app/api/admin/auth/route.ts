@@ -13,6 +13,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   const isAuthenticated = await verifyAdminToken(token);
 
   return NextResponse.json({
+    ok: isAuthenticated,
     authenticated: isAuthenticated,
     isCustomPasswordConfigured: isCustomPasswordConfigured(),
   });
@@ -24,7 +25,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const { password, action } = body;
 
     if (action === 'logout') {
-      const response = NextResponse.json({ success: true, message: 'Logged out successfully' });
+      const response = NextResponse.json({ ok: true, success: true, message: 'Logged out successfully' });
       response.cookies.delete(ADMIN_COOKIE_NAME);
       return response;
     }
@@ -33,13 +34,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     if (!password || typeof password !== 'string' || password.trim() !== expectedPassword.trim()) {
       return NextResponse.json(
-        { error: 'Invalid password. Access denied.' },
+        { ok: false, error: 'Invalid password. Access denied.' },
         { status: 401 }
       );
     }
 
-    const token = await createAdminToken(expectedPassword);
+    const token = await createAdminToken();
     const response = NextResponse.json({
+      ok: true,
       success: true,
       message: 'Admin authentication verified',
     });
@@ -59,14 +61,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     return response;
   } catch (err: unknown) {
     return NextResponse.json(
-      { error: err instanceof Error ? err.message : 'Authentication failed' },
+      { ok: false, error: err instanceof Error ? err.message : 'Authentication failed' },
       { status: 500 }
     );
   }
 }
 
 export async function DELETE(): Promise<NextResponse> {
-  const response = NextResponse.json({ success: true, message: 'Logged out' });
+  const response = NextResponse.json({ ok: true, success: true, message: 'Logged out' });
   response.cookies.delete(ADMIN_COOKIE_NAME);
   return response;
 }

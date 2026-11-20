@@ -6,19 +6,25 @@ import { Footer } from '@/components/layout/Footer';
 import { generateAboutJsonLd } from '@/lib/schema/json-ld';
 
 export const metadata: Metadata = {
-  title: 'About WTFearB — Eliminating Operational Fear Through Governed AI',
+  title: 'About WTFearB — Governed AI & Engineering',
   description:
-    'Learn how WTFearB combines frontier AI engineering and systems rigor to build governed AI agents, custom ERPs, and maintainable software—Make What If Work.',
+    'Learn how WTFearB combines frontier AI engineering and systems rigor to build governed AI agents, custom ERPs, and resilient software platforms.',
   alternates: {
     canonical: '/about',
   },
   openGraph: {
-    title: 'About WTFearB — Eliminating Operational Fear Through Governed AI',
+    title: 'About WTFearB — Governed AI & Engineering',
     description:
-      'Learn how WTFearB combines frontier AI engineering and systems rigor to build governed AI agents, custom ERPs, and maintainable software—Make What If Work.',
+      'Learn how WTFearB combines frontier AI engineering and systems rigor to build governed AI agents, custom ERPs, and resilient software platforms.',
     url: '/about',
     siteName: 'WTFearB',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About WTFearB — Governed AI & Engineering',
+    description:
+      'Learn how WTFearB combines frontier AI engineering and systems rigor to build governed AI agents, custom ERPs, and resilient software platforms.',
   },
 };
 

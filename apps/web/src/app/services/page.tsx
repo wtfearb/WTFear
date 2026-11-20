@@ -8,19 +8,25 @@ import { ServicesGovernanceWorkbench } from '@/components/services/ServicesGover
 import { generateServicesJsonLd } from '@/lib/schema/json-ld';
 
 export const metadata: Metadata = {
-  title: 'AI Workflow Automation, Agentic AI & Custom SaaS Engineering Services',
+  title: 'AI Automation, Agentic AI & SaaS Engineering',
   description:
-    'Custom AI workflow automation, multi-agent RAG systems, enterprise LLM engineering, B2B SaaS portals, and distributed backend pipelines engineered by WTFearB.',
+    'Custom AI workflow automation, multi-agent RAG systems, enterprise LLM engineering, B2B SaaS portals, and distributed pipelines by WTFearB.',
   alternates: {
     canonical: '/services',
   },
   openGraph: {
-    title: 'AI Workflow Automation, Agentic AI & Custom SaaS Engineering Services | WTFearB',
+    title: 'AI Automation, Agentic AI & SaaS Engineering',
     description:
-      'Custom AI workflow automation, multi-agent RAG systems, enterprise LLM engineering, B2B SaaS portals, and distributed backend pipelines engineered by WTFearB.',
+      'Custom AI workflow automation, multi-agent RAG systems, enterprise LLM engineering, B2B SaaS portals, and distributed pipelines by WTFearB.',
     url: '/services',
     siteName: 'WTFearB',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'AI Automation, Agentic AI & SaaS Engineering',
+    description:
+      'Custom AI workflow automation, multi-agent RAG systems, enterprise LLM engineering, B2B SaaS portals, and distributed pipelines by WTFearB.',
   },
 };
 

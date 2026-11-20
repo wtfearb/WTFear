@@ -5,19 +5,25 @@ import { Footer } from '@/components/layout/Footer';
 import { BLUEPRINT_CATALOG } from '@/lib/state/blueprints-machine';
 
 export const metadata: Metadata = {
-  title: 'Production AI & Distributed Systems Engineering Blueprints',
+  title: 'AI & Distributed Engineering Blueprints',
   description:
-    'Reference architectures for governed RAG triage agents, multi-tenant PostgreSQL RLS SaaS portals, and event-driven distributed integration spines.',
+    'Reference architectures for governed RAG triage agents, multi-tenant Postgres SaaS portals, and distributed integration pipelines.',
   alternates: {
     canonical: '/blueprints',
   },
   openGraph: {
-    title: 'Production AI & Distributed Systems Engineering Blueprints | WTFearB',
+    title: 'AI & Distributed Engineering Blueprints',
     description:
-      'Reference architectures for governed RAG triage agents, multi-tenant PostgreSQL RLS SaaS portals, and event-driven distributed integration spines.',
+      'Reference architectures for governed RAG triage agents, multi-tenant Postgres SaaS portals, and distributed integration pipelines.',
     url: '/blueprints',
     siteName: 'WTFearB',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'AI & Distributed Engineering Blueprints',
+    description:
+      'Reference architectures for governed RAG triage agents, multi-tenant Postgres SaaS portals, and distributed integration pipelines.',
   },
 };
 

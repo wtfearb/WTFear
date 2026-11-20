@@ -17,6 +17,7 @@ interface AdminDashboardClientProps {
   initialProjects: PortfolioProject[];
   initialPricing: PricingConfig[];
   initialSettings: SiteSettings;
+  isLiveDatabase?: boolean;
 }
 
 type TabType = 'telemetry' | 'leads' | 'projects' | 'pricing';
@@ -27,6 +28,7 @@ export function AdminDashboardClient({
   initialProjects,
   initialPricing,
   initialSettings,
+  isLiveDatabase = false,
 }: AdminDashboardClientProps): React.ReactElement {
   const router = useRouter();
 
@@ -606,12 +608,18 @@ export function AdminDashboardClient({
           <div className="flex items-center gap-3">
             <span className="w-3 h-3 bg-[#C83E1B] shadow-[0_0_10px_#C83E1B]" />
             <div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <span className="text-sm font-bold tracking-wider text-white">
                   WTFearB // ENGINEERING COMMAND CENTER
                 </span>
-                <span className="text-[10px] px-1.5 py-0.5 border border-emerald-500/40 bg-emerald-950/30 text-emerald-400">
-                  LIVE
+                <span
+                  className={`text-[10px] font-bold px-2 py-0.5 border ${
+                    isLiveDatabase
+                      ? 'border-emerald-500/50 bg-emerald-950/40 text-emerald-400'
+                      : 'border-amber-500/50 bg-amber-950/40 text-amber-400'
+                  }`}
+                >
+                  {isLiveDatabase ? 'DATABASE: NEON POSTGRES LIVE' : 'DATABASE: FALLBACK MEMORY'}
                 </span>
               </div>
               <p className="text-[11px] text-[#717482] mt-0.5">

@@ -507,10 +507,102 @@ class InMemoryDatabase {
 const memoryStore = new InMemoryDatabase();
 
 // ============================================================================
+// IDEMPOTENT NEON POSTGRES AUTO-SEED ENGINE
+// ============================================================================
+let isSeededPromise: Promise<void> | null = null;
+
+export async function ensureDatabaseSeeded(): Promise<void> {
+  if (isSeededPromise) return isSeededPromise;
+
+  isSeededPromise = (async () => {
+    if (!db) return;
+
+    try {
+      // 1. Check & seed portfolio projects
+      const existingProjects = await db
+        .select({ id: schema.portfolioProjects.id })
+        .from(schema.portfolioProjects)
+        .limit(1);
+
+      if (existingProjects.length === 0) {
+        console.log('[DB] Seeding 10 Flagship Portfolio Projects to Neon DB...');
+        for (const p of SEED_PORTFOLIO_PROJECTS) {
+          await db
+            .insert(schema.portfolioProjects)
+            .values({
+              id: p.id,
+              slug: p.slug,
+              indexNumber: p.indexNumber,
+              title: p.title,
+              industry: p.industry,
+              category: p.category,
+              summary: p.summary,
+              problem: p.problem,
+              solution: p.solution,
+              architectureNodesJson: p.architectureNodesJson as unknown,
+              stackTags: p.stackTags as unknown,
+              keyFeatures: p.keyFeatures as unknown,
+              outcomesSummary: p.outcomesSummary,
+              liveUrl: p.liveUrl,
+              repoUrl: p.repoUrl,
+              isPublished: p.isPublished,
+              updatedAt: new Date(p.updatedAt),
+            })
+            .onConflictDoNothing();
+        }
+      }
+
+      // 2. Check & seed pricing configs
+      const existingPricing = await db
+        .select({ id: schema.pricingConfigs.id })
+        .from(schema.pricingConfigs)
+        .limit(1);
+
+      if (existingPricing.length === 0) {
+        console.log('[DB] Seeding Pricing Configs to Neon DB...');
+        for (const pr of SEED_PRICING_CONFIGS) {
+          await db
+            .insert(schema.pricingConfigs)
+            .values({
+              id: pr.id,
+              modelSlug: pr.modelSlug,
+              title: pr.title,
+              subtitle: pr.subtitle,
+              baseMinUsd: pr.baseMinUsd,
+              baseMaxUsd: pr.baseMaxUsd,
+              defaultDurationLabel: pr.defaultDurationLabel,
+              teamAllocation: pr.teamAllocation,
+              deliverables: pr.deliverables as unknown,
+              isPublished: pr.isPublished,
+              updatedAt: new Date(pr.updatedAt),
+            })
+            .onConflictDoNothing();
+        }
+      }
+    } catch (err) {
+      console.warn('[DB] ensureDatabaseSeeded encountered error (using memory store fallback):', err);
+    }
+  })();
+
+  return isSeededPromise;
+}
+
+export async function checkDatabaseConnection(): Promise<boolean> {
+  if (!db) return false;
+  try {
+    await db.select({ id: schema.portfolioProjects.id }).from(schema.portfolioProjects).limit(1);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+// ============================================================================
 // HIGH-LEVEL REPOSITORY API (Auto-switches between Neon Postgres and In-Memory)
 // ============================================================================
 
 export async function getPortfolioProjects(publishedOnly = true): Promise<schema.PortfolioProject[]> {
+  await ensureDatabaseSeeded();
   if (db) {
     try {
       const query = publishedOnly
@@ -528,6 +620,7 @@ export async function getPortfolioProjects(publishedOnly = true): Promise<schema
 }
 
 export async function getPortfolioProjectBySlug(slug: string): Promise<schema.PortfolioProject | null> {
+  await ensureDatabaseSeeded();
   if (db) {
     try {
       const rows = await db
@@ -596,6 +689,7 @@ export async function deletePortfolioProject(id: string): Promise<boolean> {
 }
 
 export async function getPricingConfigs(publishedOnly = true): Promise<schema.PricingConfig[]> {
+  await ensureDatabaseSeeded();
   if (db) {
     try {
       const query = publishedOnly

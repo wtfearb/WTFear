@@ -289,7 +289,7 @@ export function AuditBookingModal({
                 <label className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#3F414A] block">
                   AUDIT FOCUS AREA
                 </label>
-                <div className="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-2">
+                <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   {AUDIT_FOCUS_AREAS.map((area) => {
                     const isSelected = focusArea === area;
                     return (
@@ -299,8 +299,8 @@ export function AuditBookingModal({
                         onClick={() => setFocusArea(area)}
                         className={
                           isSelected
-                            ? 'bg-[#0A0A0C] text-[#FFFFFF] border border-[#0A0A0C] rounded-[2px] px-2.5 py-2 text-[11.5px] font-medium flex items-center gap-1.5 cursor-pointer text-left transition-colors'
-                            : 'bg-[#FFFFFF] text-[#0A0A0C] border border-[#E2E2E8] hover:border-[#0A0A0C] rounded-[2px] px-2.5 py-2 text-[11.5px] font-medium flex items-center gap-1.5 cursor-pointer text-left transition-colors'
+                            ? 'bg-[#0A0A0C] text-[#FFFFFF] border border-[#0A0A0C] rounded-[2px] px-3 py-2.5 text-[12px] font-medium flex items-center gap-2 cursor-pointer text-left transition-colors'
+                            : 'bg-[#FFFFFF] text-[#0A0A0C] border border-[#E2E2E8] hover:border-[#0A0A0C] rounded-[2px] px-3 py-2.5 text-[12px] font-medium flex items-center gap-2 cursor-pointer text-left transition-colors'
                         }
                       >
                         <span
@@ -308,7 +308,7 @@ export function AuditBookingModal({
                             isSelected ? 'bg-[#C83E1B]' : 'bg-[#E2E2E8]'
                           }`}
                         />
-                        <span className="truncate">{area}</span>
+                        <span>{area}</span>
                       </button>
                     );
                   })}
@@ -420,10 +420,10 @@ export function AuditBookingModal({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="h-11 px-5 bg-[#0A0A0C] hover:bg-[#181A20] text-[#FFFFFF] rounded-[2px] font-mono text-[11px] font-bold uppercase tracking-[0.1em] inline-flex items-center gap-2 transition-colors cursor-pointer disabled:opacity-60"
+                  className="h-11 px-5 bg-[#0A0A0C] hover:bg-[#181A20] text-[#FFFFFF] rounded-[2px] font-mono text-[11px] font-bold uppercase tracking-[0.1em] inline-flex items-center gap-2 transition-colors cursor-pointer disabled:opacity-60 whitespace-nowrap shrink-0"
                 >
-                  <span>{isSubmitting ? 'DISPATCHING...' : 'DISPATCH AUDIT REQUEST'}</span>
-                  <span className="text-[#C83E1B]">&rarr;</span>
+                  <span className="whitespace-nowrap">{isSubmitting ? 'DISPATCHING...' : 'DISPATCH AUDIT REQUEST'}</span>
+                  <span className="text-[#FF6B47] text-sm leading-none">&rarr;</span>
                 </button>
               </div>
             </div>

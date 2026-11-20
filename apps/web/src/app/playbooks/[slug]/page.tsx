@@ -8,6 +8,7 @@ import { SITE_URL } from '@/lib/site-config';
 interface PlaybookData {
   readonly slug: string;
   readonly title: string;
+  readonly shortTitle?: string;
   readonly metaDescription: string;
   readonly summary: string;
   readonly targetLatency: string;
@@ -23,6 +24,7 @@ const PLAYBOOKS: Record<string, PlaybookData> = {
   'governed-rag-evaluation-harness': {
     slug: 'governed-rag-evaluation-harness',
     title: 'Playbook: Eliminating Hallucinations in Production RAG with Pydantic v2 & Golden Evals',
+    shortTitle: 'Governed RAG Evaluation Harness Guide',
     metaDescription: 'Step-by-step engineering playbook for building deterministic RAG governance, Reciprocal Rank Fusion, and CI-blocking 50-case evaluation suites.',
     summary: 'A principal engineer guide to building zero-hallucination agentic retrieval systems in Python 3.12, FastAPI, and PostgreSQL 16.',
     targetLatency: 'Retriever < 45ms, Orchestrator < 1,400ms',
@@ -56,7 +58,8 @@ def verify_autonomous_citations(self) -> Self:
   'postgres-rls-pgvector-hybrid-search': {
     slug: 'postgres-rls-pgvector-hybrid-search',
     title: 'Playbook: PostgreSQL 16 RLS + pgvector HNSW Hybrid BM25 Search',
-    metaDescription: 'Complete tutorial and SQL reference for pgvector HNSW + ParadeDB BM25 (pg_search) / Lexical FTS (ts_rank_cd) RRF in PostgreSQL 16 with Row-Level Security.',
+    shortTitle: 'Postgres RLS & pgvector Hybrid Search',
+    metaDescription: 'Complete guide for pgvector HNSW and lexical BM25 search in PostgreSQL 16 with Row-Level Security and Reciprocal Rank Fusion.',
     summary: 'Architecting single-query multi-tenant hybrid search without external vector database dependencies or synchronization drift.',
     targetLatency: 'p95 query latency < 45ms across 1M chunks',
     definitionLead: 'PostgreSQL 16 Hybrid Search combines pgvector HNSW cosine distance with ParadeDB BM25 (pg_search) / Lexical FTS (ts_rank_cd) RRF inside a single transaction secured by Row-Level Security (RLS).',
@@ -99,18 +102,25 @@ export async function generateMetadata({
   const playbook = PLAYBOOKS[slug];
   if (!playbook) return {};
 
+  const pageTitle = playbook.shortTitle || playbook.title;
+
   return {
-    title: playbook.title,
+    title: pageTitle,
     description: playbook.metaDescription,
     alternates: {
       canonical: `${SITE_URL}/playbooks/${slug}`,
     },
     openGraph: {
-      title: playbook.title,
+      title: pageTitle,
       description: playbook.metaDescription,
       url: `${SITE_URL}/playbooks/${slug}`,
-      siteName: 'wtfear — Product & AI Engineering Studio',
+      siteName: 'WTFearB',
       type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: pageTitle,
+      description: playbook.metaDescription,
     },
   };
 }

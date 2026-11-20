@@ -30,8 +30,8 @@ export function AdminLoginForm(): React.ReactElement {
         throw new Error(data.error || 'Authentication rejected');
       }
 
-      router.push(from);
-      router.refresh();
+      // Full window reload so Edge middleware and Server Component immediately read the new cookie
+      window.location.href = from || '/admin';
     } catch (err: unknown) {
       setErrorMessage(err instanceof Error ? err.message : 'Login failed');
     } finally {

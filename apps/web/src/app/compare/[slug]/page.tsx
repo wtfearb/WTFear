@@ -8,6 +8,7 @@ import { SITE_URL } from '@/lib/site-config';
 interface ComparisonData {
   readonly slug: string;
   readonly title: string;
+  readonly shortTitle?: string;
   readonly metaDescription: string;
   readonly subtitle: string;
   readonly comparisonTarget: string;
@@ -23,6 +24,7 @@ const COMPARISONS: Record<string, ComparisonData> = {
   'traditional-dev-agencies': {
     slug: 'traditional-dev-agencies',
     title: 'WTFearB vs. Traditional Dev Agencies & Consultancies',
+    shortTitle: 'WTFearB vs Traditional Dev Agencies',
     metaDescription: 'Quantitative architectural comparison between WTFearB rapid 2-week engineering sprints and traditional dev shop retainers.',
     subtitle: 'Why senior engineering pods with CI-blocking eval gates outperform 6-month agency retainers.',
     comparisonTarget: 'Traditional Dev Agencies & Consultancies',
@@ -58,6 +60,7 @@ const COMPARISONS: Record<string, ComparisonData> = {
   'in-house-hiring': {
     slug: 'in-house-hiring',
     title: 'WTFearB Engineering Pod vs. In-House Full-Time Hiring',
+    shortTitle: 'WTFearB vs In-House Senior Hiring',
     metaDescription: 'Cost, time-to-production, and risk comparison between hiring full-time AI engineers vs engaging a dedicated WTFearB engineering pod.',
     subtitle: 'How to bypass the 4-month hiring lag and ship production AI agents this sprint.',
     comparisonTarget: 'In-House Full-Time Hiring',
@@ -93,6 +96,7 @@ const COMPARISONS: Record<string, ComparisonData> = {
   'no-code-wrappers': {
     slug: 'no-code-wrappers',
     title: 'WTFearB Custom Systems vs. No-Code AI Wrappers',
+    shortTitle: 'WTFearB vs No-Code AI Wrappers',
     metaDescription: 'Architectural comparison between WTFearB governed code-first systems and brittle no-code AI tools (Zapier, Bubble, Make).',
     subtitle: 'Why mission-critical production workflows require code-governed schemas, vector indexing, and CI test harnesses.',
     comparisonTarget: 'No-Code AI Wrappers & DIY Tools',
@@ -140,18 +144,25 @@ export async function generateMetadata({
   const comp = COMPARISONS[slug];
   if (!comp) return {};
 
+  const pageTitle = comp.shortTitle || comp.title;
+
   return {
-    title: `${comp.title} | WTFearB`,
+    title: pageTitle,
     description: comp.metaDescription,
     alternates: {
       canonical: `${SITE_URL}/compare/${slug}`,
     },
     openGraph: {
-      title: comp.title,
+      title: pageTitle,
       description: comp.metaDescription,
       url: `${SITE_URL}/compare/${slug}`,
-      siteName: 'WTFearB Systems Studio',
+      siteName: 'WTFearB',
       type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: pageTitle,
+      description: comp.metaDescription,
     },
   };
 }

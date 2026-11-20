@@ -6,11 +6,25 @@ import { Footer } from '@/components/layout/Footer';
 import { ContactFormClient } from '@/components/forms/ContactFormClient';
 
 export const metadata: Metadata = {
-  title: 'Architecture Review & Project Inquiry | WTFearB',
+  title: 'Architecture Review & Project Inquiry',
   description:
     'Direct technical bottleneck diagnosis with a Principal Systems Engineer. Zero sales reps, mathematically bounded deliverables.',
   alternates: {
     canonical: '/audit',
+  },
+  openGraph: {
+    title: 'Architecture Review & Project Inquiry',
+    description:
+      'Direct technical bottleneck diagnosis with a Principal Systems Engineer. Zero sales reps, mathematically bounded deliverables.',
+    url: '/audit',
+    siteName: 'WTFearB',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Architecture Review & Project Inquiry',
+    description:
+      'Direct technical bottleneck diagnosis with a Principal Systems Engineer. Zero sales reps, mathematically bounded deliverables.',
   },
 };
 

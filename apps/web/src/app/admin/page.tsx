@@ -10,6 +10,8 @@ import {
   getPortfolioProjects,
   getPricingConfigs,
   getSiteSettings,
+  ensureDatabaseSeeded,
+  checkDatabaseConnection,
 } from '@/lib/db';
 import { AdminDashboardClient } from './AdminDashboardClient';
 
@@ -31,13 +33,29 @@ export default async function AdminPage(): Promise<React.ReactElement> {
     redirect('/admin/login');
   }
 
-  const [metrics, leads, projects, pricing, siteSettings] = await Promise.all([
-    getTelemetryMetrics(),
-    getAuditLeads(100),
-    getPortfolioProjects(false),
-    getPricingConfigs(false),
-    getSiteSettings(),
-  ]);
+  let metrics;
+  let leads: Awaited<ReturnType<typeof getAuditLeads>> = [];
+  let projects: Awaited<ReturnType<typeof getPortfolioProjects>> = [];
+  let pricing: Awaited<ReturnType<typeof getPricingConfigs>> = [];
+  let siteSettings: Awaited<ReturnType<typeof getSiteSettings>>;
+  let isLiveDatabase = false;
+
+  try {
+    await ensureDatabaseSeeded();
+    isLiveDatabase = await checkDatabaseConnection();
+
+    [metrics, leads, projects, pricing, siteSettings] = await Promise.all([
+      getTelemetryMetrics(),
+      getAuditLeads(100),
+      getPortfolioProjects(false),
+      getPricingConfigs(false),
+      getSiteSettings(),
+    ]);
+  } catch (err) {
+    console.error('[Admin Page Data Fetch Error]', err);
+    metrics = await getTelemetryMetrics();
+    siteSettings = await getSiteSettings();
+  }
 
   return (
     <AdminDashboardClient
@@ -46,6 +64,7 @@ export default async function AdminPage(): Promise<React.ReactElement> {
       initialProjects={projects}
       initialPricing={pricing}
       initialSettings={siteSettings}
+      isLiveDatabase={isLiveDatabase}
     />
   );
 }

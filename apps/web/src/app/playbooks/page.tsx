@@ -4,19 +4,25 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
-  title: 'Engineering Playbooks & Technical Guides | WTFearB',
+  title: 'Engineering Playbooks & Technical Guides',
   description:
     'In-depth principal engineering playbooks: eliminating RAG hallucinations with Pydantic v2 and PostgreSQL 16 RLS + pgvector HNSW hybrid search.',
   alternates: {
     canonical: '/playbooks',
   },
   openGraph: {
-    title: 'Engineering Playbooks & Technical Guides — WTFearB',
+    title: 'Engineering Playbooks & Technical Guides',
     description:
       'Step-by-step engineering tutorials, SQL queries, and Python code for production AI systems and databases.',
     url: '/playbooks',
-    siteName: 'WTFearB Systems Studio',
+    siteName: 'WTFearB',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Engineering Playbooks & Technical Guides',
+    description:
+      'Step-by-step engineering tutorials, SQL queries, and Python code for production AI systems and databases.',
   },
 };
 

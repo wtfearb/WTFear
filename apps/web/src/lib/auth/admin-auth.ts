@@ -6,6 +6,14 @@
 export const ADMIN_COOKIE_NAME = 'wtfear_admin_session';
 export const DEFAULT_DEV_ADMIN_PASSWORD = 'wtfear-admin-2026';
 
+export function getAdminSecret(): string {
+  return (
+    process.env.ADMIN_SESSION_SECRET ||
+    process.env.ADMIN_PASSWORD ||
+    'wtfear-admin-session-key'
+  );
+}
+
 export function getAdminPassword(): string {
   return process.env.ADMIN_PASSWORD || DEFAULT_DEV_ADMIN_PASSWORD;
 }
@@ -14,10 +22,10 @@ export function isCustomPasswordConfigured(): boolean {
   return Boolean(process.env.ADMIN_PASSWORD && process.env.ADMIN_PASSWORD.trim().length > 0);
 }
 
-export async function createAdminToken(password: string): Promise<string> {
+export async function createAdminToken(secret = getAdminSecret()): Promise<string> {
   const encoder = new TextEncoder();
   const timestamp = Date.now().toString();
-  const data = encoder.encode(`${timestamp}:${password}`);
+  const data = encoder.encode(`${timestamp}:${secret}`);
   const hashBuffer = await crypto.subtle.digest('SHA-256', data);
   const hashArray = Array.from(new Uint8Array(hashBuffer));
   const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
@@ -37,9 +45,9 @@ export async function verifyAdminToken(token: string | undefined | null): Promis
   const maxAgeMs = 7 * 24 * 60 * 60 * 1000;
   if (now - timestamp > maxAgeMs || timestamp > now + 60000) return false;
 
-  const password = getAdminPassword();
+  const secret = getAdminSecret();
   const encoder = new TextEncoder();
-  const data = encoder.encode(`${timestampStr}:${password}`);
+  const data = encoder.encode(`${timestampStr}:${secret}`);
   const hashBuffer = await crypto.subtle.digest('SHA-256', data);
   const hashArray = Array.from(new Uint8Array(hashBuffer));
   const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');

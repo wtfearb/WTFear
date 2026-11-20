@@ -10,19 +10,25 @@ import { SITE_URL } from '@/lib/site-config';
 import { SEED_PORTFOLIO_PROJECTS } from '@/lib/seed-data';
 
 export const metadata: Metadata = {
-  title: 'Flagship AI, ERP, Voice & SaaS Engineering Case Studies',
+  title: 'Flagship AI, ERP & SaaS Engineering Work',
   description:
-    'Explore WTFearB’s 10 flagship platforms including PolarisERP, NexusVoice, VegaDocs, NexusAudit, and CapellaBI—engineered with live deployments and sovereign architectures.',
+    'Explore WTFearB’s 10 flagship platforms including PolarisERP, NexusVoice, VegaDocs, NexusAudit, and CapellaBI with live deployments and repos.',
   alternates: {
     canonical: '/projects',
   },
   openGraph: {
-    title: 'Flagship AI, ERP, Voice & SaaS Engineering Case Studies | WTFearB',
+    title: 'Flagship AI, ERP & SaaS Engineering Work',
     description:
-      'Explore WTFearB’s 10 flagship platforms including PolarisERP, NexusVoice, VegaDocs, NexusAudit, and CapellaBI—engineered with live deployments and sovereign architectures.',
+      'Explore WTFearB’s 10 flagship platforms including PolarisERP, NexusVoice, VegaDocs, NexusAudit, and CapellaBI with live deployments and repos.',
     url: '/projects',
     siteName: 'WTFearB',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Flagship AI, ERP & SaaS Engineering Work',
+    description:
+      'Explore WTFearB’s 10 flagship platforms including PolarisERP, NexusVoice, VegaDocs, NexusAudit, and CapellaBI with live deployments and repos.',
   },
 };
 
