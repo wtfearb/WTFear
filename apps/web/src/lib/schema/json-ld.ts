@@ -15,6 +15,7 @@ export interface OrganizationJsonLd {
   readonly slogan?: string;
   readonly description: string;
   readonly sameAs: readonly string[];
+  readonly knowsAbout?: readonly string[];
   readonly areaServed: readonly string[];
   readonly contactPoint: {
     readonly '@type': 'ContactPoint';
@@ -49,6 +50,17 @@ export function generateRootJsonLd(): Record<string, unknown> {
           'https://github.com/wtfear',
           'https://github.com/wtfearb',
           'https://www.linkedin.com/company/wtfearb/',
+          'https://dev.to/wtfearb',
+        ],
+        knowsAbout: [
+          'Multi-Agent AI Systems',
+          'Governed RAG Architecture',
+          'Custom B2B SaaS Engineering',
+          'Distributed Event Pipelines',
+          'Enterprise Workflow Automation',
+          'Next.js & TypeScript Systems',
+          'Python & FastAPI AI Backends',
+          'PostgreSQL & pgvector',
         ],
         areaServed: ['Global', 'India', 'Hyderabad', 'United States', 'Europe'],
         contactPoint: {
@@ -113,6 +125,43 @@ export function generateBlueprintJsonLd(params: {
       '@id': `${baseUrl}/#organization`,
     },
     keywords: params.stack.join(', '),
+  };
+}
+
+export function generateBlueprintsCatalogJsonLd(): Record<string, unknown> {
+  const baseUrl = SITE_URL;
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebPage',
+        '@id': `${baseUrl}/blueprints#webpage`,
+        url: `${baseUrl}/blueprints`,
+        name: 'Engineering Blueprints | WTFearB',
+        description:
+          'Production-tested system blueprints for governed AI agents, multi-tenant B2B portals, and event-driven backends—documented with clear boundaries, failure modes, and evaluation gates.',
+        isPartOf: {
+          '@id': `${baseUrl}/#website`,
+        },
+        breadcrumb: {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            {
+              '@type': 'ListItem',
+              position: 1,
+              name: 'Home',
+              item: `${baseUrl}/`,
+            },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: 'Engineering Blueprints',
+              item: `${baseUrl}/blueprints`,
+            },
+          ],
+        },
+      },
+    ],
   };
 }
 
@@ -266,6 +315,17 @@ export function generateAboutJsonLd(): Record<string, unknown> {
           'https://github.com/wtfear',
           'https://github.com/wtfearb',
           'https://www.linkedin.com/company/wtfearb/',
+          'https://dev.to/wtfearb',
+        ],
+        knowsAbout: [
+          'Multi-Agent AI Systems',
+          'Governed RAG Architecture',
+          'Custom B2B SaaS Engineering',
+          'Distributed Event Pipelines',
+          'Enterprise Workflow Automation',
+          'Next.js & TypeScript Systems',
+          'Python & FastAPI AI Backends',
+          'PostgreSQL & pgvector',
         ],
         areaServed: ['Global', 'India', 'Hyderabad', 'United States', 'Europe'],
         contactPoint: {
