@@ -270,8 +270,8 @@ export default function ServicesPage(): React.ReactElement {
           {/* -----------------------------------------------------------------------
               Row 01: Governed AI Engineering & RAG Systems (Text Left / Schematic Right)
              ----------------------------------------------------------------------- */}
-          <div id="discipline-01" className="scroll-mt-28 py-16 lg:py-20">
-            <span id="ai-engineering" className="scroll-mt-28" />
+          <div id="discipline-01" className="scroll-mt-28 py-12 lg:py-14">
+            <span id="ai-engineering" className="scroll-mt-28 block" />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
                 {/* Left (5 cols): Description & Capabilities */}
@@ -316,8 +316,8 @@ export default function ServicesPage(): React.ReactElement {
           {/* -----------------------------------------------------------------------
               Row 02: Custom Software & Systems Engineering (Schematic Left / Text Right)
              ----------------------------------------------------------------------- */}
-          <div id="discipline-02" className="scroll-mt-28 py-16 lg:py-20">
-            <span id="custom-software" className="scroll-mt-28" />
+          <div id="discipline-02" className="scroll-mt-28 py-12 lg:py-14">
+            <span id="custom-software" className="scroll-mt-28 block" />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
                 {/* Left (7 cols): Schematic */}
@@ -365,8 +365,8 @@ export default function ServicesPage(): React.ReactElement {
           {/* -----------------------------------------------------------------------
               Row 03: SaaS & Enterprise B2B Portals (Text Left / Schematic Right)
              ----------------------------------------------------------------------- */}
-          <div id="discipline-03" className="scroll-mt-28 py-16 lg:py-20">
-            <span id="saas-b2b" className="scroll-mt-28" />
+          <div id="discipline-03" className="scroll-mt-28 py-12 lg:py-14">
+            <span id="saas-b2b" className="scroll-mt-28 block" />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
                 {/* Left (5 cols): Description & Capabilities */}
@@ -415,7 +415,7 @@ export default function ServicesPage(): React.ReactElement {
         {/* =========================================================================
             4. EXTENDED CAPABILITIES INDEX — PART B (04–06)
            ========================================================================= */}
-        <section className="bg-[#F9F9FB] pt-16 pb-14 border-b border-[#E2E2E8]">
+        <section className="bg-[#F9F9FB] pt-14 pb-14 border-b border-[#E2E2E8]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <span className="font-mono text-[11px] font-bold uppercase tracking-[0.08em] text-[#C83E1B] block mb-2">
               04–06 // INFRASTRUCTURE, AUTOMATION &amp; ADVISORY
@@ -424,49 +424,49 @@ export default function ServicesPage(): React.ReactElement {
               Specialized Systems &amp; Architectural Advisory.
             </h2>
 
-            {/* Borderless Horizontal Divider List */}
-            <div className="border-t border-[#E2E2E8] divide-y divide-[#E2E2E8]">
+            {/* Explicit 12-Column Horizontal Grid List */}
+            <div className="border-t border-[#E2E2E8]">
               {/* Row 04 */}
+              <span id="backend-distributed" className="scroll-mt-24 block" />
               <div
                 id="discipline-04"
-                className="scroll-mt-28 py-5 grid grid-cols-1 md:grid-cols-[76px_310px_1fr] gap-2 md:gap-4 items-baseline"
+                className="scroll-mt-24 py-5 border-b border-[#E2E2E8] grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-6 items-baseline"
               >
-                <span id="backend-distributed" className="scroll-mt-28" />
-                <span className="font-mono text-[12px] font-bold text-[#C83E1B]">04 //</span>
-                <span className="font-sans text-[14.5px] font-bold text-[#0A0A0C]">
+                <span className="md:col-span-1 font-mono text-[12px] font-bold text-[#C83E1B]">04 //</span>
+                <h3 className="md:col-span-4 font-sans text-[15px] font-bold text-[#0A0A0C]">
                   Backend &amp; Distributed Event Pipelines
-                </span>
-                <p className="font-sans text-[13.5px] text-[#3F414A] leading-relaxed">
+                </h3>
+                <p className="md:col-span-7 font-sans text-[13.5px] leading-[1.6] text-[#3F414A]">
                   High-throughput APIs, async queue workers, idempotent state machines, and OpenTelemetry observability.
                 </p>
               </div>
 
               {/* Row 05 */}
+              <span id="workflow-automation" className="scroll-mt-24 block" />
               <div
                 id="discipline-05"
-                className="scroll-mt-28 py-5 grid grid-cols-1 md:grid-cols-[76px_310px_1fr] gap-2 md:gap-4 items-baseline"
+                className="scroll-mt-24 py-5 border-b border-[#E2E2E8] grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-6 items-baseline"
               >
-                <span id="workflow-automation" className="scroll-mt-28" />
-                <span className="font-mono text-[12px] font-bold text-[#C83E1B]">05 //</span>
-                <span className="font-sans text-[14.5px] font-bold text-[#0A0A0C]">
+                <span className="md:col-span-1 font-mono text-[12px] font-bold text-[#C83E1B]">05 //</span>
+                <h3 className="md:col-span-4 font-sans text-[15px] font-bold text-[#0A0A0C]">
                   Workflow Automation &amp; System Integrations
-                </span>
-                <p className="font-sans text-[13.5px] text-[#3F414A] leading-relaxed">
+                </h3>
+                <p className="md:col-span-7 font-sans text-[13.5px] leading-[1.6] text-[#3F414A]">
                   Deterministic ERP/CRM synchronization, human-in-the-loop approval gates, and resilient webhook engines.
                 </p>
               </div>
 
               {/* Row 06 */}
+              <span id="architecture-consulting" className="scroll-mt-24 block" />
               <div
                 id="discipline-06"
-                className="scroll-mt-28 py-5 grid grid-cols-1 md:grid-cols-[76px_310px_1fr] gap-2 md:gap-4 items-baseline"
+                className="scroll-mt-24 py-5 border-b border-[#E2E2E8] grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-6 items-baseline"
               >
-                <span id="architecture-consulting" className="scroll-mt-28" />
-                <span className="font-mono text-[12px] font-bold text-[#C83E1B]">06 //</span>
-                <span className="font-sans text-[14.5px] font-bold text-[#0A0A0C]">
+                <span className="md:col-span-1 font-mono text-[12px] font-bold text-[#C83E1B]">06 //</span>
+                <h3 className="md:col-span-4 font-sans text-[15px] font-bold text-[#0A0A0C]">
                   Architecture &amp; Technical Consulting
-                </span>
-                <p className="font-sans text-[13.5px] text-[#3F414A] leading-relaxed">
+                </h3>
+                <p className="md:col-span-7 font-sans text-[13.5px] leading-[1.6] text-[#3F414A]">
                   System topology audits, AI feasibility reviews, database latency tuning, and build-vs-buy monographs.
                 </p>
               </div>

@@ -1,11 +1,8 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import type {
-  AuditSubmissionRequest,
-  AuditSubmissionResponse,
-  LeadTier,
-} from '@wtfear/contracts';
+import type { LeadTier } from '@wtfear/contracts';
 import { createAuditLead } from '@/lib/db';
+import { sendAuditEmails } from '@/lib/email/mailer';
 
 const GENERIC_EMAIL_DOMAINS = new Set([
   'gmail.com',
@@ -41,24 +38,28 @@ const TECHNICAL_KEYWORDS = [
   'rls',
 ];
 
-export async function POST(
-  req: NextRequest
-): Promise<NextResponse<AuditSubmissionResponse | { error: string; message: string }>> {
+export async function POST(req: NextRequest): Promise<NextResponse> {
   const traceId = req.headers.get('traceparent') || crypto.randomUUID();
 
   try {
-    const body = (await req.json()) as AuditSubmissionRequest;
-    const rawEmail = body.workEmail || body.email;
-    const rawBottleneck = body.bottleneckDescription || body.systemBottleneck;
-    const rawTimeline = body.targetTimeline;
-    const rawDomain = body.companyDomain;
-    const sessionId = body.sessionId || req.headers.get('x-session-id') || undefined;
-    const calculatorSnapshotJson = body.calculatorSnapshotJson || (body.calculatorScope ? { scope: body.calculatorScope } : undefined);
+    const body = await req.json();
+    const rawEmail = (body.workEmail || body.email || '') as string;
+    const rawBottleneck = (body.bottleneckDescription || body.systemBottleneck || '') as string;
+    const rawTimeline = (body.targetTimeline || 'immediate') as 'immediate' | 'month' | 'within_month' | 'exploring';
+    const rawDomain = (body.companyDomain || body.organization || '') as string;
+    const rawFocusArea = (body.focusArea || body.engagementTrack || body.metadata?.engagementTrack || 'Governed AI & RAG') as string;
+    const rawSystemStage = (body.systemStage || 'Production Scaling & Bottleneck Resolution') as string;
+    const rawSource = (body.source || (body.metadata ? 'contact' : 'modal')) as 'modal' | 'contact';
+    const rawName = (body.name || body.metadata?.name || undefined) as string | undefined;
+
+    const sessionId = (body.sessionId || req.headers.get('x-session-id') || undefined) as string | undefined;
+    const calculatorSnapshotJson = (body.calculatorSnapshotJson ||
+      (body.calculatorScope ? { scope: body.calculatorScope } : undefined)) as Record<string, unknown> | undefined;
 
     // 1. Validation Invariants
     if (!rawEmail || !rawEmail.includes('@')) {
       return NextResponse.json(
-        { error: 'INVALID_EMAIL', message: 'A valid corporate or engineering work email is required.' },
+        { ok: false, error: 'INVALID_EMAIL', message: 'A valid email address is required.' },
         { status: 400 }
       );
     }
@@ -66,6 +67,7 @@ export async function POST(
     if (!rawBottleneck || rawBottleneck.trim().length < 15) {
       return NextResponse.json(
         {
+          ok: false,
           error: 'BOTTLENECK_TOO_SHORT',
           message: 'Please provide a technical system bottleneck summary of at least 15 characters.',
         },
@@ -109,6 +111,10 @@ export async function POST(
     const leadTier: LeadTier = leadScore >= 70 ? 'TIER_1_FAST_TRACK' : 'TIER_2_NURTURE';
     const leadId = crypto.randomUUID();
 
+    // Generate clean human-readable reference ID
+    const refSuffix = crypto.randomUUID().slice(0, 4).toUpperCase();
+    const referenceId = `WTFB-${new Date().getFullYear()}-${refSuffix}`;
+
     // 3. Persist to Neon Postgres or in-memory fallback store
     await createAuditLead({
       id: leadId,
@@ -117,31 +123,51 @@ export async function POST(
       companyDomain: resolvedDomain,
       targetTimeline: rawTimeline,
       bottleneckDescription: rawBottleneck.trim(),
-      calculatorSnapshotJson: calculatorSnapshotJson || null,
+      calculatorSnapshotJson: calculatorSnapshotJson || {
+        referenceId,
+        focusArea: rawFocusArea,
+        systemStage: rawSystemStage,
+        source: rawSource,
+      },
       leadScore,
       qualificationTier: leadTier,
       status: 'new',
-      adminNotes: `Lead scoring: ${leadScore} (Domain: ${isCorporate ? 'Corporate +35' : 'Generic +10'}, Urgency: ${rawTimeline}, Hits: ${keywordHits})`,
+      adminNotes: `[Ref: ${referenceId}] Focus: ${rawFocusArea} | Stage: ${rawSystemStage} | Lead score: ${leadScore} (Domain: ${isCorporate ? 'Corporate +35' : 'Generic +10'}, Urgency: ${rawTimeline}, Hits: ${keywordHits})`,
       createdAt: new Date(),
+    });
+
+    // 4. Two-Way Transactional Email Routing
+    const emailDispatch = await sendAuditEmails({
+      referenceId,
+      email: emailNormalized,
+      name: rawName,
+      organization: resolvedDomain,
+      focusArea: rawFocusArea,
+      systemStage: rawSystemStage,
+      bottleneckDescription: rawBottleneck.trim(),
+      source: rawSource,
     });
 
     const bookingUrl =
       leadTier === 'TIER_1_FAST_TRACK'
-        ? `https://cal.com/wtfear/15min-architecture-audit?email=${encodeURIComponent(
+        ? `https://cal.com/wtfear/architecture-audit?email=${encodeURIComponent(
             emailNormalized
           )}&notes=${encodeURIComponent(rawBottleneck.slice(0, 150))}`
-        : 'https://cal.com/wtfear/15min-architecture-audit';
+        : 'https://cal.com/wtfear/architecture-audit';
 
-    const responsePayload: AuditSubmissionResponse = {
+    const responsePayload = {
+      ok: true,
       success: true,
+      referenceId,
+      emailDispatched: emailDispatch.emailDispatched,
       leadId,
       leadTier,
       leadScore,
       bookingUrl,
       message:
         leadTier === 'TIER_1_FAST_TRACK'
-          ? 'Fast-track priority approved. A Principal Systems Engineer is reserved for your technical diagnosis.'
-          : 'Audit intake recorded. You may select any open timeslot on Cal.com.',
+          ? 'Priority review approved. A Principal Systems Engineer has received your technical brief.'
+          : 'Audit intake recorded. Our principal engineers will review your system scope.',
       traceId,
     };
 
@@ -157,6 +183,7 @@ export async function POST(
     console.error('[API /audit] Processing error:', error);
     return NextResponse.json(
       {
+        ok: false,
         error: 'INGRESS_ERROR',
         message: error instanceof Error ? error.message : 'Internal error processing audit intake.',
       },

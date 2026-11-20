@@ -91,6 +91,7 @@ export function ContactFormClient({
             : {
                 track: selectedTrack,
               },
+          source: 'contact',
           metadata: {
             name: name.trim(),
             organization: organization.trim(),
@@ -108,8 +109,10 @@ export function ContactFormClient({
         throw new Error(data.message || data.error || 'Failed to submit technical brief.');
       }
 
-      const ref = (data.leadId as string) || crypto.randomUUID();
-      setSubmissionId(ref.slice(0, 8).toUpperCase());
+      const ref =
+        (data.referenceId as string) ||
+        (data.leadId ? `WTFB-2026-${(data.leadId as string).slice(0, 4).toUpperCase()}` : `WTFB-${Date.now()}`);
+      setSubmissionId(ref);
       setIsSuccess(true);
 
       trackClientEvent('cta_click', 'Technical Brief Transmitted', {
@@ -130,9 +133,9 @@ export function ContactFormClient({
   };
 
   if (isSuccess) {
-    const mailtoSubject = encodeURIComponent(`WTFearB Technical Brief [REF: WTF-${submissionId}]`);
+    const mailtoSubject = encodeURIComponent(`WTFearB Technical Brief [REF: ${submissionId}]`);
     const mailtoBody = encodeURIComponent(
-      `Hello WTFearB Engineering Team,\n\nI recently submitted Technical Brief [REF: WTF-${submissionId}] for ${selectedTrack}.\n\nAdditional notes:\n`
+      `Hello WTFearB Engineering Team,\n\nI recently submitted Technical Brief [REF: ${submissionId}] for ${selectedTrack}.\n\nAdditional notes:\n`
     );
 
     return (
@@ -151,7 +154,7 @@ export function ContactFormClient({
         <div className="p-4 rounded-[4px] border border-[#E2E2E8] bg-[#F9F9FB] space-y-2.5 font-mono text-xs mb-6">
           <div className="flex justify-between items-center pb-2 border-b border-[#E2E2E8]">
             <span className="text-[#717684]">REFERENCE ID:</span>
-            <span className="font-bold text-[#0A0A0C]">WTF-{submissionId}</span>
+            <span className="font-bold text-[#0A0A0C]">{submissionId}</span>
           </div>
           <div className="flex justify-between items-center pb-2 border-b border-[#E2E2E8]">
             <span className="text-[#717684]">ENGAGEMENT TRACK:</span>
@@ -279,7 +282,7 @@ export function ContactFormClient({
               htmlFor="contact-email"
               className="font-mono text-[11px] font-bold uppercase tracking-[0.08em] text-[#3F414A] block mb-2"
             >
-              WORK EMAIL <span className="text-[#C83E1B]">*</span>
+              EMAIL <span className="text-[#C83E1B]">*</span>
             </label>
             <input
               id="contact-email"
@@ -287,7 +290,7 @@ export function ContactFormClient({
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="alex@company.com"
+              placeholder="you@company.com"
               className="w-full bg-[#FFFFFF] border border-[#E2E2E8] focus:border-[#0A0A0C] focus:outline-none rounded-[2px] px-3.5 py-2.5 font-sans text-[14px] text-[#0A0A0C] placeholder:text-[#8E92A0] transition-colors"
             />
           </div>

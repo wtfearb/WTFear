@@ -19,7 +19,7 @@ export function HeroSection(): React.ReactElement {
             <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#FFFFFF] border border-[#E2E2E8]">
               <span className="w-1.5 h-1.5 rounded-full bg-[#C83E1B] shrink-0" aria-hidden="true" />
               <span className="font-mono text-[11px] font-bold uppercase tracking-[0.08em] text-[#C83E1B]">
-                PRODUCT &amp; AI ENGINEERING STUDIO
+                WTFEARB // PRODUCT &amp; AI ENGINEERING STUDIO
               </span>
             </div>
 
